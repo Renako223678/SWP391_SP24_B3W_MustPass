@@ -5,13 +5,10 @@
 package DAO;
 
 import DTO.Account;
-import Utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -25,7 +22,7 @@ public class UserDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            conn = DBUtils.getConnection();
+            conn = utils.DBUtils.getConnection();
             if (conn != null) {
                 String sql = "SELECT TOP (1000) [ID]\n"
                         + "      ,[name]\n"
