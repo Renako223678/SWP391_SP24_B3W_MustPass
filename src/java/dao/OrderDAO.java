@@ -58,14 +58,4 @@ public class OrderDAO {
         return listOrder;
     }
     
-    public List<RecipientDTO> getRecipient(long userID){
-        List<RecipientDTO> listRecipient = new ArrayList<>();
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        
-        String sql = "SELECT []";
-        
-        return listRecipient;
-    }
 }
