@@ -5,7 +5,7 @@
 package Controllers;
 
 import DAO.UserDAO;
-import DTO.Account;
+import dto.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -37,20 +37,20 @@ public class LoginController extends HttpServlet {
             String id = request.getParameter("id");
             String pass = request.getParameter("pass");
             UserDAO dao = new UserDAO();
-            Account user = dao.checkLogin(id, pass);
+            UserDTO user = dao.checkLogin(id, pass);
             // nếu acc  là null thì th đó ko tồn tại
             if (user == null) {
                 request.setAttribute("noti", "Incorrect UserID or Password");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
-            } else if (user.getRoleid() == 0) {
+            } else if (user.getRoleId() == 0) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
                 request.getRequestDispatcher("customer.jsp").forward(request, response);
-            } else if (user.getRoleid()== 1) {
+            } else if (user.getRoleId()== 1) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
                 request.getRequestDispatcher("staff.jsp").forward(request, response);
-            }else if (user.getRoleid()== 2) {
+            }else if (user.getRoleId()== 2) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
                 request.getRequestDispatcher("admin.jsp").forward(request, response);

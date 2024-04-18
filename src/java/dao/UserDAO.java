@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import DTO.Account;
+import dto.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,8 +16,8 @@ import java.sql.SQLException;
  */
 public class UserDAO {
    
-    public static Account checkLogin(String email, String password) throws ClassNotFoundException, SQLException {
-        Account user = null;
+    public static UserDTO checkLogin(String email, String password) throws ClassNotFoundException, SQLException {
+        UserDTO user = null;
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -39,7 +39,7 @@ public class UserDAO {
                     int userid = rs.getInt("email");
                     int roleID = rs.getInt("roleid");
                     int numberlotus = rs.getInt("Number_of_lotus");
-                    user = new Account(userid, email, password, fullName, numberlotus, roleID);
+                    user = new UserDTO(userid, email, password, fullName, numberlotus, roleID);
                 }
             }
         } catch (Exception e) {
@@ -59,4 +59,5 @@ public class UserDAO {
 
         return user;
     }
+    
 }
