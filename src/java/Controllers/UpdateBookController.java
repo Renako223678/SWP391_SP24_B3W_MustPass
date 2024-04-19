@@ -39,14 +39,15 @@ public class UpdateBookController extends HttpServlet {
            String translator = request.getParameter("translator");
            String decimalString = request.getParameter("unitPrice");
            BigDecimal unitPrice = new BigDecimal(decimalString);
-            
+           int categoryID = Integer.parseInt(request.getParameter("categoryID"));
+           
            String dateString = request.getParameter("publishDate");
            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
            Date publishDate = format.parse(dateString);
             
            byte status = Byte.parseByte(request.getParameter("status"));
            
-           boolean checkUpdate = dao.updateBook(bookName, url, publishingCompany, issuingCompany, translator, (java.sql.Date) publishDate, unitPrice, status);
+           boolean checkUpdate = dao.updateBook(bookName, description, publishingCompany, issuingCompany, translator, (java.sql.Date) publishDate, unitPrice, categoryID, status);
            HttpSession session = request.getSession();
            if(checkUpdate){
                url = SUCCESS;
