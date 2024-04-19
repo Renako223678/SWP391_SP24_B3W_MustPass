@@ -12,20 +12,20 @@ import java.util.List;
 import utils.DBUtils;
 
 public class BookDAO {
-    public List<BookDTO> getListBook(String searchGenre) throws SQLException{
+    public List<BookDTO> searchBook(String name) throws SQLException{
         List<BookDTO> bookList = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         
         String sql = "SELECT [BookId], [BookName], [Description], [AuthorName], [PublishingCompany],"
-                + "[IssusingCompany], [TranslatorName], [Genre], [PublishDate], [Quantity],"
-                + "[UnitPrice], [Status], [TotalFeedback]"
-                + "FROM [Books] WHERE [Genre] like ?";
+                + "[IssusingCompany], [TranslatorName], [PublishDate], [Quantity],"
+                + "[UnitPrice], [CatogoryID], [Status], [TotalFeedback]"
+                + "FROM [Books] WHERE [BookName] like ?";
         try{
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, "%" + searchGenre + "%");
+            ps.setString(1, "%" + name + "%");
             rs = ps.executeQuery();
             while(rs.next()){
                 long bookId = rs.getLong("BookId");
@@ -33,16 +33,17 @@ public class BookDAO {
                 String des = rs.getString("Description");
                 String authorName = rs.getString("AuthorName");
                 String publishing = rs.getString("PublishingCompany");
-                String issusing = rs.getString("IssusingCompany");
+                String issuing = rs.getString("IssusingCompany");
                 String translator = rs.getString("TranslatorName");
-                String genre = rs.getString("Genre");
                 Date publishDate = rs.getDate("PublishDate");
                 int quantity = rs.getInt("Quantity");
                 BigDecimal unitPrice = rs.getBigDecimal("UnitPrice");
+                int categoryId = rs.getInt("CatogoryID");
                 Byte status = rs.getByte("Status");
                 int totalFeedback = rs.getInt("TotalFeedback");
-                BookDTO book = new BookDTO(bookId, bookName, des, authorName, publishing, issusing, 
-                        translator, genre, publishDate, quantity, unitPrice, status, totalFeedback);
+                BookDTO book = new BookDTO(bookId, bookName, des, authorName, publishing, 
+                        issuing, translator, publishDate, quantity, unitPrice, categoryId, 
+                        status, totalFeedback);
                 bookList.add(book);
             }
         }catch(Exception ex){
@@ -62,16 +63,18 @@ public class BookDAO {
     }
     
     public boolean addBook(long bookId, String bookName, String description, String author,
-            String publishingCompany, String issusingCompany, String translator, String genre,
-            Date publishDate, int quantity, BigDecimal unitPrice, byte status, int totalFeedback) throws SQLException{
+            String publishingCompany, String issuingCompany, String translator, 
+            Date publishDate, int quantity, BigDecimal unitPrice, byte status) throws SQLException{
         boolean check = false;
         Connection conn = null;
         PreparedStatement ps = null;
         
-        String sql = "INSERT INTO [Books]{[BookId], [BookName], [Description], [AuthorName], [PublishingCompany],"
-                + "[IssusingCompany], [TranslatorName], [Genre], [PublishDate], [Quantity],"
-                + "[UnitPrice], [Status], [TotalFeedback]}"
-                + "VALUES{?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?}";
+        String sql = "INSERT INTO [Books]([BookId], [BookName], [Description], [AuthorName], "
+                + "[PublishingCompany], [IssusingCompany], [TranslatorName], [PublishDate], [Quantity]"
+                + "[UnitPrice], [Status], [TotalFeedback])"
+                + "SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?"
+                + "FROM [Catogory]"
+                + "WHERE [Books].[CatogoryID] = [Catogory].[ID]";
         try{
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
@@ -80,14 +83,12 @@ public class BookDAO {
             ps.setString(3, description);
             ps.setString(4, author);
             ps.setString(5, publishingCompany);
-            ps.setString(6, issusingCompany);
+            ps.setString(6, issuingCompany);
             ps.setString(7, translator);
-            ps.setString(8, genre);
-            ps.setDate(9, publishDate);
-            ps.setInt(10, quantity);
-            ps.setBigDecimal(11, unitPrice);
-            ps.setByte(12, status);
-            ps.setInt(13, totalFeedback);
+            ps.setDate(8, publishDate);
+            ps.setInt(9, quantity);
+            ps.setBigDecimal(10, unitPrice);
+            ps.setByte(11, status);
             check = ps.executeUpdate() > 0 ? true : false;
         }catch(Exception ex){
             ex.printStackTrace();
@@ -103,15 +104,15 @@ public class BookDAO {
     }
     
     public boolean updateBook(String bookName, String des, String publishingCompany,
-            String issusingCompany, String translator, String genre, Date publishDate,
-            BigDecimal unitPrice, byte status) throws SQLException{
+            String issuingCompany, String translator, Date publishDate,
+            BigDecimal unitPrice, int categoryId, byte status) throws SQLException{
         boolean check = false;
         Connection conn = null;
         PreparedStatement ps = null;
         
         String sql = "UPDATE [Books] SET [Description] = ?, [PublishingCompany] = ?,"
-                + "[IssusingCompany] = ?, [TranslatorName] = ?, [Genre]= ?, [PublishDate] = ?,"
-                + "[UnitPrice] = ?, [Status] = ?"
+                + "[IssusingCompany] = ?, [TranslatorName] = ?, [PublishDate] = ?,"
+                + "[UnitPrice] = ?, [CatogoryID] = ?, [Status] = ?"
                 + "WHERE [BookName] = ?";
         try{
             conn = DBUtils.getConnection();
@@ -119,12 +120,13 @@ public class BookDAO {
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, des);
                 ps.setString(2, publishingCompany);
-                ps.setString(3, issusingCompany);
+                ps.setString(3, issuingCompany);
                 ps.setString(4, translator);
-                ps.setString(5, genre);
-                ps.setDate(6, publishDate);
-                ps.setBigDecimal(7, unitPrice);
+                ps.setDate(5, publishDate);
+                ps.setBigDecimal(6, unitPrice);
+                ps.setInt(7, categoryId);
                 ps.setByte(8, status);
+                ps.setString(9, bookName);
                 check = ps.executeUpdate() > 0 ? true : false;
             }
         }catch(Exception ex){

@@ -13,7 +13,7 @@ import java.util.List;
 import utils.DBUtils;
 
 public class OrderDAO {
-    public List<OrderDTO> getListOrder(long searchId) throws SQLException{
+    public List<OrderDTO> getListOrder() throws SQLException{
         List<OrderDTO> listOrder = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
@@ -25,7 +25,6 @@ public class OrderDAO {
         try{
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setLong(1,searchId);
             rs = ps.executeQuery();
             while(rs.next()){
                 long orderId = rs.getLong("OrderId");
@@ -58,4 +57,32 @@ public class OrderDAO {
         return listOrder;
     }
     
+    public boolean updateOrderStatus(long orderId, byte status) throws SQLException{
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        
+        String sql = "UPDATE [Orders] SET [Status] = ? WHERE [OrderId] = ?";
+        try{
+            conn = DBUtils.getConnection();
+            if(conn != null){
+                ps = conn.prepareStatement(sql);
+                ps.setByte(1, status);
+                ps.setLong(2, orderId);
+                check = ps.executeUpdate() > 0 ? true : false;
+            }            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(ps != null){
+                ps.close();
+            }
+            if(conn != null){
+                conn.close();
+            }
+        }
+        
+        return check;
+    }
 }
