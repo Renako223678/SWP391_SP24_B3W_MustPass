@@ -30,6 +30,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>AdminPage/admin.jsp</welcome-file>
+        <welcome-file>AdminPage/page-account-login.html</welcome-file>
     </welcome-file-list>
 </web-app>
