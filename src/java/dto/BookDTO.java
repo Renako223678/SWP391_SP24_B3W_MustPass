@@ -9,33 +9,30 @@ public class BookDTO {
     private String description;
     private String author;
     private String publishingCompany;
-    private String issusingCompany;
+    private String issuingCompany;
     private String translator;
-    private String genre;
     private Date publishDate;
     private int quantity;
     private BigDecimal unitPrice;
+    private int categoryId;
     private byte status;
     private int totalFeedback;
 
     public BookDTO() {
     }
 
-    public BookDTO(long bookId, String bookName, String description, String author, 
-            String publishingCompany, String issusingCompany, String translator, 
-            String genre, Date publishDate, int quantity, BigDecimal unitPrice, 
-            byte status, int totalFeedback) {
+    public BookDTO(long bookId, String bookName, String description, String author, String publishingCompany, String issuingCompany, String translator, Date publishDate, int quantity, BigDecimal unitPrice, int categoryId, byte status, int totalFeedback) {
         this.bookId = bookId;
         this.bookName = bookName;
         this.description = description;
         this.author = author;
         this.publishingCompany = publishingCompany;
-        this.issusingCompany = issusingCompany;
+        this.issuingCompany = issuingCompany;
         this.translator = translator;
-        this.genre = genre;
         this.publishDate = publishDate;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
+        this.categoryId = categoryId;
         this.status = status;
         this.totalFeedback = totalFeedback;
     }
@@ -80,12 +77,12 @@ public class BookDTO {
         this.publishingCompany = publishingCompany;
     }
 
-    public String getIssusingCompany() {
-        return issusingCompany;
+    public String getIssuingCompany() {
+        return issuingCompany;
     }
 
-    public void setIssusingCompany(String issusingCompany) {
-        this.issusingCompany = issusingCompany;
+    public void setIssuingCompany(String issuingCompany) {
+        this.issuingCompany = issuingCompany;
     }
 
     public String getTranslator() {
@@ -94,14 +91,6 @@ public class BookDTO {
 
     public void setTranslator(String translator) {
         this.translator = translator;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public Date getPublishDate() {
@@ -128,6 +117,14 @@ public class BookDTO {
         this.unitPrice = unitPrice;
     }
 
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public byte getStatus() {
         return status;
     }
@@ -147,10 +144,11 @@ public class BookDTO {
     @Override
     public String toString() {
         return "BookId: " + bookId + "\nBook Name: " + bookName + "\nDescription: " + description 
-                + "\nAuthor: " + author + "\nPublishing Company: " + publishingCompany 
-                + "\nIssusing Company: " + issusingCompany + "\nTranslator: " + translator 
-                + "\nGenre: " + genre + "\nPublish Date: " + publishDate + "\nQuantity: " + quantity 
-                + "\nUnit Price: " + unitPrice + "\nStatus: " + status + "\nTotal Feedback:" + totalFeedback;
+                + "\nAuthor: " + author + "\nPublishing Company=" + publishingCompany 
+                + "\nIssuing Company: " + issuingCompany + "\nTtranslator: " + translator 
+                + "\nPublish Date: " + publishDate + "\nQuantity: " + quantity 
+                + "\nUnit Price: " + unitPrice + "\nCategoryId: " + categoryId 
+                + "\nStatus: " + status + "\nTotal Feedback: " + totalFeedback;
     }
     
 }
