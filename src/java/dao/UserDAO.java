@@ -2,13 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAO;
+package dao;
 
+import dto.FeedbackDTO;
 import dto.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import utils.DBUtils;
 
 /**
  *
@@ -59,5 +62,24 @@ public class UserDAO {
 
         return user;
     }
+     public boolean Insert(FeedbackDTO f){
+        boolean inserted = false;
+        String sql = "INSERT into Feedback VALUES(?,?,?,?,?)";
+        try{
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ptm = con.prepareStatement(sql);
+            ptm.setInt(1, f.getFeedbackid()+1);
+            ptm.setInt(2, f.getStar());
+            ptm.setString(3, f.getDescription());
+            ptm.setInt(4, f.getBookid());
+            ptm.setInt(5, f.getUserid());
+            ptm.executeUpdate();
+            inserted = true;
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return inserted;
+    }
     
 }
+

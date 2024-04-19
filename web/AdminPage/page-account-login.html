@@ -39,7 +39,8 @@
                 </ul>
             </div>
         </header>
-        <section class="content-main mt-80 mb-80">
+        <form action="MainController" method="post">
+            <section class="content-main mt-80 mb-80">
             <div class="card mx-auto card-login">
                 <div class="card-body">
                     <h4 class="card-title mb-4">Đăng nhập</h4>
@@ -58,7 +59,7 @@
                             </label>
                         </div> <!-- form-group form-check .// -->
                         <div class="mb-4">
-                            <button type="submit" class="btn btn-primary w-100"> Đăng nhập </button>
+                            <button type="submit" name="Login" class="btn btn-primary w-100"> Đăng nhập </button>
                         </div> <!-- form-group// -->
                     </form>
                     
@@ -66,6 +67,7 @@
                 </div>
             </div>
         </section>
+        </form>
         <footer class="main-footer text-center">
             <p class="font-xs">
                 <script>
