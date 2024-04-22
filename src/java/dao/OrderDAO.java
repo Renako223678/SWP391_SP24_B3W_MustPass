@@ -1,3 +1,4 @@
+
 package dao;
 
 import dto.Order;
@@ -6,6 +7,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import util.DBContext;
@@ -70,4 +73,22 @@ public class OrderDAO {
         } 
         return listOrder;
     }
+     public List<Order> getALLOrder(){
+        List<Order> listOrder = new ArrayList<>();
+        String query = "Select * from Orders ORDER BY OrderDate DESC";
+        try {
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    listOrder.add(new Order(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getFloat(4), rs.getInt(5), rs.getFloat(6),
+                            rs.getFloat(7), rs.getInt(8), rs.getInt(9), rs.getInt(10)));
+                }
+                
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        return listOrder;
+    }
 }
+
