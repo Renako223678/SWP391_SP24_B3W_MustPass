@@ -1,9 +1,0 @@
-16-Apr-2024 13:36:22.565 INFO [main] org.apache.catalina.core.ApplicationContext.log Filter1:Initializing filter
-16-Apr-2024 13:36:22.565 INFO [main] org.apache.catalina.core.ApplicationContext.log EncodingPassword:Initializing filter
-16-Apr-2024 13:36:22.565 INFO [main] org.apache.catalina.core.ApplicationContext.log Mdfilter:Initializing filter
-16-Apr-2024 13:36:25.020 INFO [main] org.apache.catalina.core.ApplicationContext.log No Spring WebApplicationInitializer types detected on classpath
-16-Apr-2024 13:36:25.035 INFO [main] org.apache.catalina.core.ApplicationContext.log Initializing Spring root WebApplicationContext
-16-Apr-2024 13:36:25.185 INFO [main] org.apache.catalina.core.ApplicationContext.log Initializing Spring FrameworkServlet 'dispatcher'
-16-Apr-2024 13:36:26.727 INFO [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
-16-Apr-2024 13:36:26.727 INFO [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
-16-Apr-2024 13:36:26.728 INFO [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@663e2cfd')

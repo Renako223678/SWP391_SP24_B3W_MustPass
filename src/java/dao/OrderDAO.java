@@ -1,164 +1,73 @@
 package dao;
 
-import dto.OrderDTO;
-import java.math.BigDecimal;
+import dto.Order;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import utils.DBUtils;
+import util.DBContext;
 
 public class OrderDAO {
 
-    public List<OrderDTO> getListOrder() throws SQLException {
-        List<OrderDTO> listOrder = new ArrayList<>();
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        String sql = "SELECT [OrderId], [Description], [OrderDate], [ShipFee], [UsedLotusBub],"
-                + "[TotalPrice], [FinalPrice], [Status], [UserId], [RecipientId]"
-                + "FROM [Orders] WHERE [UserId] like ?";
-        try {
-            conn = DBUtils.getConnection();
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                long orderId = rs.getLong("OrderId");
-                String des = rs.getString("Description");
-                Date orderDate = rs.getDate("OrderDate");
-                BigDecimal shipFee = rs.getBigDecimal("ShipFee");
-                int lotusBub = rs.getInt("UsedLotusBub");
-                BigDecimal totalPrice = rs.getBigDecimal("TotalPrice");
-                BigDecimal finalPrice = rs.getBigDecimal("FinalPrice");
-                byte status = rs.getByte("Status");
-                long userId = rs.getLong("UserId");
-                long recipientId = rs.getLong("RecipientId");
-                OrderDTO order = new OrderDTO(orderId, des, orderDate, shipFee, lotusBub, totalPrice, finalPrice, status, userId, recipientId);
-                listOrder.add(order);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-
-        return listOrder;
-    }
-
-    public boolean updateOrderStatus(long orderId, byte status) throws SQLException {
-        boolean check = false;
-        Connection conn = null;
-        PreparedStatement ps = null;
-
-        String sql = "UPDATE [Orders] SET [Status] = ? WHERE [OrderId] = ?";
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                ps = conn.prepareStatement(sql);
-                ps.setByte(1, status);
-                ps.setLong(2, orderId);
-                check = ps.executeUpdate() > 0 ? true : false;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-
-        return check;
-    }
-
-    public boolean deleteOrder(long orderId) throws SQLException {
-        boolean check = false;
-        Connection conn = null;
-        PreparedStatement ps = null;
-
-        String sql = "DELETE FROM [Orders] WHERE [OrderId] = ?";
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                ps = conn.prepareStatement(sql);
-                ps.setLong(1, orderId);
-                check = ps.executeUpdate() > 0 ? true : false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-
-        return check;
-    }
-
-    public List<OrderDTO> getListOrderByStatus(byte status) throws SQLException {
-    List<OrderDTO> listOrder = new ArrayList<>();
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    String sql = "SELECT [OrderId], [Description], [OrderDate], [ShipFee], [UsedLotusBub],"
-            + "[TotalPrice], [FinalPrice], [Status], [UserId], [RecipientId]"
-            + "FROM [Orders] WHERE [Status] = ?";
-    try {
-        conn = DBUtils.getConnection();
-        ps = conn.prepareStatement(sql);
-        ps.setByte(1, status); // Set the status parameter
-        rs = ps.executeQuery();
-        while (rs.next()) {
-            long orderId = rs.getLong("OrderId");
-            String des = rs.getString("Description");
-            Date orderDate = rs.getDate("OrderDate");
-            BigDecimal shipFee = rs.getBigDecimal("ShipFee");
-            int lotusBub = rs.getInt("UsedLotusBub");
-            BigDecimal totalPrice = rs.getBigDecimal("TotalPrice");
-            BigDecimal finalPrice = rs.getBigDecimal("FinalPrice");
-            long userId = rs.getLong("UserId");
-            long recipientId = rs.getLong("RecipientId");
-
-            // Create an OrderDTO object
-            OrderDTO order = new OrderDTO(orderId, des, orderDate, shipFee, lotusBub, totalPrice, finalPrice, status, userId, recipientId);
-
-            // Add the OrderDTO object to the list
-            listOrder.add(order);
+    public int createOrder(Order order, int userId) {
+         int orderId = -1;
+        String query = "INSERT INTO orders(description, orderdate, shipfee, usedlotusbub, totalprice, finalprice, status, userid, recipientid) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, order.getDescription());
+            ps.setDate(2, order.getOrderDate()); // Chuyển đổi kiểu Date
+            ps.setFloat(3, order.getShipFee());
+            ps.setInt(4, order.getUsedLotusBub());
+            ps.setFloat(5, order.getTotalPrice());
+            ps.setFloat(6, order.getFinalPrice());
+            ps.setInt(7, order.getStatus());
+            ps.setInt(8, userId);
+            ps.setInt(9, 1);
+            ps.executeUpdate();
+             rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+               orderId = rs.getInt(1); // Lấy ID của đơn hàng mới
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception ex) {
-        ex.printStackTrace();
-    } finally {
-        if (rs != null) {
-            rs.close();
-        }
-        if (ps != null) {
-            ps.close();
-        }
-        if (conn != null) {
-            conn.close();
-        }
+        return orderId;
     }
-
-    return listOrder;
-}
-
+    public List<Order> getOrderByUserID(int userId){
+        List<Order> listOrder = new ArrayList<>();
+        String query = "Select * from Orders where UserId = ?";
+        try {
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, userId);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    Order order = new Order(
+                    rs.getInt("OrderId"), // Thay vì chỉ số cột, sử dụng tên cột
+                    rs.getString("Description"),
+                    rs.getDate("OrderDate"),
+                    rs.getFloat("ShipFee"),
+                    rs.getInt("UsedLotusBub"),
+                    rs.getFloat("TotalPrice"),
+                    rs.getFloat("FinalPrice"),
+                    rs.getInt("Status"),
+                    rs.getInt("UserId"),
+                    rs.getInt("RecipientId")
+                );
+                listOrder.add(order);
+                }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        return listOrder;
+    }
 }

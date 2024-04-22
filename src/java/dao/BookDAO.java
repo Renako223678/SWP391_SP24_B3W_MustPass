@@ -1,170 +1,185 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package dao;
 
-import dto.BookDTO;
-import java.math.BigDecimal;
+import util.DBContext;
+import dto.Book;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import utils.DBUtils;
+import static util.DBContext.getConnection;
 
-public class BookDAO {
-    public List<BookDTO> searchBook(String name) throws SQLException{
-        List<BookDTO> bookList = new ArrayList<>();
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        
-        String sql = "SELECT [BookId], [BookName], [Description], [AuthorName], [PublishingCompany],"
-                + "[IssusingCompany], [TranslatorName], [PublishDate], [Quantity],"
-                + "[UnitPrice], [CatogoryID], [Status], [TotalFeedback]"
-                + "FROM [Books] WHERE [BookName] like ?";
-        try{
-            conn = DBUtils.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, "%" + name + "%");
-            rs = ps.executeQuery();
-            while(rs.next()){
-                long bookId = rs.getLong("BookId");
-                String bookName = rs.getString("BookName");
-                String des = rs.getString("Description");
-                String authorName = rs.getString("AuthorName");
-                String publishing = rs.getString("PublishingCompany");
-                String issuing = rs.getString("IssusingCompany");
-                String translator = rs.getString("TranslatorName");
-                Date publishDate = rs.getDate("PublishDate");
-                int quantity = rs.getInt("Quantity");
-                BigDecimal unitPrice = rs.getBigDecimal("UnitPrice");
-                int categoryId = rs.getInt("CatogoryID");
-                Byte status = rs.getByte("Status");
-                int totalFeedback = rs.getInt("TotalFeedback");
-                BookDTO book = new BookDTO(bookId, bookName, des, authorName, publishing, 
-                        issuing, translator, publishDate, quantity, unitPrice, categoryId, 
-                        status, totalFeedback);
-                bookList.add(book);
-            }
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }finally{
-            if(rs != null){
-                rs.close();
-            }
-            if(ps != null){
-                ps.close();
-            }
-            if(conn != null){
-                conn.close();
-            }
+/**
+ *
+ * @author DELL
+ */
+public class BookDAO{
+    Connection conn= null;
+    PreparedStatement ps =null;
+    ResultSet rs = null;
+//    public Book findProductForCart(String Id, int quantity) throws ClassNotFoundException, SQLException {
+//        try {
+//            String sql = "select * from Product where productID = ?";
+//            PreparedStatement stm = getConnection().prepareStatement(sql);
+//            stm.setInt(1, Integer.parseInt(Id));
+//            ResultSet rs = stm.executeQuery();
+//            while (rs.next()) {
+//                return new Book(rs.getInt(1), rs.getString(2), rs.getBoolean(3), rs.getFloat(4), quantity,
+//                        rs.getFloat(6), rs.getString(7), rs.getDate(8), rs.getDate(9), rs.getInt(10), rs.getInt(11));
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+//    public List<Book> getListProductByCategory(String search) throws SQLException {
+//        List<Book> listProduct = new ArrayList<>();
+//        PreparedStatement pst = null;
+//        ResultSet rs = null;
+//        try {
+//                pst = getConnection().prepareStatement("SELECT * FROM Product WHERE CategoryID = ?");
+//                pst.setString(0, search);
+//                rs = pst.executeQuery();
+//                while (rs.next()) {
+//                    listProduct.add(new Book(rs.getInt(1), rs.getString(2), rs.getBoolean(3), rs.getFloat(4), rs.getInt(5),
+//                        rs.getFloat(6), rs.getString(7), rs.getDate(8), rs.getDate(9), rs.getInt(10), rs.getInt(11)));
+//                }
+//            
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } 
+//        return listProduct;
+//    }
+    public List<Book> getAllListBook() {
+        List<Book> listBook = new ArrayList<>();
+        String query = "Select * from Books";
+        try {
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    listBook.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getDate(8), rs.getInt(9),rs.getInt(10), rs.getFloat(11), rs.getInt(12),
+                        rs.getInt(13), rs.getInt(14)));
+                }
+            
+        } 
+        catch (Exception e) {
+            
         }
-        return bookList;
+        return listBook;
+    }
+
+    public Book getBookByID(int id){
+        String query = "Select * from Books where BookId = ?";
+        try {
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, id);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    return new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getDate(8), rs.getInt(9),rs.getInt(10), rs.getFloat(11), rs.getInt(12),
+                        rs.getInt(13), rs.getInt(14));
+                }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        return null;
     }
     
-    public boolean addBook(long bookId, String bookName, String description, String author,
-            String publishingCompany, String issuingCompany, String translator, 
-            Date publishDate, int quantity, BigDecimal unitPrice, byte status) throws SQLException{
-        boolean check = false;
-        Connection conn = null;
-        PreparedStatement ps = null;
-        
-        String sql = "INSERT INTO [Books]([BookId], [BookName], [Description], [AuthorName], "
-                + "[PublishingCompany], [IssusingCompany], [TranslatorName], [PublishDate], [Quantity]"
-                + "[UnitPrice], [Status], [TotalFeedback])"
-                + "SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?"
-                + "FROM [Catogory]"
-                + "WHERE [Books].[CatogoryID] = [Catogory].[ID]";
-        try{
-            conn = DBUtils.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setLong(1, bookId);
-            ps.setString(2, bookName);
-            ps.setString(3, description);
-            ps.setString(4, author);
-            ps.setString(5, publishingCompany);
-            ps.setString(6, issuingCompany);
-            ps.setString(7, translator);
-            ps.setDate(8, publishDate);
-            ps.setInt(9, quantity);
-            ps.setBigDecimal(10, unitPrice);
-            ps.setByte(11, status);
-            check = ps.executeUpdate() > 0 ? true : false;
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }finally{
-            if(ps != null){
-                ps.close();
-            }
-            if(conn != null){
-                conn.close();
-            }
-        }
-        return check;
+    public List<Book> getBookByCateAndSubCate(int cateId, int subCateId){
+        List<Book> listBook = new ArrayList<>();
+        String query = "Select * from Books where CategoryId=? and SubCategoryId = ?";
+        try {
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, cateId);
+                ps.setInt(2, subCateId);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    listBook.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getDate(8), rs.getInt(9),rs.getInt(10), rs.getFloat(11), rs.getInt(12),
+                        rs.getInt(13), rs.getInt(14)));
+                }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        return listBook;
     }
     
-    public boolean updateBook(String bookName, String des, String publishingCompany,
-            String issuingCompany, String translator, Date publishDate,
-            BigDecimal unitPrice, int categoryId, byte status) throws SQLException{
-        boolean check = false;
-        Connection conn = null;
-        PreparedStatement ps = null;
-        
-        String sql = "UPDATE [Books] SET [Description] = ?, [PublishingCompany] = ?,"
-                + "[IssusingCompany] = ?, [TranslatorName] = ?, [PublishDate] = ?,"
-                + "[UnitPrice] = ?, [CatogoryID] = ?, [Status] = ?"
-                + "WHERE [BookName] = ?";
-        try{
-            conn = DBUtils.getConnection();
-            if(conn != null){
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, des);
-                ps.setString(2, publishingCompany);
-                ps.setString(3, issuingCompany);
-                ps.setString(4, translator);
-                ps.setDate(5, publishDate);
-                ps.setBigDecimal(6, unitPrice);
-                ps.setInt(7, categoryId);
-                ps.setByte(8, status);
-                ps.setString(9, bookName);
-                check = ps.executeUpdate() > 0 ? true : false;
-            }
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }finally{
-            if(ps != null){
-                ps.close();
-            }
-            if(conn != null){
-                conn.close();
-            }
-        }
-        return check;
+    public Book getBookID(String id){
+        String query = "Select * from Books where BookId = ?";
+        try {
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                ps.setString(1, id);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    return new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getDate(8), rs.getInt(9),rs.getInt(10), rs.getFloat(11), rs.getInt(12),
+                        rs.getInt(13), rs.getInt(14));
+                }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        return null;
     }
     
-    public boolean deleteBook(long bookId) throws SQLException{
-        boolean check = false;
-        Connection conn = null;
-        PreparedStatement ps = null;
-        
-        String sql = "DELETE FROM [Books] WHERE [BookId] = ?";
-        try{
-            conn = DBUtils.getConnection();
-            if(conn != null){
-                ps = conn.prepareStatement(sql);
-                ps.setLong(1, bookId);
-                check = ps.executeUpdate() > 0 ? true : false;
-            }
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }finally{
-            if(ps != null){
-                ps.close();
-            }
-            if(conn != null){
-                conn.close();
-            }
+      public Book updateBook(Book edittedItem) {
+        try {
+            String sql = "update Books set BookName=?, Description=?, AuthorName=?, PublishingCompany=?,"
+                    +  "IssusingCompany=?, TranslatorName=?, PublishDate=?, Quantity=?, SubCategoryId=?, UnitPrice=?, CategoryID=?, Status=?, TotalFeedback=?  where BookId=? ";
+            PreparedStatement stmt = getConnection().prepareStatement(sql);
+            stmt.setString(1, edittedItem.getBookName());
+            stmt.setString(2, edittedItem.getDescription());
+            stmt.setString(3, edittedItem.getAuthorName());
+            stmt.setString(4, edittedItem.getPublishingCompany());
+            stmt.setString(5, edittedItem.getIssusingCompany());
+            stmt.setString(6, edittedItem.getTranslatorName());
+            stmt.setDate(7, edittedItem.getPublishDate());
+            stmt.setInt(8, edittedItem.getQuantity());
+            stmt.setInt(9, edittedItem.getSubCategoryId());
+            stmt.setInt(10, edittedItem.getCategoryId());
+            stmt.setInt(11, edittedItem.getStatus());
+            stmt.setInt(12, edittedItem.getTotalFeedback());
+            stmt.setInt(13, edittedItem.getBookId());
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return check;
+        return null;
+    }
+         
+    //Create  
+    public Book createBook(Book newItem) {
+        try {
+            String sql = "insert into Books(BookName,Description,AuthorName,PublishingCompany,IssusingCompany,TranslatorName,PublishDate,Quantity,SubCategoryId,UnitPrice,CategoryID,Status,TotalFeedback "
+                    + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement stmt = getConnection().prepareStatement(sql);
+            stmt.setString(1, newItem.getBookName());
+            stmt.setString(2, newItem.getDescription());
+            stmt.setString(3, newItem.getAuthorName());
+            stmt.setString(4, newItem.getPublishingCompany());
+            stmt.setString(5, newItem.getIssusingCompany());
+            stmt.setString(6, newItem.getTranslatorName());
+            stmt.setDate(7, newItem.getPublishDate());
+            stmt.setInt(8, newItem.getQuantity());
+            stmt.setInt(9, newItem.getSubCategoryId());
+            stmt.setInt(10, newItem.getCategoryId());
+            stmt.setInt(11, newItem.getStatus());
+            stmt.setInt(12, newItem.getTotalFeedback());
+            stmt.setInt(13, newItem.getBookId());
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }
