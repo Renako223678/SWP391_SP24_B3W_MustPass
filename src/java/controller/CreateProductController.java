@@ -39,39 +39,33 @@ public class CreateProductController extends HttpServlet {
             throws ServletException, IOException {
         String ul = PRODUCT_PAGE;
          try (PrintWriter out = response.getWriter()) {
-            String _bookName = request.getParameter("txt_bookName");
-            byte[] txt_bookName = _bookName.getBytes("ISO-8859-1");
-            _bookName = new String(txt_bookName, "UTF-8");
-            
-            String _description = request.getParameter("txt_description");
-            byte[] txt_description = _description.getBytes("ISO-8859-1");
-            _description = new String(txt_description, "UTF-8");
-            
-            String _authorName = request.getParameter("txt_authorName");
-            byte[] txt_authorName = _authorName.getBytes("ISO-8859-1");
-            _authorName = new String(txt_authorName, "UTF-8");
-            
-            String _publishingCompany = request.getParameter("txt_publishingCompany");
-            byte[] txt_publishingCompany = _publishingCompany.getBytes("ISO-8859-1");
-            _publishingCompany = new String(txt_publishingCompany, "UTF-8");
-            
-            String _issusingCompany = request.getParameter("txt_issusingCompany");
-            byte[] txt_issusingCompany = _issusingCompany.getBytes("ISO-8859-1");
-            _issusingCompany = new String(txt_issusingCompany, "UTF-8");
-            
-            String _translatorName = request.getParameter("txt_translatorName");
-            byte[] txt_translatorName = _translatorName.getBytes("ISO-8859-1");
-            _translatorName = new String(txt_translatorName, "UTF-8");
-            
-            Date _publishDate = Date.valueOf(request.getParameter("txt_publishDate"));
-            int _quantity = Integer.parseInt(request.getParameter("txt_quantity"));
-            int _subCategoryId = Integer.parseInt(request.getParameter("txt_subCategoryId"));
-            float _unitPrice = Float.parseFloat(request.getParameter("txt_unitPrice"));
-            int _categoryId = Integer.parseInt(request.getParameter("txt_categoryId"));
-            int _status = Integer.parseInt(request.getParameter("txt_status"));
-            int _totalFeedback = Integer.parseInt(request.getParameter("txt_totalFeedback"));
+            String BookName = request.getParameter("BookName");
+            byte[] txt_bookName = BookName.getBytes("ISO-8859-1");
+            BookName = new String(txt_bookName, "UTF-8");
+            String Description = request.getParameter("Description");
+            byte[] txt_description = Description.getBytes("ISO-8859-1");
+            Description = new String(txt_description, "UTF-8");
+            String AuthorName = request.getParameter("AuthorName");
+            byte[] txt_authorName = AuthorName.getBytes("ISO-8859-1");
+            AuthorName = new String(txt_authorName, "UTF-8");
+            String PublishingCompany = request.getParameter("PublishingCompany");
+            byte[] txt_publishingCompany = PublishingCompany.getBytes("ISO-8859-1");
+            PublishingCompany = new String(txt_publishingCompany, "UTF-8");
+            String IssusingCompany = request.getParameter("IssusingCompany");
+            byte[] txt_issusingCompany = IssusingCompany.getBytes("ISO-8859-1");
+            IssusingCompany = new String(txt_issusingCompany, "UTF-8");
+            String TranslatorName = request.getParameter("TranslatorName");
+            byte[] txt_translatorName = TranslatorName.getBytes("ISO-8859-1");
+            TranslatorName = new String(txt_translatorName, "UTF-8");
+            Date PublishDate = Date.valueOf(request.getParameter("PublishDate"));
+            int Quantity = Integer.parseInt(request.getParameter("Quantity"));
+            int SubCategoryId = Integer.parseInt(request.getParameter("SubCategoryId"));
+            float UnitPrice = Float.parseFloat(request.getParameter("UnitPrice"));
+            int CategoryID = Integer.parseInt(request.getParameter("CategoryID"));
+            int Status = Integer.parseInt(request.getParameter("Status"));
+            int TotalFeedback = Integer.parseInt(request.getParameter("TotalFeedback"));
             BookDAO Adao = new BookDAO();
-            Book item = new Book(_bookName, _description, _authorName, _publishingCompany, _issusingCompany, _translatorName, _publishDate, _quantity, _subCategoryId, _unitPrice, _categoryId, _status, 0);
+            Book item = new Book(BookName, Description, AuthorName, PublishingCompany, IssusingCompany, TranslatorName, PublishDate, Quantity, SubCategoryId, UnitPrice, CategoryID, Status, TotalFeedback);
             Adao.createBook(item);
             RequestDispatcher rd = request.getRequestDispatcher(ul);
             rd.forward(request, response);

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UpdateCategoryController extends HttpServlet {
 
     private final String MANGER_PAGE = "ManagerUpdateCategory.jsp";
-    private final String MANGER_P = "ManagerCategoryController";
+    private final String MANGER_P = "ManagerCatogoryController";
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -40,8 +40,8 @@ public class UpdateCategoryController extends HttpServlet {
         try {
             String id = request.getParameter("ID");
             CategoryDAO dao = new CategoryDAO();
-            Category cate = dao.detailCategory(id);
-            request.setAttribute("cate", cate);
+            Category user = dao.detailCategory(id);
+            request.setAttribute("user", user);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -63,12 +63,15 @@ public class UpdateCategoryController extends HttpServlet {
             throws ServletException, IOException {
         String ul = MANGER_P;
         try (PrintWriter out = response.getWriter()) {
-            int _id = Integer.parseInt(request.getParameter("txt_ID"));
-            String _categoryName = request.getParameter("txt_categoryName");
-      
-            int _status = Integer.parseInt(request.getParameter("txt_status"));
+            int ID = Integer.parseInt(request.getParameter("ID"));
+            
+            String CategoryName = request.getParameter("CategoryName");
+            byte[] xCategoryName = CategoryName.getBytes("ISO-8859-1");
+            CategoryName = new String(xCategoryName, "UTF-8");
+            
+            int Status = Integer.parseInt(request.getParameter("Status"));
             CategoryDAO Adao = new CategoryDAO();
-            Category item = new Category(_id, _categoryName, _status);
+            Category item = new Category(ID, CategoryName, Status);
             Adao.updateCategory(item);
             RequestDispatcher rd = request.getRequestDispatcher(ul);
             rd.forward(request, response);

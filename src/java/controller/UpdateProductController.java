@@ -97,7 +97,7 @@ private final String MANGER_P = "ManagerProductController";
 //            int _categoryId = Integer.parseInt(request.getParameter("txt_categoryId"));
 //            int _status = Integer.parseInt(request.getParameter("txt_status"));
 //            int _totalFeedback = Integer.parseInt(request.getParameter("txt_totalFeedback"));
-            int _bookId = Integer.parseInt(request.getParameter("txt_bookId"));
+            int BookId = Integer.parseInt(request.getParameter("BookId"));
             String BookName = request.getParameter("BookName");
             String Description = request.getParameter("Description");
             String AuthorName = request.getParameter("AuthorName");
@@ -113,7 +113,7 @@ private final String MANGER_P = "ManagerProductController";
             int TotalFeedback = Integer.parseInt(request.getParameter("TotalFeedback"));
             
             BookDAO Adao = new BookDAO();
-            Book item = new Book(_bookId, BookName, Description, AuthorName, PublishingCompany, IssusingCompany, 
+            Book item = new Book(BookId, BookName, Description, AuthorName, PublishingCompany, IssusingCompany, 
                     TranslatorName, PublishDate, SubCategoryId, SubCategoryId, UnitPrice, CategoryID, Status, TotalFeedback);
             Adao.updateBook(item);
             RequestDispatcher rd = request.getRequestDispatcher(ul);

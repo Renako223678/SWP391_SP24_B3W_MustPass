@@ -191,7 +191,7 @@
                     </style>
 
                     <c:if test="${sessionScope.roleID == 2}">
-                        <c:set var="cate" value="${requestScope.cate}" />
+                        <c:set var="user" value="${requestScope.user}" />
                         <form action="MainController"method="post">
                             <div class="container"> <br></br>
                                 <div class="table-responsive">
@@ -207,29 +207,46 @@
                                             <tr>
                                                 <td>Category ID</td>
                                                 <td>
-                                                    ${cate.categoryID}
-                                                    <input  hidden name="txt_ID" value="${cate.categoryID}"  />
+                                                    ${user.categoryID}
+                                                    <input  hidden name="ID" value="${user.categoryID}"  />
                                                 </td>
                                                     </tr>
                                                         <tr>
                                                 <td>Category Name</td>
                                                 <td>
-                                                    <input  name="txt_categoryName" value="${cate.categoryName}"  />
+                                                    <input  name="CategoryName" value="${user.categoryName}"  />
                                                 </td>
                                                     </tr>
                                                         <tr>
                                                 <td>Status</td>
                                                 <td>
-                                                    <input  name="txt_status" value="${cate.status}"  />
+                                                    <select name="Status">
+                                                    <c:choose>
+                                                        <c:when test="${user.status eq 1}">
+                                                            <option value="1" selected>Đang Hoạt Động </option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="1">Đang Hoạt Động</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${user.status eq 2}">
+                                                            <option value="2" selected>Ngừng Hoạt Động</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="2">Ngừng Hoạt Động</option>
+                                                        </c:otherwise>
+                                                    </c:choose>                   
+                                                </select>
                                                 </td>
                                             </tr>
                                             
                                             <tr>
                                                 <td>
-                                                     <button type="submit" name="btAction" value="Manage Product">BACK</button>
+                                                     <button type="submit" name="btAction" value="Manage Category">BACK</button>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" name="btAction" value="MANAGER_UPDATE_PRODUCT">UPDATE</button>
+                                                    <button type="submit" name="btAction" value="Manage_Update_Cate">UPDATE</button>
                                                 </td>
                                             </tr>
                                         </table>

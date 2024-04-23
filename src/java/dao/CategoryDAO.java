@@ -42,10 +42,10 @@ public class CategoryDAO {
             stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                int _id = rs.getInt("ID");
-                String _categoryName = rs.getString("CatogoryName");
-                int _status = rs.getInt("Status");
-                ac = new Category(_id, _categoryName, _status);
+                int ID = rs.getInt("ID");
+                String CategoryName = rs.getString("CategoryName");
+                int Status = rs.getInt("Status");
+                ac = new Category(ID, CategoryName, Status);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,6 +79,19 @@ public class CategoryDAO {
             stmt.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    
+     public Category deleteCategory(String id) {
+        try {
+            String sql = "delete from Category where ID =? ";
+            PreparedStatement stmt = getConnection().prepareStatement(sql);
+            stmt.setString(1, id);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }

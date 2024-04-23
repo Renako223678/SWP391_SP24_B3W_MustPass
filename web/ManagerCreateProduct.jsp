@@ -208,79 +208,79 @@
                                             <tr>
                                                 <td>Book Name</td>
                                                 <td>
-                                                    <input  name="txt_bookName"   />
+                                                    <input  name="BookName"   />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Book Description</td>
                                                 <td>
-                                                    <input  name="txt_description" />
+                                                    <input  name="Description" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Author Name</td>
                                                 <td>
-                                                    <input  name="txt_authorName"   />
+                                                    <input  name="AuthorName"   />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Publishing Company</td>
                                                 <td>
-                                                    <input  name="txt_publishingCompany"   />
+                                                    <input  name="PublishingCompany"   />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Issusing Company</td>
                                                 <td>
-                                                    <input  name="txt_issusingCompany"   />
+                                                    <input  name="IssusingCompany"   />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Translator Name</td>
                                                 <td>
-                                                    <input  name="txt_translatorName"  />
+                                                    <input  name="TranslatorName"  />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Publish Date</td>
                                                 <td>
-                                                    <input type="date"  name="txt_publishDate"  />
+                                                    <input type="date"  name="PublishDate"  />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Quantity </td>
                                                 <td>
-                                                    <input type="number"  name="txt_quantity"   />
+                                                    <input type="number"  name="Quantity"   />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Sub Category Id</td>
                                                 <td>
-                                                    <input type="number"  name="txt_subCategoryId"   />
+                                                    <input type="number"  name="SubCategoryId"   />
                                                 </td>
                                             </tr>  
                                             <tr>
                                                 <td>Unit Price</td>
                                                 <td>
-                                                    <input type="number"  name="txt_unitPrice"  />
+                                                    <input type="number"  name="UnitPrice"  />
                                                 </td>
                                             </tr>
                                               <tr>
                                                 <td>Category Id</td>
                                                 <td>
-                                                    <input type="number"  name="txt_categoryId"   />
+                                                    <input type="number"  name="CategoryID"   />
                                                 </td>
                                             </tr>  
                                             <tr>
                                                 <td>Status</td>
                                                 <td>
-                                                    <input type="number"  name="txt_status"   />
+                                                    <input type="number"  name="Status"   />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Total Feedback</td>
                                                 <td>
-                                                    <input type="number"  name="txt_totalFeedback"  />
+                                                    <input type="number"  name="TotalFeedback"  />
                                                 </td>
                                             </tr>
                                             

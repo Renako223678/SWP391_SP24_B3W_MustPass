@@ -108,6 +108,10 @@
         <servlet-name>StaffUpdateProductController</servlet-name>
         <servlet-class>controller.StaffUpdateProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteCategoryController</servlet-name>
+        <servlet-class>controller.DeleteCategoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -215,6 +219,10 @@
     <servlet-mapping>
         <servlet-name>StaffUpdateProductController</servlet-name>
         <url-pattern>/StaffUpdateProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCategoryController</servlet-name>
+        <url-pattern>/DeleteCategoryController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

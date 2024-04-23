@@ -6,11 +6,9 @@
 package controller;
 
 import dao.CategoryDAO;
-import dto.Account;
 import dto.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author THUAN
  */
-public class CreateCategogyController extends HttpServlet {
-    private final String MANGER_PAGE = "CreateCategory.jsp";
-     private final String MANGER_P = "ManagerCatogoryController";
+public class DeleteCategoryController extends HttpServlet {
+private final String ADMIN_PAGE = "ManagerCatogoryController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,6 +29,16 @@ public class CreateCategogyController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+       
+        String url = ADMIN_PAGE;
+        String id = request.getParameter("ID");
+        CategoryDAO dao = new CategoryDAO();
+        Category user = dao.deleteCategory(id);
+        request.getRequestDispatcher(url).forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -45,9 +52,7 @@ public class CreateCategogyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = MANGER_PAGE;
-        RequestDispatcher rd = request.getRequestDispatcher(url);
-        rd.forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -61,21 +66,7 @@ public class CreateCategogyController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ul = MANGER_P;
-        try (PrintWriter out = response.getWriter()) {
-            String CategoryName = request.getParameter("CategoryName");
-            byte[] xCategoryName = CategoryName.getBytes("ISO-8859-1");
-            CategoryName = new String(xCategoryName, "UTF-8");
-            
-            int Status = Integer.parseInt(request.getParameter("Status"));
-            CategoryDAO Adao = new CategoryDAO();
-            Category item = new Category(CategoryName, Status);
-            Adao.createCategory(item);
-            RequestDispatcher rd = request.getRequestDispatcher(ul);
-            rd.forward(request, response);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } 
+        processRequest(request, response);
     }
 
     /**

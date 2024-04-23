@@ -239,6 +239,7 @@
                                                 <th>Categogy ID</th>
                                                 <th>Category Name</th>  
                                                 <th>Status</th>
+                                      
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -254,9 +255,14 @@
                                                         <c:if test="${ac.status == 2}">
                                                             <td>Ngừng Hoạt Động</td>
                                                         </c:if>
-                                                           <td>
+                                                        <td>
                                                             <button>
                                                                 <a href="UpdateCategoryController?ID=${ac.categoryID}" > EDIT </a>
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <button>
+                                                                <a href="DeleteCategoryController?ID=${ac.categoryID}" > Delete </a>
                                                             </button>
                                                         </td>
                                                </tr>

@@ -20,7 +20,7 @@
     <body id="page-top">
         <div id="wrapper">
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-                <a class="sidebar-brand d-flex align-items-center" href="AdminController">
+                <a class="sidebar-brand d-flex align-items-center" href="#">
                     <div class="sidebar-brand-icon">
                         <img src="img/R.png" class="img-fluid">
                     </div>
@@ -207,28 +207,45 @@
                                             <tr>
                                                 <td>Category Name</td>
                                                 <td>
-                                                    <input   name="txt_categoryName"  />
+                                                    <input   name="CategoryName"  />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Status</td>
                                                 <td>
-                                                    <input   name="txt_status"  />
+                                                    <select name="Status">
+                                                    <c:choose>
+                                                        <c:when test="${user.status eq 1}">
+                                                            <option value="1" selected>Đang Hoạt Động </option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="1">Đang Hoạt Động</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${user.status eq 2}">
+                                                            <option value="2" selected>Ngừng Hoạt Động</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="2">Ngừng Hoạt Động</option>
+                                                        </c:otherwise>
+                                                    </c:choose>                   
+                                                </select>
                                                 </td>
                                             </tr>
                                                <tr>
                                                 <td></td>
                                                 <td>
-                                                    <input hidden=""  name="txt_Id"  />
+                                                    <input hidden=""  name="ID"  />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                     <button type="submit" name="btAction" value="Manage Product">BACK</button>
+                                                     <button type="submit" name="btAction" value="Manage Category">BACK</button>
                                                 </td>
                                        
                                                 <td>
-                                                    <button type="submit" name="btAction" value="Create Categogy">UPDATE</button>
+                                                    <button type="submit" name="btAction" value="Create Categogy">Create</button>
                                                 </td>
                                             </tr>
                                         </table>

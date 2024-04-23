@@ -152,7 +152,7 @@ public class BookDAO{
             stmt.setInt(13, edittedItem.getBookId());
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {
-            // Trả về đối tượng sách đã cập nhật
+   
             return edittedItem;
         }
         } catch (Exception e) {
@@ -162,28 +162,28 @@ public class BookDAO{
     }
          
     //Create  
-    public Book createBook(Book newItem) {
-        try {
-            String sql = "insert into Books(BookName,Description,AuthorName,PublishingCompany,IssusingCompany,TranslatorName,PublishDate,Quantity,SubCategoryId,UnitPrice,CategoryID,Status,TotalFeedback "
-                    + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement stmt = getConnection().prepareStatement(sql);
-            stmt.setString(1, newItem.getBookName());
-            stmt.setString(2, newItem.getDescription());
-            stmt.setString(3, newItem.getAuthorName());
-            stmt.setString(4, newItem.getPublishingCompany());
-            stmt.setString(5, newItem.getIssusingCompany());
-            stmt.setString(6, newItem.getTranslatorName());
-            stmt.setDate(7, newItem.getPublishDate());
-            stmt.setInt(8, newItem.getQuantity());
-            stmt.setInt(9, newItem.getSubCategoryId());
-            stmt.setInt(10, newItem.getCategoryId());
-            stmt.setInt(11, newItem.getStatus());
-            stmt.setInt(12, newItem.getTotalFeedback());
-            stmt.setInt(13, newItem.getBookId());
-            stmt.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
+   public Book createBook(Book newItem) {
+    try {
+        String sql = "INSERT INTO Books (BookName, Description, AuthorName, PublishingCompany, IssusingCompany, TranslatorName, PublishDate, Quantity, SubCategoryId, UnitPrice, CategoryID, Status, TotalFeedback) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement stmt = getConnection().prepareStatement(sql);
+        stmt.setString(1, newItem.getBookName());
+        stmt.setString(2, newItem.getDescription());
+        stmt.setString(3, newItem.getAuthorName());
+        stmt.setString(4, newItem.getPublishingCompany());
+        stmt.setString(5, newItem.getIssusingCompany());
+        stmt.setString(6, newItem.getTranslatorName());
+        stmt.setDate(7, newItem.getPublishDate());
+        stmt.setInt(8, newItem.getQuantity());
+        stmt.setInt(9, newItem.getSubCategoryId());
+        stmt.setInt(10, newItem.getCategoryId());
+        stmt.setInt(11, newItem.getStatus());
+        stmt.setInt(12, newItem.getTotalFeedback());
+        stmt.executeUpdate();
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
     }
+    return null;
+}
+
 }

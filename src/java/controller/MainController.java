@@ -42,8 +42,11 @@ public class MainController extends HttpServlet {
     private final String MANAGER_PRODUCT = "ManagerProductController";
     private final String MANAGER_CATEGORY = "ManagerCatogoryController";
     private final String MANAGER_UPDATE_ACCOUNT = "UpdateAccountController";
+ 
     private final String CREATE_PRODUCT = "CreateProductController";
     private final String CREATE_CATEGOGY = "CreateCategogyController";
+    
+    private final String MANAGER_UPDATE_CATEGORY = "UpdateCategoryController";
     
     private final String UPDATE_BLOG = "UpdateBlogController";
     private final String UPDATE_PRODUCT = "UpdateProductController";
@@ -102,7 +105,10 @@ public class MainController extends HttpServlet {
                 url = STAFF_UPDATE_ORDERS;
             }else if (button.equals("STAFF_UPDATE_PRODUCTS")){
                 url = STAFF_UPDATE_PRODUCT;
+            }else if (button.equals("Manage_Update_Cate")){
+                url = MANAGER_UPDATE_CATEGORY;
             }
+
 
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
