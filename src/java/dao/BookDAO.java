@@ -150,7 +150,11 @@ public class BookDAO{
             stmt.setInt(11, edittedItem.getStatus());
             stmt.setInt(12, edittedItem.getTotalFeedback());
             stmt.setInt(13, edittedItem.getBookId());
-            stmt.executeUpdate();
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected > 0) {
+            // Trả về đối tượng sách đã cập nhật
+            return edittedItem;
+        }
         } catch (Exception e) {
             e.printStackTrace();
         }

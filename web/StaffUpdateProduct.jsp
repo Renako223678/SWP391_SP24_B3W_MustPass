@@ -20,23 +20,24 @@
     <body id="page-top">
         <div id="wrapper">
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-                <a class="sidebar-brand d-flex align-items-center" href="#">
+                <a class="sidebar-brand d-flex align-items-center" href="AdminController">
                     <div class="sidebar-brand-icon">
                         <img src="img/R.png" class="img-fluid">
                     </div>
                 </a>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="homepage.jsp">
-                        <i class="mdi mdi-home-variant-outline"></i>
-                        <span>TRANG CHỦ</span></a>
                 </li>
+
                 <hr class="sidebar-divider d-none d-md-block">
                 <div class="text-center d-none d-md-inline">
                     <button class="rounded-circle border-0" id="sidebarToggle"></button>
                 </div>
             </ul>
+
+
             <div id="content-wrapper" class="d-flex flex-column">
+
                 <div id="content">
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow-sm osahan-nav-top">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -61,12 +62,6 @@
                                     <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                                     </svg>  <b class="caret">${sessionScope.username} </b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="AccountInfoController?ID=${sessionScope.username}"><i class="fa fa-user-o"></i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
-                                            </svg> Profile</a></li>
-                                    <li><a href="SettingController"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/>
-                                            </svg> Settings</a></li>
                                     <li class="divider"></li>
                                     <li><a href="LogoutController"><i class="material-icons">&#xE8AC;</i> Logout</a></li>
                                 </ul>
@@ -77,7 +72,6 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-search fa-fw"></i>
                                 </a>
-
                                 <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
 
                                 </div>
@@ -195,87 +189,153 @@
                             color:#c60021
                         }
                     </style>
+
                     <c:if test="${sessionScope.roleID == 3}">
-                        <div class="container"> <br></br>
-                            <div class="table-responsive">
-                                <div class="table-wrapper">
-                                    <div class="table-title">
-                                        <div class="row">
-                                            <div class="col-xs-5">
-                                                <h2>Book <b>Management</b></h2>
-                                            </div>
-                                            <form action="MainController" method="post">
-                                                <div class="input-group-prepend ">
-                                                    <div class="input-group-append">
-                                                        <input class="btn btn-primary" type="submit" value="Staff FeedBack" name="btAction" >
-                                                    </div>
-                                                    <div class="input-group-append">
-                                                        <input class="btn btn-primary" type="submit" value="Staff Orders" name="btAction" >
-                                                    </div>
+                        <c:set var="book" value="${requestScope.book}" />
+                        <form action="MainController"method="post">
+                            <div class="container"> <br></br>
+                                <div class="table-responsive">
+                                    <div class="table-wrapper">
+                                        <div class="table-title">
+                                            <div class="row">
+                                                <div class="col-xs-5">
+                                                    <h2>Update Book</h2>
                                                 </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <form action="MainController">
-                                            Search Keyword: <input type="text" name="txtSearchName" value="" />
-                                            <input type="submit" value="Find" name="btAction" />
-                                            </br>                                            
-                                            </br>
-                                            <div>
-                                                <input type="submit" value="Create Product" name="btAction" /> 
                                             </div>
-                                            </br>   
-                                    </form>
-                                    <table class="table table-striped table-hover">
-                                        <thead>
+                                        </div>
+                                        <table class="table table-striped table-hover">
                                             <tr>
-                                                <th>BookId</th>
-                                                <th>BookName</th>  
-                                                <th>Description</th>
-                                                <th>AuthorName</th>
-                                                <th>TranslatorName</th>
-                                                <th>PublishDate</th>
-                                                <th>Quantity</th>
-                                                <th>UnitPrice</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                                <td>Book ID</td>
+                                                <td>
+                                                    ${book.bookId}
+                                                    <input  hidden name="txt_bookId" value="${book.bookId}"  />
+                                                </td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${list}" var="bo" varStatus="counter">
-                                            <form action="MainController" method="post">
-                                               <tr>
-                                                        <td>${bo.bookId}</td>
-                                                        <td>${bo.bookName}</td>
-                                                        <td>${bo.description}</td>
-                                                        <td>${bo.authorName}</td>
-                                                        <td>${bo.translatorName}</td>
-                                                        <td>${bo.publishDate}</td>
-                                                        <td>${bo.quantity}</td>
-                                                        <td>${bo.unitPrice}</td>
-                                                        <c:if test="${bo.status == 1}">
-                                                            <td>Avaiable</td>
-                                                        </c:if>
-                                                        <c:if test="${bo.status == 2}">
-                                                            <td>Inavaiable</td>
-                                                        </c:if>  
-                                                        <td>
-                                                            <button>
-                                                                <a href="StaffUpdateProductController?ID=${bo.bookId}" > EDIT </a>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                            </form>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>      
-                        </div>   
+                                            <tr>
+                                                <td>Book Name</td>
+                                                <td>
+                                                    <input  name="txt_bookName" value="${book.bookName}"  />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Book Description</td>
+                                                <td>
+                                                    <input  name="txt_description" value="${book.description}"  />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Author Name</td>
+                                                <td>
+                                                    <input  name="txt_authorName" value="${book.authorName}"  />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Publishing Company</td>
+                                                <td>
+                                                    <input  name="txt_publishingCompany" value="${book.publishingCompany}"  />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Issusing Company</td>
+                                                <td>
+                                                    <input  name="txt_issusingCompany" value="${book.issusingCompany}"  />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Translator Name</td>
+                                                <td>
+                                                    <input  name="txt_translatorName" value="${book.translatorName}"  />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Publish Date</td>
+                                                <td>
+                                                    <input type="date"  name="txt_publishDate" value="${book.publishDate}"  />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Quantity </td>
+                                                <td>
+                                                    <input type="number"  name="txt_quantity" value="${book.quantity}"  />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sub Category Id</td>
+                                                <td>
+                                                    <input type="number"  name="txt_subCategoryId" value="${book.subCategoryId}"  />
+                                                </td>
+                                            </tr>  
+                                            <tr>
+                                                <td>Unit Price</td>
+                                                <td>
+                                                    <input type="number"  name="txt_unitPrice" value="${book.unitPrice}"  />
+                                                </td>
+                                            </tr>
+                                              <tr>
+                                                <td>Category Id</td>
+                                                <td>
+                                                    <input type="number"  name="txt_categoryId" value="${book.categoryId}"  />
+                                                </td>
+                                            </tr>  
+                                            <tr>
+                                                <td>Status</td>
+                                                <td>
+                                                    <select name="txt_status">
+                                                    <c:choose>
+                                                        <c:when test="${book.status eq 1}">
+                                                            <option value="1" selected>Đang Hoạt Động</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="1">Đang Hoạt Động</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${book.status eq 2}">
+                                                            <option value="2" selected>Ngừng Hoạt Động</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="2">Ngừng Hoạt Động</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${book.status eq 3}">
+                                                            <option value="3" selected>Hết Hàng</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="3">Hết Hàng</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>Total Feedback</td>
+                                                <td>
+                                                    <input type="number"  name="txt_totalFeedback" value="${book.totalFeedback}"  />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>
+                                                     <button type="submit" name="btAction" value="Staff Product">BACK</button>
+                                                </td>
+                                                <td>
+                                                    <button type="submit" name="btAction" value="STAFF_UPDATE_PRODUCTS">UPDATE</button>
+                                                </td>
+                                            </tr>       
+                                        </table>
+                                    </div>
+                                </div>      
+                            </div>   
+                        </form>
                     </c:if>
+
                     <script data-cfasync="false" src="js/email-decode.min.js"></script><script src="vendor/jquery/jquery.min.js" type="4673c51028ea841130b80adc-text/javascript"></script>
                     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js" type="4673c51028ea841130b80adc-text/javascript"></script>
+
                     <script src="vendor/jquery-easing/jquery.easing.min.js" type="4673c51028ea841130b80adc-text/javascript"></script>
+
                     <script src="js/osahan.min.js" type="4673c51028ea841130b80adc-text/javascript"></script>
                     <script src="js/rocket-loader.min.js" data-cf-settings="4673c51028ea841130b80adc-|49" defer=""></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"75c6f9299e967d56","version":"2022.10.3","r":1,"token":"dd471ab1978346bbb991feaa79e6ce5c","si":100}' crossorigin="anonymous"></script>
                     </body>

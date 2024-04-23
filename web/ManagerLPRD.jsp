@@ -262,10 +262,10 @@
                                                         <td>${bo.quantity}</td>
                                                         <td>${bo.unitPrice}</td>
                                                         <c:if test="${bo.status == 1}">
-                                                            <td>Avaiable</td>
+                                                            <td>Đang Hoạt Động</td>
                                                         </c:if>
                                                         <c:if test="${bo.status == 2}">
-                                                            <td>Inavaiable</td>
+                                                            <td>Ngừng Hoạt Động</td>
                                                         </c:if>  
                                                         <td>
                                                             <button>

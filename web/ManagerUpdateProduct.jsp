@@ -280,7 +280,32 @@
                                             <tr>
                                                 <td>Status</td>
                                                 <td>
-                                                    <input type="number"  name="txt_status" value="${book.status}"  />
+                                                   <select name="txt_status">
+                                                    <c:choose>
+                                                        <c:when test="${book.status eq 1}">
+                                                            <option value="1" selected>Đang Hoạt Động</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="1">Đang Hoạt Động</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${book.status eq 2}">
+                                                            <option value="2" selected>Ngừng Hoạt Động</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="2">Ngừng Hoạt Động</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${book.status eq 3}">
+                                                            <option value="3" selected>Hết Hàng</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="3">Hết Hàng</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>

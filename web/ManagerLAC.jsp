@@ -254,19 +254,19 @@
                                                             <td>Admin</td>
                                                         </c:if>
                                                         <c:if test="${ac.roleId == 2}">
-                                                            <td>Manager</td>
+                                                            <td>Quản Lí</td>
                                                         </c:if>  
                                                         <c:if test="${ac.roleId == 3}">
-                                                            <td>Staff</td>
+                                                            <td>Nhân Viên</td>
                                                         </c:if>      
                                                          <c:if test="${ac.roleId == 4}">
-                                                            <td>Customer</td>
+                                                            <td>Khách Hàng</td>
                                                         </c:if>      
                                                          <c:if test="${ac.status == 1}">
-                                                            <td>Avaiable</td>
+                                                            <td>Đang Hoạt Động</td>
                                                         </c:if>
                                                         <c:if test="${ac.status == 2}">
-                                                            <td>Inavaiable</td>
+                                                            <td>Dừng Hoạt Động</td>
                                                         </c:if>  
                                                         <td>
                                                             <button>

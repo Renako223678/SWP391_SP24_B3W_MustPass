@@ -249,10 +249,10 @@
                                                         <td>${ac.categoryID}</td>
                                                         <td>${ac.categoryName}</td>
                                                         <c:if test="${ac.status == 1}">
-                                                            <td>Avaiable</td>
+                                                            <td>Đang Hoạt Động</td>
                                                         </c:if>
                                                         <c:if test="${ac.status == 2}">
-                                                            <td>Inavaiable</td>
+                                                            <td>Ngừng Hoạt Động</td>
                                                         </c:if>
                                                            <td>
                                                             <button>

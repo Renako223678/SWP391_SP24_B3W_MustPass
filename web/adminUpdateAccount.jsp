@@ -238,13 +238,63 @@
                                             <tr>
                                                 <td>STATUS: </td>
                                                 <td>
-                                                    <input  name="txt_status" value="${user.status}"  />
+                                                    <select name="txt_status">
+                                                    <c:choose>
+                                                        <c:when test="${user.status eq 1}">
+                                                            <option value="1" selected>Đang Hoạt Động</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="1">Đang Hoạt Động</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${user.status eq 2}">
+                                                            <option value="2" selected>Ngừng Hoạt Động</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="2">Ngừng Hoạt Động</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>ROLE ID:</td>
                                                 <td>
-                                                   <input  name="txt_roleID" value="${user.roleId}"  />
+                                                <select name="txt_roleID">
+                                                    <c:choose>
+                                                        <c:when test="${user.roleId eq 1}">
+                                                            <option value="1" selected>Admin</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="1">Admin</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${user.roleId eq 2}">
+                                                            <option value="2" selected>Quản lí</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="2">Quản lí</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${user.roleId eq 3}">
+                                                            <option value="3" selected>Nhân Viên</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="3">Nhân viên</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                            <c:choose>
+                                                        <c:when test="${user.roleId eq 4}">
+                                                            <option value="4" selected>Khách Hàng</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="4">Khách Hàng</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
