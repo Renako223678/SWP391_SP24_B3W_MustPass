@@ -1,17 +1,10 @@
 package controller;
 
-import cart.Cart;
-import dao.CategoryDAO;
 import dao.RecipientDAO;
-import dao.SubCategoryDAO;
 import dto.Account;
-import dto.Category;
 import dto.Recipient;
-import dto.SubCategory;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,12 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Quanglatui
- */
-@WebServlet(name = "ViewCartController", urlPatterns = {"/ViewCartController"})
-public class ViewCartController extends HttpServlet {
+@WebServlet(name = "CreateRecipientController", urlPatterns = {"/CreateRecipientController"})
+public class CreateRecipientController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,33 +26,23 @@ public class ViewCartController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        String url = "viewCart.jsp";
-        dao.CategoryDAO cateDao = new CategoryDAO();
-        dao.SubCategoryDAO subDao = new SubCategoryDAO();
-        List<Category> listCategory = new ArrayList<>();
-        listCategory = cateDao.getAllListCategory();
-        request.setAttribute("listCategory", listCategory);
-        List<SubCategory> listSubCate = new ArrayList<>();
-        listSubCate = subDao.getAllListSubCategory();
-        request.setAttribute("listSubCategory", listSubCate);
-
+        String url = "ViewCartController";
+        String address = request.getParameter("txtAddress");
+        String name = request.getParameter("txtName");
+        String phone = request.getParameter("txtPhone");
         HttpSession session = request.getSession();
-        Cart cart = (Cart) session.getAttribute("CART");
-        if (cart == null) {
-            cart = new Cart(); // Nếu giỏ hàng chưa được khởi tạo, tạo mới
-            session.setAttribute("CART", cart); // Đặt giỏ hàng vào session
-        }
-        Account user = (Account)session.getAttribute("LOGIN_USER");
-        List<Recipient> listRecipient = new ArrayList<>();
-        RecipientDAO reDao = new RecipientDAO();
-        listRecipient = reDao.getRecipientByUserID(user.getUserId());
-        request.setAttribute("listRecipient", listRecipient);
-
-// Chuyển đối tượng Cart vào JSP
-        request.setAttribute("cart", cart);
+        Account account = (Account) session.getAttribute("LOGIN_USER");
+        Recipient newRecipient = new Recipient();
+        newRecipient.setDestAddress(address);
+        newRecipient.setRecipientName(name);
+        newRecipient.setPhoneNumber(phone);
+        newRecipient.setStatus(1);
+        newRecipient.setUserID(account.getUserId());
+        RecipientDAO dao = new RecipientDAO();
+        dao.createRecipient(newRecipient);
         request.getRequestDispatcher(url).forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

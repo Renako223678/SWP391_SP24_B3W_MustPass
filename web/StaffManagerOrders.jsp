@@ -202,7 +202,7 @@
                                     <div class="table-title">
                                         <div class="row">
                                             <div class="col-xs-5">
-                                                <h2>Feedback <b>Management</b></h2>
+                                                <h2>Orders <b>Management</b></h2>
                                             </div>
                                             <form action="MainController" method="post">
                                                 <div class="input-group-prepend ">
@@ -216,14 +216,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <form action="MainController">
-                                            Search Keyword: <input type="text" name="txtSearchName" value="" />
-                                            <input type="submit" value="Find" name="btAction" />
-                                            </br>                                            
-                                            </br>
-                                         
-                                            </br>   
-                                    </form>
+
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>

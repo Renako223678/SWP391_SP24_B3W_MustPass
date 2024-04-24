@@ -50,9 +50,9 @@
                             </div>
                         </div>
 
-                        <c:if test="${not empty requestScope.LOGIN_ERROR.errorMsg}">
+                        <c:if test="${not empty requestScope.ERROR_MESSAGE}">
                             <font color='red'>
-                            ${requestScope.LOGIN_ERROR.errorMsg}
+                            ${requestScope.ERROR_MESSAGE}
                             </font> 
                         </c:if> <br></br>
 
@@ -67,9 +67,9 @@
                         <p class="text-center">
                             <a href="signup.jsp" class="btn btn-light btn-block mb-2">TẠO TÀI KHOẢN</a>
                         </p>
-
+                      </form>  
                 </div>
-                </form>
+                
             </div>
         </div>
     </div>

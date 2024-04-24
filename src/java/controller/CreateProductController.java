@@ -6,15 +6,22 @@
 package controller;
 
 import dao.BookDAO;
+import dao.CategoryDAO;
+import dao.SubCategoryDAO;
 import dto.Book;
+import dto.Category;
+import dto.SubCategory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -23,11 +30,20 @@ import javax.servlet.http.HttpServletResponse;
 public class CreateProductController extends HttpServlet {
 
     private final String CREATE_NEW_PRODUCT= "ManagerCreateProduct.jsp";
-    private final String PRODUCT_PAGE = "CreateProductController";
+    private final String PRODUCT_PAGE = "ManagerProductController";
 
      @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        CategoryDAO adao = new CategoryDAO();
+        List<Category> listItem = adao.getAllListCategory();
+         request.setAttribute("categories", listItem);
+         
+         SubCategoryDAO dao = new SubCategoryDAO();
+         List<SubCategory> listItems = dao.getAllListSubCategory();
+         request.setAttribute("subcategories", listItems);
+         
         String url = CREATE_NEW_PRODUCT;
         RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
@@ -40,24 +56,30 @@ public class CreateProductController extends HttpServlet {
         String ul = PRODUCT_PAGE;
          try (PrintWriter out = response.getWriter()) {
             String BookName = request.getParameter("BookName");
-            byte[] txt_bookName = BookName.getBytes("ISO-8859-1");
-            BookName = new String(txt_bookName, "UTF-8");
+            byte[] xBookName = BookName.getBytes("ISO-8859-1");
+            BookName = new String(xBookName, "UTF-8");
+            
             String Description = request.getParameter("Description");
-            byte[] txt_description = Description.getBytes("ISO-8859-1");
-            Description = new String(txt_description, "UTF-8");
+            byte[] xDescription = Description.getBytes("ISO-8859-1");
+            Description = new String(xDescription, "UTF-8");
+            
             String AuthorName = request.getParameter("AuthorName");
-            byte[] txt_authorName = AuthorName.getBytes("ISO-8859-1");
-            AuthorName = new String(txt_authorName, "UTF-8");
+            byte[] xAuthorName = AuthorName.getBytes("ISO-8859-1");
+            AuthorName = new String(xAuthorName, "UTF-8");
+            
             String PublishingCompany = request.getParameter("PublishingCompany");
-            byte[] txt_publishingCompany = PublishingCompany.getBytes("ISO-8859-1");
-            PublishingCompany = new String(txt_publishingCompany, "UTF-8");
+            byte[] xPublishingCompany = PublishingCompany.getBytes("ISO-8859-1");
+            PublishingCompany = new String(xPublishingCompany, "UTF-8");
+            
             String IssusingCompany = request.getParameter("IssusingCompany");
-            byte[] txt_issusingCompany = IssusingCompany.getBytes("ISO-8859-1");
-            IssusingCompany = new String(txt_issusingCompany, "UTF-8");
+            byte[] xIssusingCompany = IssusingCompany.getBytes("ISO-8859-1");
+            IssusingCompany = new String(xIssusingCompany, "UTF-8");
+            
             String TranslatorName = request.getParameter("TranslatorName");
-            byte[] txt_translatorName = TranslatorName.getBytes("ISO-8859-1");
-            TranslatorName = new String(txt_translatorName, "UTF-8");
-            Date PublishDate = Date.valueOf(request.getParameter("PublishDate"));
+            byte[] xTranslatorName = TranslatorName.getBytes("ISO-8859-1");
+            TranslatorName = new String(xTranslatorName, "UTF-8");
+        
+            int PublishDate = Integer.parseInt(request.getParameter("PublishDate"));
             int Quantity = Integer.parseInt(request.getParameter("Quantity"));
             int SubCategoryId = Integer.parseInt(request.getParameter("SubCategoryId"));
             float UnitPrice = Float.parseFloat(request.getParameter("UnitPrice"));

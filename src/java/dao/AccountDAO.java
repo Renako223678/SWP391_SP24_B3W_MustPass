@@ -23,11 +23,12 @@ import util.DBContext;
 public class AccountDAO extends DBContext {
 
     //find account
-    public Account findAccount(String email) throws ClassNotFoundException, SQLException {
+    public Account findAccount(String email, String password) throws ClassNotFoundException, SQLException {
         try {
-            String sql = "select * from Users where Email = ? ";
+            String sql = "select * from Users where Email = ? and Password =  ?";
             PreparedStatement stm = getConnection().prepareStatement(sql);
             stm.setString(1, email);
+            stm.setString(2, password);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 return new Account(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(6),rs.getInt(7));

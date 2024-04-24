@@ -250,7 +250,7 @@
                                             <tr>
                                                 <td>Publish Date</td>
                                                 <td>
-                                                    <input type="date"  name="PublishDate" value="${book.publishDate}"  />
+                                                    <input type="number"  name="PublishDate" value="${book.publishDate}"  />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -262,7 +262,13 @@
                                             <tr>
                                                 <td>Sub Category Id</td>
                                                 <td>
-                                                    <input type="number"  name="SubCategoryId" value="${book.subCategoryId}"  />
+                                                
+                                                    <select name="SubCategoryId">
+                                                        <c:forEach items="${subcategories}" var="subcategory">
+                                                            <option value="${subcategory.subcategoryID}">
+                                                                ${subcategory.subName}</option>
+                                                        </c:forEach>
+                                                    </select>
                                                 </td>
                                             </tr>  
                                             <tr>
@@ -274,7 +280,19 @@
                                               <tr>
                                                 <td>Category Id</td>
                                                 <td>
-                                                    <input type="number"  name="CategoryID" value="${book.categoryId}"  />
+                                                   
+                                                    <select name="CategoryID">
+                                                        <c:forEach items="${categories}" var="category">
+                                                            <option value="${category.categoryID}">
+                                                                
+                                                                <c:if test="${category.categoryID eq book.categoryId}">
+                                                            Selected ->
+                                                            </c:if>
+                                                                ${category.categoryName}
+                                                            
+                                                            </option>
+                                                        </c:forEach>
+                                                    </select>
                                                 </td>
                                             </tr>  
                                             <tr>

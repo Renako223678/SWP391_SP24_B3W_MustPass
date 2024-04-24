@@ -5,14 +5,13 @@
  */
 package controller;
 
-import dao.FeedbackDAO;
-import dto.Feedback;
+import dao.CategoryDAO;
+import dao.SubCategoryDAO;
+import dto.Category;
+import dto.SubCategory;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,28 +23,11 @@ import javax.servlet.http.HttpSession;
  *
  * @author THUAN
  */
-public class ManagerFeedbackController extends HttpServlet {
-private final String MANAGER_PAGE = "StaffManagerFeedback.jsp";
+public class CreateSubCategogyController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
-       String url = MANAGER_PAGE;
-        try {
-            String txtSearch = request.getParameter("txtSearch");
-            if (txtSearch == null) {
-                txtSearch = "";
-            }
-            HttpSession session = request.getSession();
-            FeedbackDAO sdao = new FeedbackDAO();
-            List<Feedback> listItem = sdao.getAllFeedbacks();
-            request.setAttribute("list", listItem);
-          
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-        }
-    }
+    private final String MANGER_PAGE = "CreateSubCategory.jsp";
+     private final String MANGER_P = "ManagerSubCategoryController";
+   
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -59,13 +41,13 @@ private final String MANAGER_PAGE = "StaffManagerFeedback.jsp";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    try {
-        processRequest(request, response);
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(ManagerFeedbackController.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (SQLException ex) {
-        Logger.getLogger(ManagerFeedbackController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        String url = MANGER_PAGE;
+        HttpSession session = request.getSession();
+        CategoryDAO dao = new CategoryDAO();
+        List<Category> listItem = dao.getAllListCategory();
+            request.setAttribute("categories", listItem);
+        RequestDispatcher rd = request.getRequestDispatcher(url);
+        rd.forward(request, response);
     }
 
     /**
@@ -79,13 +61,26 @@ private final String MANAGER_PAGE = "StaffManagerFeedback.jsp";
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    try {
-        processRequest(request, response);
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(ManagerFeedbackController.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (SQLException ex) {
-        Logger.getLogger(ManagerFeedbackController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        String ul = MANGER_P;
+        try (PrintWriter out = response.getWriter()) {
+            String SubName = request.getParameter("SubName");
+            byte[] xSubName = SubName.getBytes("ISO-8859-1");
+            SubName = new String(xSubName, "UTF-8");
+            
+            String Description = request.getParameter("Description");
+            byte[] xDescription = Description.getBytes("ISO-8859-1");
+            Description = new String(xDescription, "UTF-8");
+            
+            int Status = Integer.parseInt(request.getParameter("Status"));
+            int CategoryId = Integer.parseInt(request.getParameter("CategoryId"));
+            SubCategoryDAO Adao = new SubCategoryDAO();
+            SubCategory item = new SubCategory(SubName, Description, Status, CategoryId);
+            Adao.createSubCategory(item);
+            RequestDispatcher rd = request.getRequestDispatcher(ul);
+            rd.forward(request, response);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } 
     }
 
     /**

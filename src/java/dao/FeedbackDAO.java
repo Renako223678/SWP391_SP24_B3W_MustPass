@@ -26,16 +26,16 @@ public class FeedbackDAO {
     public List<Feedback> getAllFeedback() throws ClassNotFoundException, SQLException {
         List<Feedback> listItems = new ArrayList<>();
         try {
-            String sql = "select * from Feedback";
+            String sql = "select * from FeedBack";
             PreparedStatement stm = getConnection().prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                int _feedback = rs.getInt("FeedBackId");
-                int _star = rs.getInt("Star");
-                String _descripton = rs.getString("Description");
-                int _userid = rs.getInt("UserId");
-                int _bookId = rs.getInt("BookId");
-                Feedback ac = new Feedback(_feedback, _star, _descripton, _userid, _bookId);
+                int FeedBackId = rs.getInt("FeedBackId");
+                int Star = rs.getInt("Star");
+                String Description = rs.getString("Description");
+                int UserId = rs.getInt("UserId");
+                int BookId = rs.getInt("BookId");
+                Feedback ac = new Feedback(FeedBackId, Star, Description, UserId, BookId);
                 listItems.add(ac);
             }
         } catch (SQLException e) {
@@ -46,7 +46,7 @@ public class FeedbackDAO {
     
      public List<Feedback> getALLOFeedback(){
         List<Feedback> listO = new ArrayList<>();
-        String query = "Select * from Feedback";
+        String query = "Select * from FeedBack";
         try {
                 conn = new DBContext().getConnection();
                 ps = conn.prepareStatement(query);
@@ -60,4 +60,26 @@ public class FeedbackDAO {
         } 
         return listO;
     }
+     
+    public List<Feedback> getAllFeedbacks() throws SQLException, ClassNotFoundException {
+    List<Feedback> listItems = new ArrayList<>();
+    String sql = "SELECT * FROM Feedback";
+    try (PreparedStatement stm = getConnection().prepareStatement(sql);
+         ResultSet rs = stm.executeQuery()) {
+        while (rs.next()) {
+            int feedbackId = rs.getInt("FeedBackId");
+            int star = rs.getInt("Star");
+            String description = rs.getString("Description");
+            int userId = rs.getInt("UserId");
+            int bookId = rs.getInt("BookId");
+            Feedback feedback = new Feedback(feedbackId, star, description, userId, bookId);
+            listItems.add(feedback);
+        }
+    } catch (SQLException e) {
+        // Log the exception or handle it in an appropriate way
+        throw e;
+    }
+    return listItems;
+}
+
 }

@@ -13,7 +13,6 @@ import dto.Category;
 import dto.SubCategory;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,10 +25,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author THUAN
  */
-public class UpdateProductController extends HttpServlet {
-private final String MANGER_PAGE = "ManagerUpdateProduct.jsp";
-private final String MANGER_P = "ManagerProductController";
+public class StaffCreateProductController extends HttpServlet {
 
+    private final String CREATE_NEW_PRODUCT= "StaffCreateProduct.jsp";
+    private final String PRODUCT_PAGE = "StaffController";
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -41,28 +40,20 @@ private final String MANGER_P = "ManagerProductController";
      * @throws IOException if an I/O error occurs
      */
     @Override
-     protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = MANGER_PAGE;
-        try {
-            String id = request.getParameter("ID");
-            BookDAO dao = new BookDAO();
-            Book book = dao.getBookID(id);
-            request.setAttribute("book", book);
+        String url = CREATE_NEW_PRODUCT;
         HttpSession session = request.getSession();
         CategoryDAO adao = new CategoryDAO();
         List<Category> listItem = adao.getAllListCategory();
          request.setAttribute("categories", listItem);
          
-         SubCategoryDAO ddao = new SubCategoryDAO();
-         List<SubCategory> listItems = ddao.getAllListSubCategory();
+         SubCategoryDAO dao = new SubCategoryDAO();
+         List<SubCategory> listItems = dao.getAllListSubCategory();
          request.setAttribute("subcategories", listItems);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-        }
+         
+        RequestDispatcher rd = request.getRequestDispatcher(url);
+        rd.forward(request, response);
     }
 
     /**
@@ -74,43 +65,10 @@ private final String MANGER_P = "ManagerProductController";
      * @throws IOException if an I/O error occurs
      */
     @Override
-   protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ul = MANGER_P;
-        try (PrintWriter out = response.getWriter()) {
-//            int _bookId = Integer.parseInt(request.getParameter("txt_bookId"));
-//            String _bookName = request.getParameter("txt_bookName");
-//            byte[] txt_bookName = _bookName.getBytes("ISO-8859-1");
-//            _bookName = new String(txt_bookName, "UTF-8");
-//            
-//            String _description = request.getParameter("txt_description");
-//            byte[] txt_description = _description.getBytes("ISO-8859-1");
-//            _description = new String(txt_description, "UTF-8");
-//            
-//            String _authorName = request.getParameter("txt_authorName");
-//            byte[] txt_authorName = _authorName.getBytes("ISO-8859-1");
-//            _authorName = new String(txt_authorName, "UTF-8");
-//            
-//            String _publishingCompany = request.getParameter("txt_publishingCompany");
-//            byte[] txt_publishingCompany = _publishingCompany.getBytes("ISO-8859-1");
-//            _publishingCompany = new String(txt_publishingCompany, "UTF-8");
-//            
-//            String _issusingCompany = request.getParameter("txt_issusingCompany");
-//            byte[] txt_issusingCompany = _issusingCompany.getBytes("ISO-8859-1");
-//            _issusingCompany = new String(txt_issusingCompany, "UTF-8");
-//            
-//            String _translatorName = request.getParameter("txt_translatorName");
-//            byte[] txt_translatorName = _translatorName.getBytes("ISO-8859-1");
-//            _translatorName = new String(txt_translatorName, "UTF-8");
-//            
-//            Date _publishDate = Date.valueOf(request.getParameter("txt_publishDate"));
-//            int _quantity = Integer.parseInt(request.getParameter("txt_quantity"));
-//            int _subCategoryId = Integer.parseInt(request.getParameter("txt_subCategoryId"));
-//            float _unitPrice = Float.parseFloat(request.getParameter("txt_unitPrice"));
-//            int _categoryId = Integer.parseInt(request.getParameter("txt_categoryId"));
-//            int _status = Integer.parseInt(request.getParameter("txt_status"));
-//            int _totalFeedback = Integer.parseInt(request.getParameter("txt_totalFeedback"));
-            int BookId = Integer.parseInt(request.getParameter("BookId"));
+        String ul = PRODUCT_PAGE;
+         try (PrintWriter out = response.getWriter()) {
             String BookName = request.getParameter("BookName");
             byte[] xBookName = BookName.getBytes("ISO-8859-1");
             BookName = new String(xBookName, "UTF-8");
@@ -132,9 +90,9 @@ private final String MANGER_P = "ManagerProductController";
             IssusingCompany = new String(xIssusingCompany, "UTF-8");
             
             String TranslatorName = request.getParameter("TranslatorName");
-            byte[] xTranslatorName= TranslatorName.getBytes("ISO-8859-1");
+            byte[] xTranslatorName = TranslatorName.getBytes("ISO-8859-1");
             TranslatorName = new String(xTranslatorName, "UTF-8");
-            
+        
             int PublishDate = Integer.parseInt(request.getParameter("PublishDate"));
             int Quantity = Integer.parseInt(request.getParameter("Quantity"));
             int SubCategoryId = Integer.parseInt(request.getParameter("SubCategoryId"));
@@ -142,18 +100,17 @@ private final String MANGER_P = "ManagerProductController";
             int CategoryID = Integer.parseInt(request.getParameter("CategoryID"));
             int Status = Integer.parseInt(request.getParameter("Status"));
             int TotalFeedback = Integer.parseInt(request.getParameter("TotalFeedback"));
-            
             BookDAO Adao = new BookDAO();
-            Book item = new Book(BookId, BookName, Description, AuthorName, PublishingCompany, IssusingCompany, 
-                    TranslatorName, PublishDate, Quantity, SubCategoryId, UnitPrice, CategoryID, Status, TotalFeedback);
-            Adao.updateBook(item);
+            Book item = new Book(BookName, Description, AuthorName, PublishingCompany, IssusingCompany, TranslatorName, PublishDate, Quantity, SubCategoryId, UnitPrice, CategoryID, Status, TotalFeedback);
+            Adao.createBook(item);
             RequestDispatcher rd = request.getRequestDispatcher(ul);
             rd.forward(request, response);
         
         } catch (Exception ex) {
             ex.printStackTrace();
         } 
-   }
+    }
+
     /**
      * Returns a short description of the servlet.
      *

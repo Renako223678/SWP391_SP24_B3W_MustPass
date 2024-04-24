@@ -219,16 +219,15 @@
                                                     <div class="input-group-append">
                                                         <input class="btn btn-primary" type="submit" value="Manage Category" name="btAction" >
                                                     </div>
-                                                  
+                                                  <div class="input-group-append">
+                                                        <input class="btn btn-primary" type="submit" value="Manage SubCategory" name="btAction" >
+                                                    </div>  
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
                                     <form action="MainController">
-                                            Search Keyword: <input type="text" name="txtSearchName" value="" />
-                                            <input type="submit" value="Find" name="btAction" />
-                                            </br>                                            
-                                            </br>
+                                  
                                             <div>
                                                 <input type="submit" value="Create Product" name="btAction" /> 
                                             </div>
@@ -270,6 +269,11 @@
                                                         <td>
                                                             <button>
                                                                 <a href="UpdateProductController?ID=${bo.bookId}" > EDIT </a>
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <button>
+                                                                <a href="DeleteProductController?ID=${bo.bookId}" > DELETE </a>
                                                             </button>
                                                         </td>
                                                     </tr>

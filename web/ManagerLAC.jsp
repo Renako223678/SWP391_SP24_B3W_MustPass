@@ -220,14 +220,14 @@
                                                     <div class="input-group-append">
                                                         <input class="btn btn-primary" type="submit" value="Manage Category" name="btAction" >
                                                     </div>
+                                                    <div class="input-group-append">
+                                                        <input class="btn btn-primary" type="submit" value="Manage SubCategory" name="btAction" >
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
-                                     <form action="MainController">
-                                            Search Keyword: <input type="text" name="txtSearchName" value="" />
-                                            <input type="submit" value="Find" name="btAction" />
-                                        </form>
+                               
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>

@@ -199,7 +199,7 @@
                                         <div class="table-title">
                                             <div class="row">
                                                 <div class="col-xs-5">
-                                                    <h2>Update Book</h2>
+                                                    <h2>Create Book</h2>
                                                 </div>
                                             </div>
                                         </div>
@@ -242,9 +242,9 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Publish Date</td>
+                                                <td>PublishDate </td>
                                                 <td>
-                                                    <input type="date"  name="PublishDate"  />
+                                                    <input type="number"  name="PublishDate"   />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -256,7 +256,11 @@
                                             <tr>
                                                 <td>Sub Category Id</td>
                                                 <td>
-                                                    <input type="number"  name="SubCategoryId"   />
+                                                     <select name="SubCategoryId">
+                                                        <c:forEach items="${subcategories}" var="subcategory">
+                                                            <option value="${subcategory.subcategoryID}">${subcategory.subName}</option>
+                                                        </c:forEach>
+                                                    </select>
                                                 </td>
                                             </tr>  
                                             <tr>
@@ -268,13 +272,36 @@
                                               <tr>
                                                 <td>Category Id</td>
                                                 <td>
-                                                    <input type="number"  name="CategoryID"   />
+                                                    <select name="CategoryID">
+                                                        <c:forEach items="${categories}" var="category">
+                                                            <option value="${category.categoryID}">${category.categoryName}</option>
+                                                        </c:forEach>
+                                                    </select>
                                                 </td>
                                             </tr>  
                                             <tr>
                                                 <td>Status</td>
                                                 <td>
-                                                    <input type="number"  name="Status"   />
+                                              
+                                                    <select name="Status">
+                                                    <c:choose>
+                                                        <c:when test="${user.status eq 1}">
+                                                            <option value="1" selected>Đang Hoạt Động </option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="1">Đang Hoạt Động</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${user.status eq 2}">
+                                                            <option value="2" selected>Ngừng Hoạt Động</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="2">Ngừng Hoạt Động</option>
+                                                        </c:otherwise>
+                                                    </c:choose>                   
+                                                </select>
+                                         
                                                 </td>
                                             </tr>
                                             <tr>

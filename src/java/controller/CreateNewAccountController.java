@@ -58,7 +58,7 @@ public class CreateNewAccountController extends HttpServlet {
                     cusError.setEmailLengthErr("Email không được để trống");
                 }
             }
-            if (dao.findAccount(email) != null) {
+            if (dao.findAccount(email,password) != null) {
                 cusError.setEmailExisted("Email bị trùng");
                 checkValidation = false;
             }

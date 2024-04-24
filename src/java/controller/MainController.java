@@ -41,13 +41,16 @@ public class MainController extends HttpServlet {
     private final String MANAGER_BLOG = "ManagerBlogController";
     private final String MANAGER_PRODUCT = "ManagerProductController";
     private final String MANAGER_CATEGORY = "ManagerCatogoryController";
+    private final String MANAGER_SUBCATEGORY = "ManagerSubCategoryController";
+    
     private final String MANAGER_UPDATE_ACCOUNT = "UpdateAccountController";
  
     private final String CREATE_PRODUCT = "CreateProductController";
     private final String CREATE_CATEGOGY = "CreateCategogyController";
+    private final String CREATE_SUBCATEGOGY = "CreateSubCategogyController";
     
     private final String MANAGER_UPDATE_CATEGORY = "UpdateCategoryController";
-    
+    private final String MANAGER_UPDATE_SUBCATEGORY = "UpdateSubCategoryController";
     private final String UPDATE_BLOG = "UpdateBlogController";
     private final String UPDATE_PRODUCT = "UpdateProductController";
     
@@ -57,7 +60,7 @@ public class MainController extends HttpServlet {
     private final String STAFF_PRODUCT = "StaffController";
     private final String STAFF_UPDATE_ORDERS = "UpdateOrdersController";
     private final String STAFF_UPDATE_PRODUCT = "StaffUpdateProductController";
-    
+    private final String STAFF_CREATE_PRODUCT = "StaffCreateProductController";
           
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -93,9 +96,13 @@ public class MainController extends HttpServlet {
                 url = CREATE_PRODUCT;
             }else if (button.equals("Create Categogy")) {
                 url = CREATE_CATEGOGY;
+            }else if (button.equals("Create SubCategogy")) {
+                url = CREATE_SUBCATEGOGY;
             }else if (button.equals("Manage Category")){
                 url = MANAGER_CATEGORY;
-            }else if (button.equals("Staff FeedBack")){
+            }else if (button.equals("Manage SubCategory")){
+                url = MANAGER_SUBCATEGORY;
+            } else if (button.equals("Staff FeedBack")){
                 url = STAFF_FEEDBACK;
             }else if (button.equals("Staff Orders")){
                 url = STAFF_ORDERS;
@@ -107,6 +114,10 @@ public class MainController extends HttpServlet {
                 url = STAFF_UPDATE_PRODUCT;
             }else if (button.equals("Manage_Update_Cate")){
                 url = MANAGER_UPDATE_CATEGORY;
+            }else if (button.equals("Manage_Update_SubCate")){
+                url = MANAGER_UPDATE_SUBCATEGORY;
+            }else if (button.equals("Staff Create Product")){
+                url = STAFF_CREATE_PRODUCT;
             }
 
 

@@ -216,14 +216,6 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <form action="MainController">
-                                            Search Keyword: <input type="text" name="txtSearchName" value="" />
-                                            <input type="submit" value="Find" name="btAction" />
-                                            </br>                                            
-                                            </br>
-                                         
-                                            </br>   
-                                    </form>
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
@@ -235,14 +227,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach items="${list}" var="ac" varStatus="counter">
+                                            <c:forEach items="${list}" var="la" varStatus="counter">
                                             <form action="MainController" method="post">
                                                 <tr>
-                                                     
-                                                   
+                                                   <td>${la}</td>
+                                                   <td>${la}</td>
+                                                   <td>${la}</td>
+                                                   <td>${la}</td>
+                                                   <td>${la}</td>
                                                 </tr>
                                             </form>
-                                        </c:forEach>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

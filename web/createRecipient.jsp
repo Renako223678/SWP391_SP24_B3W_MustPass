@@ -24,6 +24,15 @@
         <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg">
         <!-- Template CSS -->
         <link rel="stylesheet" href="assets/css/main.css?v=3.4">
+        <style>
+        footer {
+            position: fixed; /* Đảm bảo footer luôn ở cuối */
+            bottom: 50px;
+            width: 100%; /* Chiếm toàn bộ chiều rộng */
+            height: 60px; /* Chiều cao cố định của footer */
+            background-color: #f8f9fa; /* Màu nền của footer */
+        }
+        </style>
     </head>
     <body id="page-top">
         <div id="wrapper">
@@ -199,130 +208,31 @@
                     </div>
 
 
-                    <form class="field_form shipping_calculator" action="AddOrderController" method="GET">
-                    <section class="mt-50 mb-50">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="table-responsive">
-                                        <table class="table shopping-summery text-center clean">
-                                            <thead>
-                                                <tr class="main-heading">
-                                                    <th scope="col">Image</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Price</th>
-                                                    <th scope="col">Quantity</th>
-                                                    <th scope="col">Remove</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach var="bookEntry" items="${cart.cart}">
-                                                    <tr>
-                                                        <td class="image product-thumbnail"><img src="assets/imgs/shop/product-1-2.jpg" alt="#"></td>
-                                                        <td class="product-des product-name">
-                                                            <h5 class="product-name"><a href="shop-product-right.html">${bookEntry.value.bookName}</a></h5>
-                                                            <p class="font-xs">${bookEntry.value.authorName}<br> ${bookEntry.value.publishingCompany}
-                                                            </p>
-                                                        </td>
-                                                        <td class="price" data-title="Price"><span>${bookEntry.value.unitPrice}đ </span></td>
-                                                        <td class="text-center" data-title="Stock">
-                                                            <a href="QuantityBookCartController?bookId=${bookEntry.value.bookId}&quantity=-1" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                            <span class="qty-val">${bookEntry.value.quantity}</span>
-                                                            <a href="QuantityBookCartController?bookId=${bookEntry.value.bookId}&quantity=1" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                                        </td>
-                                                        <td class="action" data-title="Remove"><a href="DeleteBookCartController?bookId=${bookEntry.value.bookId}" class="text-muted"><i class="fi-rs-trash"></i></a></td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
-                                    <div class="row mb-50">
-                                        <div class="col-lg-6 col-md-12">
-                                            <div class="heading_s1 mb-3">
-                                                <h4>Calculate Shipping</h4>
-                                            </div>
-                                            <p class="mt-15 mb-30">Flat rate: <span class="font-xl text-brand fw-900">50000đ</span></p>
-                                            <form class="field_form shipping_calculator">
-                                                <div class="form-row">
-                                                    <div class="form-group col-lg-12">
-                                                        <div class="custom_select">
-                                                            <select class="form-control" name = "recipientID">
-                                                                <c:forEach var="recipient" items="${listRecipient}">
-                                                                    <option value="${recipient.recipientID}">
-                                                                        Địa chỉ giao hàng: ${recipient.destAddress}, 
-                                                                        Tên người nhận: ${recipient.recipientName},
-                                                                        Số điện thoại: ${recipient.phoneNumber}
-                                                                    </option>
-                                                                </c:forEach>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <div class="form-group col-lg-12">
-                                                        <a href="createRecipient.jsp" class="btn  btn-sm"><i class="fi-rs-shuffle mr-10"></i>Thêm địa chỉ giao hàng</a>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            <div class="mb-30 mt-50">
-                                                <div class="heading_s1 mb-3">
-                                                    <h4>Apply Coupon</h4>
-                                                </div>
-                                                <div class="total-amount">
-                                                    <div class="left">
-                                                        <div class="coupon">
-                                                            <form action="#" target="_blank">
-                                                                <div class="form-row row justify-content-center">
-                                                                    <div class="form-group col-lg-6">
-                                                                        <input class="font-medium" name="Coupon" placeholder="Enter Your Coupon">
-                                                                    </div>
-                                                                    <div class="form-group col-lg-6">
-                                                                        <button class="btn  btn-sm"><i class="fi-rs-label mr-10"></i>Apply</button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12">
-                                            <div class="border p-md-4 p-30 border-radius cart-totals">
-                                                <div class="heading_s1 mb-3">
-                                                    <h4>Cart Totals</h4>
-                                                </div>
-                                                <div class="table-responsive">
-                                                    <table class="table">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="cart_total_label">Total Price</td>
-                                                                <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">${cart.getTotalMoney()}đ</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="cart_total_label">Shipping</td>
-                                                                <td class="cart_total_amount"> <i class="ti-gift mr-5"></i>50000đ</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="cart_total_label">Final Price</td>
-                                                                <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">${cart.getTotalMoney() + 50000}đ</span></strong></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <button type="submit" class="btn"> 
-                                                    <i class="fi-rs-box-alt mr-10"></i> CheckOut
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <a href="ViewCartController" class="btn btn-primary">Back</a>
+                    <div class="container">
+                        <div class="row justify-content-center"> <!-- Căn giữa theo chiều ngang -->
+                            <div class="col-md-6">
+                                <!-- Nội dung -->
+                                <div class="mb-25">
+                                    <h4>Tạo mới địa chỉ giao hàng</h4>
                                 </div>
+                                <form action="CreateRecipientController" method="post">
+                                    <div class="form-group">
+                                        <input type="text" required name="txtAddress" placeholder="Địa chỉ giao hàng" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" required name="txtName" placeholder="Tên người nhận" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <input required type="text" name="txtPhone" placeholder="Số điện thoại người nhận" class="form-control">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Tạo mới</button> <!-- Tạo nút submit -->
+                                </form>
                             </div>
                         </div>
-                    </section>
-                    </form>
+                    </div>
+
+
 
 
 
@@ -376,7 +286,7 @@
             <script src="js/osahan.min.js" type="e83057937dd4e85910db8985-text/javascript"></script>
             <script src="js/rocket-loader.min.js" data-cf-settings="e83057937dd4e85910db8985-|49" defer=""></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"75c6f93a1e227d56","version":"2022.10.3","r":1,"token":"dd471ab1978346bbb991feaa79e6ce5c","si":100}' crossorigin="anonymous"></script>
             <script src="path/to/your/bundle.js"></script>
-
+            
     </body>
 
     <!-- Mirrored from askbootstrap.com/preview/osahan-eat/theme-sidebar/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Oct 2022 05:04:56 GMT -->

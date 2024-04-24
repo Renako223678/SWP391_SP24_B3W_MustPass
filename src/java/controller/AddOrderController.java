@@ -36,21 +36,18 @@ public class AddOrderController extends HttpServlet {
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("CART");
         Account account = (Account) session.getAttribute("LOGIN_USER");
-
+        String recipientID = request.getParameter("recipientID");
         try {
             // Tạo đối tượng Order
             Order order = new Order();
-//            order.setOrderDate(new Date(0)); // Ngày tạo đơn hàng hiện tại
-            order.setTotalPrice(cart.getTotalMoney()); // Tổng giá trị từ giỏ hàng
-            // Đặt các giá trị khác nếu cần thiết (ví dụ: userId, shipFee, v.v.)
-            order.setShipFee(50000);
-            order.setStatus(1);
             LocalDate today = LocalDate.now();
-
             Date sqlDate = Date.valueOf(today);
-
             order.setOrderDate(sqlDate);
+            order.setShipFee(50000);
+            order.setTotalPrice(cart.getTotalMoney()); // Tổng giá trị từ giỏ hàng
             order.setFinalPrice(cart.getTotalMoney() + order.getShipFee());
+            order.setStatus(1);
+            order.setRecipientId(Integer.parseInt(recipientID));
             OrderDAO orderDAO = new OrderDAO();
             int orderId = orderDAO.createOrder(order, account.getUserId()); // Tạo Order và lấy ID
 

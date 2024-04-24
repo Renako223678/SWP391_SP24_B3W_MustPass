@@ -112,6 +112,30 @@
         <servlet-name>DeleteCategoryController</servlet-name>
         <servlet-class>controller.DeleteCategoryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteProductController</servlet-name>
+        <servlet-class>controller.DeleteProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffCreateProductController</servlet-name>
+        <servlet-class>controller.StaffCreateProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateSubCategogyController</servlet-name>
+        <servlet-class>controller.CreateSubCategogyController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerSubCategoryController</servlet-name>
+        <servlet-class>controller.ManagerSubCategoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSubCategoryController</servlet-name>
+        <servlet-class>controller.DeleteSubCategoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSubCategoryController</servlet-name>
+        <servlet-class>controller.UpdateSubCategoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -223,6 +247,30 @@
     <servlet-mapping>
         <servlet-name>DeleteCategoryController</servlet-name>
         <url-pattern>/DeleteCategoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProductController</servlet-name>
+        <url-pattern>/DeleteProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffCreateProductController</servlet-name>
+        <url-pattern>/StaffCreateProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateSubCategogyController</servlet-name>
+        <url-pattern>/CreateSubCategogyController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerSubCategoryController</servlet-name>
+        <url-pattern>/ManagerSubCategoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSubCategoryController</servlet-name>
+        <url-pattern>/DeleteSubCategoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSubCategoryController</servlet-name>
+        <url-pattern>/UpdateSubCategoryController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

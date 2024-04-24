@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
 
-    private final String LOGIN_PAGE = "HomeController";
+    private final String LOGIN_PAGE = "signin.jsp";
     private final String LOGIN_HOMEPAGE = "HomeController";
     // Admin Page
     private final String ADMIN_PAGE = "AdminController";
@@ -42,7 +42,7 @@ public class LoginController extends HttpServlet {
             String username = request.getParameter("txtUsername");
             String pw = request.getParameter("txtPassword");
             AccountDAO dao = new AccountDAO();
-            Account user = dao.findAccount(username);
+            Account user = dao.findAccount(username,pw);
             HttpSession session = request.getSession();
             if (user != null) {
                 session.setAttribute("LOGIN_USER", user);
@@ -65,10 +65,10 @@ public class LoginController extends HttpServlet {
                     session.setAttribute("username", username);
                     session.setAttribute("roleID", roleID);
                 }else {
-                    session.setAttribute("ERROR_MESSAGE", "Your role is not support");
+                    request.setAttribute("ERROR_MESSAGE", "Your role is not support");
                 }
             } else {
-                session.setAttribute("ERROR_MESSAGE", "Incorrect id or password");
+                request.setAttribute("ERROR_MESSAGE", "Incorrect username or password");
             }
         } catch (Exception ex) {
             log("Error at LoginServlet:" + ex.toString());
