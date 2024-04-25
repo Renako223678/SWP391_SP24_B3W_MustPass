@@ -12,7 +12,7 @@
         <meta name="author" content="">
         <link rel="icon" type="image/png" href="img/logo1.png">
 
-        <title>BMOS Setting</title>
+        <title>Onlinebookstore Setting</title>
 
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="css/osahan.css" rel="stylesheet">
@@ -196,7 +196,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>BMOS &copy; HCM,VIETNAME</span>
+                            <span>Onlinebookstore &copy; HCM,VIETNAME</span>
                         </div>
                     </div>
                 </footer>
@@ -230,7 +230,7 @@
                             </div>
                             <div>
                                 <p class="small font-weight-bold text-dark mb-0" style="color: brown">EMAIL</p>
-                                <P class="mb-0 small">bmos@gmail.com</P>
+                                <P class="mb-0 small">Onlinebookstore@gmail.com</P>
                             </div>
                         </div>
 

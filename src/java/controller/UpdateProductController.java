@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class UpdateProductController extends HttpServlet {
 private final String MANGER_PAGE = "ManagerUpdateProduct.jsp";
@@ -106,7 +106,7 @@ private final String MANGER_P = "ManagerProductController";
 //            Date _publishDate = Date.valueOf(request.getParameter("txt_publishDate"));
 //            int _quantity = Integer.parseInt(request.getParameter("txt_quantity"));
 //            int _subCategoryId = Integer.parseInt(request.getParameter("txt_subCategoryId"));
-//            float _unitPrice = Float.parseFloat(request.getParameter("txt_unitPrice"));
+//            float _unitPrice = Integer.parseInteger(request.getParameter("txt_unitPrice"));
 //            int _categoryId = Integer.parseInt(request.getParameter("txt_categoryId"));
 //            int _status = Integer.parseInt(request.getParameter("txt_status"));
 //            int _totalFeedback = Integer.parseInt(request.getParameter("txt_totalFeedback"));
@@ -138,7 +138,7 @@ private final String MANGER_P = "ManagerProductController";
             int PublishDate = Integer.parseInt(request.getParameter("PublishDate"));
             int Quantity = Integer.parseInt(request.getParameter("Quantity"));
             int SubCategoryId = Integer.parseInt(request.getParameter("SubCategoryId"));
-            float UnitPrice = Float.parseFloat(request.getParameter("UnitPrice"));
+            int UnitPrice = Integer.parseInt(request.getParameter("UnitPrice"));
             int CategoryID = Integer.parseInt(request.getParameter("CategoryID"));
             int Status = Integer.parseInt(request.getParameter("Status"));
             int TotalFeedback = Integer.parseInt(request.getParameter("TotalFeedback"));

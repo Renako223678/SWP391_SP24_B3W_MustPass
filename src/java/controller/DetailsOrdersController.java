@@ -5,10 +5,14 @@
  */
 package controller;
 
+import dao.AccountDAO;
 import dao.OrderDAO;
 import dao.OrderDetailDAO;
+import dao.RecipientDAO;
+import dto.Account;
 import dto.Order;
 import dto.OrderDetail;
+import dto.Recipient;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class DetailsOrdersController extends HttpServlet {
 
@@ -35,9 +39,16 @@ public class DetailsOrdersController extends HttpServlet {
             String id = request.getParameter("ID");
             OrderDetailDAO dao = new OrderDetailDAO();
             List<OrderDetail> user = dao.getOrderDetailByOrderIDs(id);
-        
             request.setAttribute("book", user);
+            
+            RecipientDAO Rdao = new RecipientDAO();
+            List<Recipient> listItemr = Rdao.getAllListRecipient();
+            request.setAttribute("rlist", listItemr);
 
+            AccountDAO adao = new AccountDAO();
+            List<Account> listItemss = adao.getAllAccount();
+            request.setAttribute("aclist", listItemss);
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

@@ -1,12 +1,16 @@
 package controller;
 
 import dao.OrderDAO;
+import dao.OrderDetailDAO;
 import dto.Account;
 import dto.Order;
+import dto.OrderDetail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,10 +41,32 @@ public class HistoryOrderController extends HttpServlet {
         HttpSession session = request.getSession();
         Account account = (Account) session.getAttribute("LOGIN_USER");
         int userId = account.getUserId();
-        OrderDAO dao = new OrderDAO();
+        String status = request.getParameter("status");
         List<Order> listOrder = new ArrayList<>();
-        listOrder = dao.getOrderByUserID(userId);
+        OrderDAO dao = new OrderDAO();
+        if (status == null) {
+            listOrder = dao.getOrderByUserIDAndStatus(userId, 1);
+            request.setAttribute("listHistoryOrder", listOrder);
+            OrderDetailDAO orderDetailDao = new OrderDetailDAO();
+            Map<Integer, List<OrderDetail>> orderDetailMap = new HashMap<>();
+            for (Order order : listOrder) {
+                int orderId = order.getOrderId(); // Lấy OrderID
+                List<OrderDetail> listOrderDetail = orderDetailDao.getOrderDetailByOrderIDAndBookName(orderId); // Lấy chi tiết
+                orderDetailMap.put(orderId, listOrderDetail); // Thêm vào Map
+            }
+            request.setAttribute("orderDetailMap", orderDetailMap);
+            request.getRequestDispatcher(url).forward(request, response);
+        }
+        listOrder = dao.getOrderByUserIDAndStatus(userId, Integer.parseInt(status));
         request.setAttribute("listHistoryOrder", listOrder);
+        OrderDetailDAO orderDetailDao = new OrderDetailDAO();
+        Map<Integer, List<OrderDetail>> orderDetailMap = new HashMap<>();
+        for (Order order : listOrder) {
+            int orderId = order.getOrderId(); // Lấy OrderID
+            List<OrderDetail> listOrderDetail = orderDetailDao.getOrderDetailByOrderIDAndBookName(orderId); // Lấy chi tiết
+            orderDetailMap.put(orderId, listOrderDetail); // Thêm vào Map
+        }
+        request.setAttribute("orderDetailMap", orderDetailMap);
         request.getRequestDispatcher(url).forward(request, response);
     }
 

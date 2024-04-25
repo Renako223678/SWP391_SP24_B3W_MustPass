@@ -5,7 +5,11 @@
  */
 package controller;
 
+import dao.AccountDAO;
+import dao.BookDAO;
 import dao.FeedbackDAO;
+import dto.Account;
+import dto.Book;
 import dto.Feedback;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +26,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class ManagerFeedbackController extends HttpServlet {
 private final String MANAGER_PAGE = "StaffManagerFeedback.jsp";
@@ -38,9 +42,16 @@ private final String MANAGER_PAGE = "StaffManagerFeedback.jsp";
             }
             HttpSession session = request.getSession();
             FeedbackDAO sdao = new FeedbackDAO();
-            List<Feedback> listItem = sdao.getAllFeedbacks();
+            List<Feedback> listItem = sdao.getAllFeedback();
             request.setAttribute("list", listItem);
-          
+            
+            BookDAO ddao = new BookDAO();
+            List<Book> listItems = ddao.getAllListBook();
+            request.setAttribute("bookList", listItems);
+            
+            AccountDAO adao = new AccountDAO();
+            List<Account> listItemss = adao.getAllAccount();
+            request.setAttribute("aclist", listItemss);
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

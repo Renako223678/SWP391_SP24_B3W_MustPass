@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class ManagerAccountController extends HttpServlet {
 private final String MANAGER_PAGE = "ManagerLAC.jsp";

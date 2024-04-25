@@ -42,7 +42,7 @@
                     <div class="row gx-4 gx-lg-5 align-items-center">
                         <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="img/bird/chimchaomao.jpg" alt="..." /></div>
                         <div class="col-md-6">
-                            <div class="small mb-1">BMOS:Chim Chào Mào</div>
+                            <div class="small mb-1">Onlinebookstore:Chim Chào Mào</div>
                             <h2 class="display-6 fw-bolder" style="color: steelblue">COMBO1: Chim Chào Mào</h2>
                             <div class="fs-5 mb-5">
                                 <span class="text-decoration-line-through">150.000đ</span>
@@ -226,8 +226,8 @@
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">
-                    bmos@gmail.com &copy; </br>
-                    BMOS Website 2023</p></div>
+                    Onlinebookstore@gmail.com &copy; </br>
+                    Onlinebookstore Website 2023</p></div>
         </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

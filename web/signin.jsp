@@ -12,7 +12,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" type="image/png" href="img/logo1.png">
-        <title>BMOS</title>
+        <title>Onlinebookstore</title>
 
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-6 d-flex justify-content-center flex-column px-0 w-100" >
                 <div class="col-lg-6 mx-auto">
-                    <h1 class="mb-2 w-100" style="margin-top: 50%; color: #120851 ">CHÀO MỪNG ĐẾN VỚI BMOS</h1>
+                    <h1 class="mb-2 w-100" style="margin-top: 50%; color: #120851 ">CHÀO MỪNG ĐẾN VỚI Onlinebookstore</h1>
                     <p class="mb-5" style="color: red">Đăng nhập vào tài khoản của bạn để tiếp tục</p>
                     <form action="LoginController" method="post">
                         <div class="d-flex align-items-center mb-4">

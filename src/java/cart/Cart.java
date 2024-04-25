@@ -84,8 +84,8 @@ public class Cart {
     }
 
     //Lấy tổng thành tiền của giỏ hàng
-    public float getTotalMoney() {
-        float total = 0;
+    public int getTotalMoney() {
+        int total = 0;
         for (Book book : cart.values()) {
             total += book.getQuantity() * book.getUnitPrice();
         }

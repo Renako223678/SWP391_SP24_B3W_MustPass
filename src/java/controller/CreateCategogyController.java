@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class CreateCategogyController extends HttpServlet {
     private final String MANGER_PAGE = "CreateCategory.jsp";

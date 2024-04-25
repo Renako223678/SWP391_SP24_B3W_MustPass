@@ -9,7 +9,7 @@ import java.sql.Date;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class Account {
     private int userId;

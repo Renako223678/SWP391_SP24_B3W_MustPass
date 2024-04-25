@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" type="image/png" href="img/logo1.png">    
+        <link rel="icon" type="image/png" href="img/R.png">    
         <title>SKY SHOP PAGE</title>
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="css/osahan.css" rel="stylesheet">
@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="path/to/materialize.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg">
+
         <!-- Template CSS -->
         <link rel="stylesheet" href="assets/css/main.css?v=3.4">
     </head>
@@ -30,7 +30,7 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
                 <a class="sidebar-brand d-flex align-items-center" href="HomeController">
                     <div class="sidebar-brand-icon">
-                        <img src="img/logo1.png" width="50" class="img-fluid">
+                        <img src="img/R.png" width="50" class="img-fluid">
                     </div>
                 </a>
                 <li class="nav-item active">
@@ -551,7 +551,7 @@
                 <footer class="sticky-footer bg-light" >
                     <div class="container my-auto ">
                         <div class="copyright text-center my-auto " style="color: #093b29" >
-                            <span >EMAIL: BMOS@gmail.com&copy;</span></br></br>
+                            <span >EMAIL: Onlinebookstore@gmail.com&copy;</span></br></br>
                             <span>ADDRES:  Q9, HCM, VIET NAM&copy;</span></br></br>
                             <span>HOTLINE: 0931 8888 991&copy;</span>
                         </div>

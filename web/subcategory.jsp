@@ -12,7 +12,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" type="image/png" href="img/logo1.png">    
-        <title>BMOS PAGE</title>
+        <title>Onlinebookstore PAGE</title>
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="css/osahan.css" rel="stylesheet">
         <link href="font/stylesheet.css" rel="stylesheet">
@@ -589,7 +589,7 @@
                 <footer class="sticky-footer bg-light" >
                     <div class="container my-auto ">
                         <div class="copyright text-center my-auto " style="color: #093b29" >
-                            <span >EMAIL: BMOS@gmail.com&copy;</span></br></br>
+                            <span >EMAIL: Onlinebookstore@gmail.com&copy;</span></br></br>
                             <span>ADDRES:  Q9, HCM, VIET NAM&copy;</span></br></br>
                             <span>HOTLINE: 0931 8888 991&copy;</span>
                         </div>

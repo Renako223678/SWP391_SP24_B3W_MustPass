@@ -2,8 +2,10 @@
 package dao;
 
 import dto.Order;
+import dto.OrderRevenue;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -29,11 +31,11 @@ public class OrderDAO {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, order.getDescription());
-            ps.setDate(2, order.getOrderDate()); // Chuyển đổi kiểu Date
-            ps.setFloat(3, order.getShipFee());
+            ps.setTimestamp(2, order.getOrderDate()); // Chuyển đổi kiểu Timestamp
+            ps.setInt(3, order.getShipFee());
             ps.setInt(4, order.getUsedLotusBub());
-            ps.setFloat(5, order.getTotalPrice());
-            ps.setFloat(6, order.getFinalPrice());
+            ps.setInt(5, order.getTotalPrice());
+            ps.setInt(6, order.getFinalPrice());
             ps.setInt(7, order.getStatus());
             ps.setInt(8, userId);
             ps.setInt(9, 1);
@@ -47,23 +49,24 @@ public class OrderDAO {
         }
         return orderId;
     }
-    public List<Order> getOrderByUserID(int userId){
+    public List<Order> getOrderByUserIDAndStatus(int userId, int status){
         List<Order> listOrder = new ArrayList<>();
-        String query = "Select * from Orders where UserId = ?";
+        String query = "Select * from Orders where UserId = ? and Status = ?";
         try {
                 conn = new DBContext().getConnection();
                 ps = conn.prepareStatement(query);
                 ps.setInt(1, userId);
+                ps.setInt(2, status);
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     Order order = new Order(
                     rs.getInt("OrderId"), // Thay vì chỉ số cột, sử dụng tên cột
                     rs.getString("Description"),
-                    rs.getDate("OrderDate"),
-                    rs.getFloat("ShipFee"),
+                    rs.getTimestamp("OrderDate"),
+                    rs.getInt("ShipFee"),
                     rs.getInt("UsedLotusBub"),
-                    rs.getFloat("TotalPrice"),
-                    rs.getFloat("FinalPrice"),
+                    rs.getInt("TotalPrice"),
+                    rs.getInt("FinalPrice"),
                     rs.getInt("Status"),
                     rs.getInt("UserId"),
                     rs.getInt("RecipientId")
@@ -83,8 +86,8 @@ public class OrderDAO {
                 ps = conn.prepareStatement(query);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    listOrder.add(new Order(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getFloat(4), rs.getInt(5), rs.getFloat(6),
-                            rs.getFloat(7), rs.getInt(8), rs.getInt(9), rs.getInt(10)));
+                    listOrder.add(new Order(rs.getInt(1), rs.getString(2), rs.getTimestamp(3), rs.getInt(4), rs.getInt(5), rs.getInt(6),
+                            rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10)));
                 }
                 
         } catch (Exception e) {
@@ -93,17 +96,17 @@ public class OrderDAO {
         return listOrder;
     }
      
-     public Order updateOrders(Order edittedItem) {
+    public Order updateOrders(Order edittedItem) {
         try {
             String sql = "update Orders set Description=?, OrderDate=?, ShipFee=?, UsedLotusBub=?, TotalPrice=?, FinalPrice=?,"
                     +  "UserId=?, RecipientId=?, Status=?  where OrderId=? ";
             PreparedStatement stmt = getConnection().prepareStatement(sql);
             stmt.setString(1, edittedItem.getDescription());
-            stmt.setDate(2, edittedItem.getOrderDate());
-            stmt.setFloat(3, edittedItem.getShipFee());
+            stmt.setTimestamp(2, edittedItem.getOrderDate());
+            stmt.setInt(3, edittedItem.getShipFee());
             stmt.setInt(4, edittedItem.getUsedLotusBub());
-            stmt.setFloat(5, edittedItem.getTotalPrice());
-            stmt.setFloat(6, edittedItem.getFinalPrice());
+            stmt.setInt(5, edittedItem.getTotalPrice());
+            stmt.setInt(6, edittedItem.getFinalPrice());
             stmt.setInt(7, edittedItem.getUserId());
             stmt.setInt(8, edittedItem.getRecipientId());
             stmt.setInt(9, edittedItem.getStatus());
@@ -124,11 +127,11 @@ public class OrderDAO {
             while (rs.next()) {
                 int OrderId = rs.getInt("OrderId");
                 String Description = rs.getString("Description");
-                Date OrderDate = rs.getDate("OrderDate");
-                float ShipFee = rs.getFloat("ShipFee");
+                Timestamp OrderDate = rs.getTimestamp("OrderDate");
+                int ShipFee = rs.getInt("ShipFee");
                 int UsedLotusBub = rs.getInt("UsedLotusBub");
-                float TotalPrice = rs.getFloat("TotalPrice");
-                float FinalPrice = rs.getFloat("FinalPrice");
+                int TotalPrice = rs.getInt("TotalPrice");
+                int FinalPrice = rs.getInt("FinalPrice");
                 int UserId = rs.getInt("UserId");
                 int RecipientId = rs.getInt("RecipientId");
                 int Status = rs.getInt("Status");
@@ -139,5 +142,21 @@ public class OrderDAO {
         }
         return ac;
     }
+     
+    
+     public void cancelOrders(int orderID) {
+        try {
+            String sql = "update Orders set Status=5  where OrderId=? ";
+            PreparedStatement stmt = getConnection().prepareStatement(sql);
+            stmt.setInt(1, orderID);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+   
 }
+
+
 

@@ -11,7 +11,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" type="image/png" href="img/logo1.png">    
-        <title>BMOS PAGE</title>
+        <title>Onlinebookstore PAGE</title>
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="css/osahan.css" rel="stylesheet">
         <link href="font/stylesheet.css" rel="stylesheet">
@@ -20,10 +20,22 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="path/to/materialize.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg">
         <!-- Template CSS -->
         <link rel="stylesheet" href="assets/css/main.css?v=3.4">
+        <style>
+            .badge {
+                /* Kiểm tra các thuộc tính này */
+                color: black; /* Màu chữ */
+                background-color: white; /* Màu nền */
+                opacity: 1; /* Độ trong suốt */
+                font-weight: bold; /* Độ đậm của chữ */
+            }
+            /* Đặt trong tập tin CSS của bạn */
+            .badge-large {
+                font-size: 1.25em; /* Tăng cỡ chữ lên 125% so với mặc định */
+            }
+
+        </style>
     </head>
     <body id="page-top">
         <div id="wrapper">
@@ -176,31 +188,86 @@
                                  //SHOW THONG TIN historyOrder
                     -->  
                     <div class="container mt-5">
-                        <h2>Order History</h2>
-                        <c:choose>
-                            <c:when test="${not empty listHistoryOrder}">
-                                <div class="row">
-                                    <c:forEach var="order" items="${listHistoryOrder}">
-                                        <div class="col-md-4">
-                                            <div class="card mb-3">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Order</h5>
-                                                    <p class="card-text">
-                                                        Description: ${order.description} <br>
-                                                        Order Date: ${order.orderDate} <br>
-                                                        Total Price: ${order.totalPrice} <br>
-                                                    </p>
-                                                    <a href="OrderDetailController?orderId=${order.orderId}" class="btn btn-primary">View Details</a>
+                        <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
+                            <nav>
+                                <ul>
+                                    <li><a href="HistoryOrderController?status=1">Đang chờ </a></li>
+                                    <li><a href="HistoryOrderController?status=2">Đang lấy hàng </a></li>
+                                    <li><a href="HistoryOrderController?status=3">Đang giao </a></li>
+                                    <li><a href="HistoryOrderController?status=4">Giao hàng thành công </a></li>
+                                    <li><a href="HistoryOrderController?status=5">Đơn đã hủy </a></li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <div class="container mt-5">
+                            <c:choose>
+                                <c:when test="${not empty listHistoryOrder}">
+                                    <div class="row">
+                                        <c:forEach var="order" items="${listHistoryOrder}">
+                                            <div class="col-md-6 col-lg-4 mb-3 d-flex align-items-stretch">
+                                                <div class="card shadow-sm border-0 w-100">
+                                                    <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+                                                        <strong>Đơn hàng #${order.orderId}</strong>
+                                                        <span class="badge badge-large">
+                                                            <c:choose>
+                                                                <c:when test="${order.status == 1}">
+                                                                    <span class="badge bg-warning">Đang chờ</span>
+                                                                </c:when>
+                                                                <c:when test="${order.status == 2}">
+                                                                    <span class="badge bg-info">Đang lấy hàng</span>
+                                                                </c:when>
+                                                                <c:when test="${order.status == 3}">
+                                                                    <span class="badge bg-primary">Đang giao</span>
+                                                                </c:when>
+                                                                <c:when test="${order.status == 4}">
+                                                                    <span class="badge bg-success">Giao hàng thành công</span>
+                                                                </c:when>
+                                                                <c:when test="${order.status == 5}">
+                                                                    <span class="badge bg-danger">Đơn đã hủy</span>
+                                                                </c:when>
+                                                            </c:choose>
+                                                        </span>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <c:forEach var="detail" items="${orderDetailMap[order.orderId]}">
+                                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                                <span>${detail.bookName}</span>
+                                                                <span>Số lượng: ${detail.quantity}</span>
+                                                                <span>Giá: ${detail.unitPrice}đ</span>
+                                                            </div>
+                                                        </c:forEach>
+                                                        <div class="mt-2">
+                                                            <p>
+                                                                Ngày đặt hàng: ${order.orderDate} <br>
+                                                                Phí ship: ${order.shipFee}đ <br>
+                                                                Tổng tiền: ${order.finalPrice}đ <br>
+                                                            </p>
+                                                        </div>
+                                                        <br/>
+                                                        <a href="OrderDetailController?orderId=${order.orderId}" class="btn btn-outline-primary">Xem chi tiết</a>
+                                                        <!-- Thêm nút Hủy nếu đơn hàng đang chờ -->
+                                                        <c:if test="${order.status == 1}">
+                                                            <a href="CancelOrderController?orderId=${order.orderId}" class="btn btn-outline-danger">Hủy</a>
+                                                        </c:if>
+                                                        <c:if test="${order.status == 4}">
+                                                            <a href="CreateFeedbackController?orderId=${order.orderId}" class="btn btn-outline-danger">Đánh giá</a>
+                                                        </c:if>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </c:forEach>
-                                </div>
-                            </c:when>
-                            <c:otherwise>
-                                <p>No orders found.</p>
-                            </c:otherwise>
-                        </c:choose>
+                                        </c:forEach>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <p>Không tìm thấy đơn hàng nào.</p>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+
+
+
+
                     </div>
 
 
@@ -222,7 +289,7 @@
                 <footer class="sticky-footer bg-light" >
                     <div class="container my-auto ">
                         <div class="copyright text-center my-auto " style="color: #093b29" >
-                            <span >EMAIL: BMOS@gmail.com&copy;</span></br></br>
+                            <span >EMAIL: Onlinebookstore@gmail.com&copy;</span></br></br>
                             <span>ADDRES:  Q9, HCM, VIET NAM&copy;</span></br></br>
                             <span>HOTLINE: 0931 8888 991&copy;</span>
                         </div>

@@ -12,13 +12,14 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import util.DBContext;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class AccountDAO extends DBContext {
 
@@ -138,14 +139,15 @@ public class AccountDAO extends DBContext {
     //Create account
     public Account createAccount(Account newItem) {
         try {
-            String sql = "insert into Users(email,Password,Fullname,number_Of_Lotus,RoleID) "
-                    + "values(?,?,?,?,?)";
+            String sql = "insert into Users(email,Password,Fullname,number_Of_Lotus,RoleID,Status) "
+                    + "values(?,?,?,?,?,?)";
             PreparedStatement stmt = getConnection().prepareStatement(sql);
             stmt.setString(1, newItem.getEmail());
             stmt.setString(2, newItem.getPassword());
             stmt.setString(3, newItem.getFullname());
             stmt.setInt(4, newItem.getNumberOfLotus());
             stmt.setInt(5, newItem.getRoleId());
+            stmt.setInt(6, newItem.getStatus());
             stmt.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -186,5 +188,25 @@ public class AccountDAO extends DBContext {
             e.printStackTrace();
         }
         return null;
+    }
+    public void updateUserLotus() throws ClassNotFoundException, SQLException {
+        String sql = "UPDATE [BookStore].[dbo].[Users] " +
+                     "SET [Number_of_Lotus] = [Number_of_Lotus] + " +
+                     "(SELECT SUM(o.[TotalPrice] / 1000) " +
+                     " FROM [BookStore].[dbo].[Orders] o " +
+                     " WHERE o.[Status] = 4 AND [Users].[UserId] = o.[UserId] " +
+                     " GROUP BY o.[UserId]) " +
+                     "WHERE EXISTS ( " +
+                     " SELECT 1 " +
+                     " FROM [BookStore].[dbo].[Orders] o " +
+                     " WHERE o.[Status] = 4 AND [Users].[UserId] = o.[UserId])";
+        
+        try (Connection conn = new DBContext().getConnection();
+             Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 }

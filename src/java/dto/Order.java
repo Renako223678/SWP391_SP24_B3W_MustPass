@@ -5,7 +5,8 @@
  */
 package dto;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.sql.Timestamp;
 
 /**
  *
@@ -14,11 +15,11 @@ import java.sql.Date;
 public class Order {
     private int orderId;
     private String description;
-    private Date orderDate;
-    private float shipFee;
+    private Timestamp orderDate;
+    private int shipFee;
     private int usedLotusBub;
-    private float totalPrice;
-    private float finalPrice;
+    private int totalPrice;
+    private int finalPrice;
     private int status;
     private int userId;
     private int recipientId;
@@ -26,7 +27,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(int orderId, String description, Date orderDate, float shipFee, int usedLotusBub, float totalPrice, float finalPrice, int status, int userId, int recipientId) {
+    public Order(int orderId, String description, Timestamp orderDate, int shipFee, int usedLotusBub, int totalPrice, int finalPrice, int status, int userId, int recipientId) {
         this.orderId = orderId;
         this.description = description;
         this.orderDate = orderDate;
@@ -39,7 +40,7 @@ public class Order {
         this.recipientId = recipientId;
     }
 
-    public Order(String description, Date orderDate, float shipFee, int usedLotusBub, float totalPrice, float finalPrice, int status, int userId, int recipientId) {
+    public Order(String description, Timestamp orderDate, int shipFee, int usedLotusBub, int totalPrice, int finalPrice, int status, int userId, int recipientId) {
         this.description = description;
         this.orderDate = orderDate;
         this.shipFee = shipFee;
@@ -67,19 +68,19 @@ public class Order {
         this.description = description;
     }
 
-    public Date getOrderDate() {
+    public Timestamp getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(Timestamp orderDate) {
         this.orderDate = orderDate;
     }
 
-    public float getShipFee() {
+    public int getShipFee() {
         return shipFee;
     }
 
-    public void setShipFee(float shipFee) {
+    public void setShipFee(int shipFee) {
         this.shipFee = shipFee;
     }
 
@@ -91,19 +92,19 @@ public class Order {
         this.usedLotusBub = usedLotusBub;
     }
 
-    public float getTotalPrice() {
+    public int getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(float totalPrice) {
+    public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
 
-    public float getFinalPrice() {
+    public int getFinalPrice() {
         return finalPrice;
     }
 
-    public void setFinalPrice(float finalPrice) {
+    public void setFinalPrice(int finalPrice) {
         this.finalPrice = finalPrice;
     }
 

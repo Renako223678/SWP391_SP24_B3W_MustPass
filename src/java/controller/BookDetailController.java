@@ -1,14 +1,20 @@
 package controller;
 
 import dao.BookDAO;
+import dao.FeedbackDAO;
+import dto.Account;
 import dto.Book;
+import dto.Feedback;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "BookDetailController", urlPatterns = {"/BookDetailController"})
 public class BookDetailController extends HttpServlet {
@@ -27,9 +33,16 @@ public class BookDetailController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = "bookDetail.jsp";
         int bookId = Integer.parseInt(request.getParameter("bookId"));
+        HttpSession session = request.getSession();
+        Account account = (Account)session.getAttribute("LOGIN_USER");
         dao.BookDAO dao = new BookDAO();
         Book book = dao.getBookByID(bookId);
+        FeedbackDAO feedbackDao = new FeedbackDAO();
+        List<Feedback> listFeedback = new ArrayList<>();
+        listFeedback = feedbackDao.getALLFeedbackByBookID(bookId);
         request.setAttribute("book", book);
+        request.setAttribute("listFeedback", listFeedback);
+        request.setAttribute("fullName", account.getFullname());
         request.getRequestDispatcher(url).forward(request, response);
     }
 

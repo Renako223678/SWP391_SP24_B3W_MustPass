@@ -8,7 +8,7 @@
         <meta name="keywords" content="Ogani, unica, creative, html">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>BMOS Contact </title>
+        <title>Onlinebookstore Contact </title>
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/bootstrap.min_1.css" type="text/css">
         <link rel="stylesheet" href="css/font-awesome.min_1.css" type="text/css">
@@ -88,7 +88,7 @@
                         <div class="contact__widget">
                             <span class="icon_mail_alt"></span>
                             <h4>Email</h4>
-                            <p>bmos@gmail.com</p>
+                            <p>Onlinebookstore@gmail.com</p>
                         </div>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
                             <ul>
                                 <li>Address: Q9, HCM, Vietnam</li>
                                 <li>Phone: +84 33888257</li>
-                                <li>Email: bmos@gmail.com</li>
+                                <li>Email: Onlinebookstore@gmail.com</li>
                             </ul>
                         </div>
                     </div>

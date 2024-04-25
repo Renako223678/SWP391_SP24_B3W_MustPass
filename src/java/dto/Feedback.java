@@ -7,7 +7,7 @@ package dto;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class Feedback {
     private int FeedBackId;
@@ -21,6 +21,13 @@ public class Feedback {
 
     public Feedback(int FeedBackId, int Star, String Description, int UserId, int BookId) {
         this.FeedBackId = FeedBackId;
+        this.Star = Star;
+        this.Description = Description;
+        this.UserId = UserId;
+        this.BookId = BookId;
+    }
+
+    public Feedback(int Star, String Description, int UserId, int BookId) {
         this.Star = Star;
         this.Description = Description;
         this.UserId = UserId;

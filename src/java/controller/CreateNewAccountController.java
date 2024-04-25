@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class CreateNewAccountController extends HttpServlet {
 
@@ -63,7 +63,7 @@ public class CreateNewAccountController extends HttpServlet {
                 checkValidation = false;
             }
             if(checkValidation){
-                Account ac = new Account(email, password, fullname, 0, 3,1);
+                Account ac = new Account(email, password, fullname, 0, 4,1);
                 dao.createAccount(ac);
                 url = LOGIN_PAGE;
             } else{

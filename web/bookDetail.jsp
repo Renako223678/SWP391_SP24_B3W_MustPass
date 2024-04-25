@@ -13,7 +13,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" type="image/png" href="img/logo1.png">    
-        <title>BMOS PAGE</title>
+        <title>Onlinebookstore PAGE</title>
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="css/osahan.css" rel="stylesheet">
         <link href="font/stylesheet.css" rel="stylesheet">
@@ -138,7 +138,7 @@
                                     </a>
                                 </li>
                             </c:if>
-                            
+
                             <li class="nav-item dropdown no-arrow mx-2 osahan-t-pu">
                                 <a class="nav-link dropdown-toggle text-dark" href="contact.jsp">
                                     <i class="mdi mdi-shopping text-danger"></i><span class="ml-2">Liên Hệ</span>
@@ -232,8 +232,41 @@
 
                                 </div>
                             </div>
+
+                            <h3 class="section-title style-1 mb-30 mt-30">Reviews</h3>
+                            <!--Comments-->
+                            <div class="comments-area style-2">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="comment-list">
+                                            <c:forEach var="feedback" items="${listFeedback}">
+                                            <div class="single-comment justify-content-between d-flex">
+                                                <div class="user justify-content-between d-flex">
+                                                    <div class="thumb text-center">
+                                                        <img src="assets/imgs/page/avatar-6.jpg" alt="">
+                                                        <h6><a href="#">${fullName}</a></h6>
+                                                    </div>
+                                                    <div class="desc">
+                                                        <div class="product-rate d-inline-block">
+                                                            <div class="product-rating" style="width:${feedback.getStar()*20}%">
+                                                            </div>
+                                                        </div>
+                                                        <p>${feedback.getDescription()}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </c:forEach>
+                                          
+                                            
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
                         </div>
                     </section>
+
+
 
 
 
@@ -527,49 +560,6 @@
 
 
 
-
-                    <div class="container-fluid">
-                        <div class="d-flex align-items-center justify-content-between mb-3 mt-2">
-                            <h5 class="mb-0">CÁC BLOG NỔI BẬT</h5>
-                            <a href="listBlog.jsp" class="small font-weight-bold text-dark">SEE ALL <i class="mdi mdi-chevron-right mr-2"></i></a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <a href="blogchimchaomao.jsp" class="text-decoration-none col-xl-3 col-md-3 mb-3">
-                            <div class="card" style="width: 18rem; color: black" >
-                                <img class="card-img-top" src="img/bird/chimchaomao.jpg" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">We pride ourselves on providing only the highest quality vegetables, grown using sustainable farming.Taste the difference with our premium vegetable selection today!.</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="blogchimvet.jsp" class="text-decoration-none col-xl-3 col-md-3 mb-3">
-                            <div class="card" style="width: 18rem; color: black" >
-                                <img class="card-img-top" src="img/bird/chimvet1.jpg" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">We pride ourselves on providing only the highest quality vegetables, grown using sustainable farming.Taste the difference with our premium vegetable selection today!.</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="blogchimchichchoe.jsp" class="text-decoration-none col-xl-3 col-md-3 mb-3">
-                            <div class="card" style="width: 18rem; color: black" >
-                                <img class="card-img-top" src="img/bird/chimchitcheo1.jpg" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">We pride ourselves on providing only the highest quality vegetables, grown using sustainable farming.Taste the difference with our premium vegetable selection today!.</p>
-                                </div>
-                            </div>
-                        </a>       
-                        <a href="blogchimhoami.jsp" class="text-decoration-none col-xl-3 col-md-3 mb-3">
-                            <div class="card" style="width: 18rem; color: black" >
-                                <img class="card-img-top" src="img/bird/chimhoami.jpg" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">We pride ourselves on providing only the highest quality vegetables, grown using sustainable farming.Taste the difference with our premium vegetable selection today!.</p>
-                                </div>
-                            </div>
-                        </a>   
-                    </div>
-
-
                     <!-- 
                         Show thêm các Sản Phẩm nổi bật
                     -->       
@@ -595,7 +585,7 @@
                 <footer class="sticky-footer bg-light" >
                     <div class="container my-auto ">
                         <div class="copyright text-center my-auto " style="color: #093b29" >
-                            <span >EMAIL: BMOS@gmail.com&copy;</span></br></br>
+                            <span >EMAIL: Onlinebookstore@gmail.com&copy;</span></br></br>
                             <span>ADDRES:  Q9, HCM, VIET NAM&copy;</span></br></br>
                             <span>HOTLINE: 0931 8888 991&copy;</span>
                         </div>

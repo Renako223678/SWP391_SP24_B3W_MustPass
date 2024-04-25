@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class CreateProductController extends HttpServlet {
 
@@ -82,7 +82,7 @@ public class CreateProductController extends HttpServlet {
             int PublishDate = Integer.parseInt(request.getParameter("PublishDate"));
             int Quantity = Integer.parseInt(request.getParameter("Quantity"));
             int SubCategoryId = Integer.parseInt(request.getParameter("SubCategoryId"));
-            float UnitPrice = Float.parseFloat(request.getParameter("UnitPrice"));
+            int UnitPrice = Integer.parseInt(request.getParameter("UnitPrice"));
             int CategoryID = Integer.parseInt(request.getParameter("CategoryID"));
             int Status = Integer.parseInt(request.getParameter("Status"));
             int TotalFeedback = Integer.parseInt(request.getParameter("TotalFeedback"));

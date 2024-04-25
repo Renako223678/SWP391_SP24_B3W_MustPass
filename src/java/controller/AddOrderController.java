@@ -1,6 +1,7 @@
 package controller;
 
 import cart.Cart;
+import dao.BookDAO;
 import dao.OrderDAO;
 import dao.OrderDetailDAO;
 import dto.Account;
@@ -9,8 +10,9 @@ import dto.Order;
 import dto.OrderDetail;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,21 +37,40 @@ public class AddOrderController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("CART");
+        BookDAO bookdao = new BookDAO();
+        Book bookOriginal = new Book();
+        boolean notEnough = false;
+
+        for (Book book : cart.getCart().values()) {
+            bookOriginal = bookdao.getBookByID(book.getBookId()); // Lấy thông tin sách từ ID
+            int remainingQuantity = bookOriginal.getQuantity() - book.getQuantity(); // Số lượng còn lại sau khi trừ đi số lượng đặt hàng
+
+            if (remainingQuantity < 0) { // Nếu số lượng còn lại nhỏ hơn 0, nghĩa là không đủ
+                request.setAttribute("errorMessage", "Sản phẩm này chỉ còn:"+ bookOriginal.getQuantity());
+                notEnough = true; // Đánh dấu rằng không đủ số lượng
+                break; // Dừng vòng lặp vì đã tìm thấy ít nhất một sản phẩm không đủ
+            }
+        }
+
+        if (notEnough) { // Nếu có ít nhất một sản phẩm không đủ số lượng
+            request.getRequestDispatcher("ViewCartController").forward(request, response); 
+            return;
+        }
         Account account = (Account) session.getAttribute("LOGIN_USER");
         String recipientID = request.getParameter("recipientID");
         try {
             // Tạo đối tượng Order
             Order order = new Order();
-            LocalDate today = LocalDate.now();
-            Date sqlDate = Date.valueOf(today);
+            LocalDateTime today = LocalDateTime.now();
+            Timestamp sqlDate =Timestamp.valueOf(today);
             order.setOrderDate(sqlDate);
             order.setShipFee(50000);
-            order.setTotalPrice(cart.getTotalMoney()); // Tổng giá trị từ giỏ hàng
+            order.setTotalPrice(cart.getTotalMoney()); 
             order.setFinalPrice(cart.getTotalMoney() + order.getShipFee());
             order.setStatus(1);
             order.setRecipientId(Integer.parseInt(recipientID));
             OrderDAO orderDAO = new OrderDAO();
-            int orderId = orderDAO.createOrder(order, account.getUserId()); // Tạo Order và lấy ID
+            int orderId = orderDAO.createOrder(order, account.getUserId()); 
 
             // Tạo các OrderDetail từ giỏ hàng
             OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
@@ -58,6 +79,9 @@ public class AddOrderController extends HttpServlet {
                 OrderDetail orderDetail = new OrderDetail();
                 orderDetail.setOrderId(orderId);
                 orderDetail.setBookId(book.getBookId()); // Chuyển đổi ID thành int
+                int quantity = bookOriginal.getQuantity() - book.getQuantity();
+                bookOriginal.setQuantity(quantity);
+                bookdao.updateBook(bookOriginal);
                 orderDetail.setQuantity(book.getQuantity());
                 orderDetail.setUnitPrice(book.getUnitPrice());
                 orderDetail.setTotalPrice(book.getQuantity() * book.getUnitPrice());

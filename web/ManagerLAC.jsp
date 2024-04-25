@@ -31,7 +31,7 @@
                         <i class="mdi mdi-home-variant-outline"></i>
                         <span>TRANG CHỦ</span></a>
                 </li>
-             
+
 
                 <hr class="sidebar-divider d-none d-md-block">
                 <div class="text-center d-none d-md-inline">
@@ -211,23 +211,42 @@
                                             <div class="col-xs-5">
                                                 <h2>Account <b>Management</b></h2>
                                             </div>
+                                            </br>
+                                            </br>
+                                            </br>
                                             <form action="MainController" method="post">
+
                                                 <div class="input-group-prepend ">
                                                     <div class="input-group-append">
                                                         <input class="btn btn-primary" type="submit" value="Manage Product" name="btAction" >
                                                     </div>
-                                             
+
                                                     <div class="input-group-append">
                                                         <input class="btn btn-primary" type="submit" value="Manage Category" name="btAction" >
                                                     </div>
                                                     <div class="input-group-append">
                                                         <input class="btn btn-primary" type="submit" value="Manage SubCategory" name="btAction" >
                                                     </div>
+                                                    <div class="input-group-append">
+                                                        <input class="btn btn-primary" type="submit" value="Manage Orders" name="btAction" >
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <input class="btn btn-primary" type="submit" value="Manage FeedBack" name="btAction" >
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <input class="btn btn-primary" type="submit" value="Manage Revenue" name="btAction" >
+                                                    </div>
+
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
-                               
+                                    <form action="MainController">
+                                        <div>
+                                            <input type="submit" value="Create Account Staff" name="btAction" /> 
+                                        </div>
+                                        </br>   
+                                    </form>
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
@@ -244,36 +263,36 @@
                                         <tbody>
                                             <c:forEach items="${list}" var="ac" varStatus="counter">
                                             <form action="MainController" method="post">
-                                               <tr>
-                                                        <td>${ac.userId}</td>
-                                                        <td>${ac.email}</td>
-                                                        <td>${ac.password}</td>
-                                                        <td>${ac.fullname}</td>
-                                                        <td>${ac.numberOfLotus}</td>
-                                                        <c:if test="${ac.roleId == 1}">
-                                                            <td>Admin</td>
-                                                        </c:if>
-                                                        <c:if test="${ac.roleId == 2}">
-                                                            <td>Quản Lí</td>
-                                                        </c:if>  
-                                                        <c:if test="${ac.roleId == 3}">
-                                                            <td>Nhân Viên</td>
-                                                        </c:if>      
-                                                         <c:if test="${ac.roleId == 4}">
-                                                            <td>Khách Hàng</td>
-                                                        </c:if>      
-                                                         <c:if test="${ac.status == 1}">
-                                                            <td>Đang Hoạt Động</td>
-                                                        </c:if>
-                                                        <c:if test="${ac.status == 2}">
-                                                            <td>Dừng Hoạt Động</td>
-                                                        </c:if>  
-                                                        <td>
-                                                            <button>
-                                                                <a href="UpdateAccountController?ID=${ac.userId}" > EDIT </a>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
+                                                <tr>
+                                                    <td>${ac.userId}</td>
+                                                    <td>${ac.email}</td>
+                                                    <td>${ac.password}</td>
+                                                    <td>${ac.fullname}</td>
+                                                    <td>${ac.numberOfLotus}</td>
+                                                    <c:if test="${ac.roleId == 1}">
+                                                        <td>Admin</td>
+                                                    </c:if>
+                                                    <c:if test="${ac.roleId == 2}">
+                                                        <td>Quản Lí</td>
+                                                    </c:if>  
+                                                    <c:if test="${ac.roleId == 3}">
+                                                        <td>Nhân Viên</td>
+                                                    </c:if>      
+                                                    <c:if test="${ac.roleId == 4}">
+                                                        <td>Khách Hàng</td>
+                                                    </c:if>      
+                                                    <c:if test="${ac.status == 1}">
+                                                        <td>Đang Hoạt Động</td>
+                                                    </c:if>
+                                                    <c:if test="${ac.status == 2}">
+                                                        <td>Dừng Hoạt Động</td>
+                                                    </c:if>  
+                                                    <td>
+                                                        <button>
+                                                            <a href="UpdateAccountController?ID=${ac.userId}" > EDIT </a>
+                                                        </button>
+                                                    </td>
+                                                </tr>
                                             </form>
                                         </c:forEach>
                                         </tbody>

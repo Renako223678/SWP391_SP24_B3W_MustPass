@@ -222,19 +222,32 @@
                                                 <th>FeedBackId</th>
                                                 <th>Star</th>  
                                                 <th>Description</th>
-                                                <th>UserId</th>
-                                                <th>BookId</th>                                               
+                                                <th>Email</th>
+                                                <th>Book Name</th>                                               
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <c:forEach items="${list}" var="la" varStatus="counter">
                                             <form action="MainController" method="post">
                                                 <tr>
-                                                   <td>${la}</td>
-                                                   <td>${la}</td>
-                                                   <td>${la}</td>
-                                                   <td>${la}</td>
-                                                   <td>${la}</td>
+                                                   <td>${la.getFeedBackId()}</td>
+                                                   <td>${la.getStar()}</td>
+                                                   <td>${la.getDescription()}</td>
+                                               
+                                                   <td>
+                                                        <c:forEach items="${aclist}" var="ac">
+                                                            <c:if test="${ac.getUserId() eq la.getUserId()}">
+                                                                ${ac.getEmail()}
+                                                            </c:if>
+                                                        </c:forEach>
+                                                   </td>
+                                                   <td>
+                                                        <c:forEach items="${bookList}" var="book">
+                                                            <c:if test="${book.getBookId() eq la.getBookId()}">
+                                                                ${book.getBookName()}
+                                                            </c:if>
+                                                        </c:forEach>
+                                                   </td>
                                                 </tr>
                                             </form>
                                             </c:forEach>

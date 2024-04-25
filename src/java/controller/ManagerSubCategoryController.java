@@ -5,7 +5,9 @@
  */
 package controller;
 
+import dao.CategoryDAO;
 import dao.SubCategoryDAO;
+import dto.Category;
 import dto.SubCategory;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class ManagerSubCategoryController extends HttpServlet {
 private final String MANAGER_PAGE = "ManagerSubCategory.jsp";
@@ -47,6 +49,10 @@ private final String MANAGER_PAGE = "ManagerSubCategory.jsp";
             SubCategoryDAO dao = new SubCategoryDAO();
             List<SubCategory> listItem = dao.getAllListSubCategory();
             request.setAttribute("list", listItem);
+            
+            CategoryDAO sdao = new CategoryDAO();
+            List<Category> listItems = sdao.getAllListCategory();
+            request.setAttribute("slist", listItems);
             url = MANAGER_PAGE;
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

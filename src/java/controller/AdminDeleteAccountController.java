@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class AdminDeleteAccountController extends HttpServlet {
 private final String ADMIN_PAGE = "AdminController";

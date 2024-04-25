@@ -48,6 +48,12 @@ public class ListBookController extends HttpServlet {
         String subId = request.getParameter("subId");
         bookList = dao.getBookByCateAndSubCate(Integer.parseInt(cateId),Integer.parseInt(subId));
         request.setAttribute("bookList", bookList);
+        int tui =0;
+        for (Book book : bookList) {
+            tui = (int)book.getUnitPrice();
+            System.out.println("So nay la:"+tui);
+            System.out.println(book);
+        }
         request.getRequestDispatcher(url).forward(request, response);
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

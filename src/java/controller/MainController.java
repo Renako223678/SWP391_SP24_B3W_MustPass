@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class MainController extends HttpServlet {
 
@@ -24,7 +24,6 @@ public class MainController extends HttpServlet {
     private final String LOGIN_PAGE = "signin.jsp";
     private final String LOGIN = "LoginController";
     private final String SIGN_UP = "SignupController";
-
     private final String CREATE = "CreateNewAccountController";
     private final String SHOW_ALL_PRODUCT ="ShowAllProductController";
     
@@ -35,6 +34,7 @@ public class MainController extends HttpServlet {
     private final String ADMIN_ACCOUNT = "AdminController";
     private final String ADMIN_UPDATE_ACCOUNT = "AdminUpdateController";
     private final String ADMIN_DELETE_ACCOUNT = "AdminDeleteAccountController";
+    private final String ADMIN_CREATE_ACCOUNT = "AminCreateAccountController";
     
     // function manager 
     private final String MANAGER_ACCOUNT = "ManagerAccountController";
@@ -42,17 +42,25 @@ public class MainController extends HttpServlet {
     private final String MANAGER_PRODUCT = "ManagerProductController";
     private final String MANAGER_CATEGORY = "ManagerCatogoryController";
     private final String MANAGER_SUBCATEGORY = "ManagerSubCategoryController";
+    private final String MANAGER_REVENUE = "ManagerRevenueController";
+    private final String MANAGER_FEEDBACK = "ManagerFeedbacksController";
+    private final String MANAGER_ORDERS = "ManagerOrderController";
     
-    private final String MANAGER_UPDATE_ACCOUNT = "UpdateAccountController";
- 
     private final String CREATE_PRODUCT = "CreateProductController";
     private final String CREATE_CATEGOGY = "CreateCategogyController";
     private final String CREATE_SUBCATEGOGY = "CreateSubCategogyController";
     
+    private final String MANAGER_CREATE_ACCOUNT = "ManagerCreateAccountController";
+    
+    private final String MANAGER_UPDATE_ACCOUNT = "UpdateAccountController";
     private final String MANAGER_UPDATE_CATEGORY = "UpdateCategoryController";
     private final String MANAGER_UPDATE_SUBCATEGORY = "UpdateSubCategoryController";
+    private final String MANAGER_UPDATE_ORDERS = "ManagerUpdateOrdersController";
     private final String UPDATE_BLOG = "UpdateBlogController";
     private final String UPDATE_PRODUCT = "UpdateProductController";
+   
+    
+    
     
     // function staff
     private final String STAFF_FEEDBACK = "ManagerFeedbackController";
@@ -66,17 +74,15 @@ public class MainController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = LOGIN_PAGE;
-
         try {
             String button = request.getParameter("btAction");
             if (button == null) {
                 url = "404.jsp";
-            } else if (button.equals("Login")) {
+            }else if (button.equals("Login")) {
                 url = LOGIN;
-                
-            } else if (button.equals("Sign up")) {
+            }else if (button.equals("Sign up")) {
                 url = CREATE;
-            } else if (button.equals("Show All Product")) {
+            }else if (button.equals("Show All Product")) {
                 url = SHOW_ALL_PRODUCT;
             }else if (button.equals("ADMIN_ACCOUNT")) {
                 url = ADMIN_ACCOUNT;
@@ -86,9 +92,9 @@ public class MainController extends HttpServlet {
                 url = MANAGER_UPDATE_ACCOUNT;
             }else if (button.equals("Manage Account")) {
                 url = MANAGER_ACCOUNT;
-            } else if (button.equals("Manage BLogs")) {
+            }else if (button.equals("Manage BLogs")) {
                 url = MANAGER_BLOG;
-            } else if (button.equals("Manage Product")) {
+            }else if (button.equals("Manage Product")) {
                 url = MANAGER_PRODUCT;
             }else if (button.equals("MANAGER_UPDATE_PRODUCT")){
                 url = UPDATE_PRODUCT;
@@ -98,11 +104,21 @@ public class MainController extends HttpServlet {
                 url = CREATE_CATEGOGY;
             }else if (button.equals("Create SubCategogy")) {
                 url = CREATE_SUBCATEGOGY;
+            }else if (button.equals("Create Account Staff")) {
+                url = MANAGER_CREATE_ACCOUNT;
+            }else if (button.equals("Create Account Manager")) {
+                url = ADMIN_CREATE_ACCOUNT;
             }else if (button.equals("Manage Category")){
                 url = MANAGER_CATEGORY;
             }else if (button.equals("Manage SubCategory")){
                 url = MANAGER_SUBCATEGORY;
-            } else if (button.equals("Staff FeedBack")){
+            }else if (button.equals("Manage Orders")){
+                url = MANAGER_ORDERS;
+            }else if (button.equals("Manage FeedBack")){
+                url = MANAGER_FEEDBACK;
+            }else if (button.equals("Manage Revenue")){
+                url = MANAGER_REVENUE;
+            }else if (button.equals("Staff FeedBack")){
                 url = STAFF_FEEDBACK;
             }else if (button.equals("Staff Orders")){
                 url = STAFF_ORDERS;
@@ -110,6 +126,8 @@ public class MainController extends HttpServlet {
                 url = STAFF_PRODUCT;
             }else if (button.equals("STAFF_UPDATE_ORDERS")){
                 url = STAFF_UPDATE_ORDERS;
+            }else if (button.equals("MANAGER_UPDATE_ORDERS")){
+                url = MANAGER_UPDATE_ORDERS;
             }else if (button.equals("STAFF_UPDATE_PRODUCTS")){
                 url = STAFF_UPDATE_PRODUCT;
             }else if (button.equals("Manage_Update_Cate")){

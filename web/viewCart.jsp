@@ -11,7 +11,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" type="image/png" href="img/logo1.png">    
-        <title>BMOS PAGE</title>
+        <title>Onlinebookstore PAGE</title>
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="css/osahan.css" rel="stylesheet">
         <link href="font/stylesheet.css" rel="stylesheet">
@@ -229,6 +229,11 @@
                                                             <a href="QuantityBookCartController?bookId=${bookEntry.value.bookId}&quantity=-1" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
                                                             <span class="qty-val">${bookEntry.value.quantity}</span>
                                                             <a href="QuantityBookCartController?bookId=${bookEntry.value.bookId}&quantity=1" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                                            <c:if test="${not empty errorMessage}">
+                                                                <div class="alert alert-danger">
+                                                                    <strong>Error:</strong> ${errorMessage}
+                                                                </div>
+                                                            </c:if>
                                                         </td>
                                                         <td class="action" data-title="Remove"><a href="DeleteBookCartController?bookId=${bookEntry.value.bookId}" class="text-muted"><i class="fi-rs-trash"></i></a></td>
                                                     </tr>
@@ -253,7 +258,7 @@
                                                                     <option value="${recipient.recipientID}">
                                                                         Địa chỉ giao hàng: ${recipient.destAddress}, 
                                                                         Tên người nhận: ${recipient.recipientName},
-                                                                        Số điện thoại: ${recipient.phoneNumber}
+                                                                        Số điện thoại: 0${recipient.phoneNumber}
                                                                     </option>
                                                                 </c:forEach>
                                                             </select>
@@ -334,7 +339,7 @@
                     <footer class="sticky-footer bg-light" >
                         <div class="container my-auto ">
                             <div class="copyright text-center my-auto " style="color: #093b29" >
-                                <span >EMAIL: BMOS@gmail.com&copy;</span></br></br>
+                                <span >EMAIL: Onlinebookstore@gmail.com&copy;</span></br></br>
                                 <span>ADDRES:  Q9, HCM, VIET NAM&copy;</span></br></br>
                                 <span>HOTLINE: 0931 8888 991&copy;</span>
                             </div>

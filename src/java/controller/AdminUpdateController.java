@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class AdminUpdateController extends HttpServlet {
      private final String ADMIN_PAGE = "adminUpdateAccount.jsp";

@@ -11,7 +11,8 @@ public class Recipient {
     public Recipient() {
     }
 
-    public Recipient(int recipientID, String destAddress, String recipientName, String phoneNumber, int status, int userID) {
+    public Recipient(int recipientID, String destAddress, String recipientName, String phoneNumber, int status,
+            int userID) {
         this.recipientID = recipientID;
         this.destAddress = destAddress;
         this.recipientName = recipientName;
@@ -76,7 +77,4 @@ public class Recipient {
         this.userID = userID;
     }
 
-    
-    
-    
 }
