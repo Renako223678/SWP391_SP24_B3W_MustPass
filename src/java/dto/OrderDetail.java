@@ -17,11 +17,11 @@ public class OrderDetail {
     private float unitPrice;
     private float totalPrice;
     private int status;
+    private String bookName; 
 
     public OrderDetail() {
     }
-
-    public OrderDetail(int orderDetailId, int bookId, int orderId, int quantity, float unitPrice, float totalPrice, int status) {
+ public OrderDetail(int orderDetailId, int bookId, int orderId, int quantity, float unitPrice, float totalPrice, int status) {
         this.orderDetailId = orderDetailId;
         this.bookId = bookId;
         this.orderId = orderId;
@@ -29,6 +29,16 @@ public class OrderDetail {
         this.unitPrice = unitPrice;
         this.totalPrice = totalPrice;
         this.status = status;
+    }
+    public OrderDetail(int orderDetailId, int bookId, int orderId, int quantity, float unitPrice, float totalPrice, int status,String bookName) {
+        this.orderDetailId = orderDetailId;
+        this.bookId = bookId;
+        this.orderId = orderId;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.totalPrice = totalPrice;
+        this.status = status;
+        this.bookName = bookName;
     }
 
     public OrderDetail(int bookId, int orderId, int quantity, float unitPrice, float totalPrice, int status) {
@@ -39,7 +49,13 @@ public class OrderDetail {
         this.totalPrice = totalPrice;
         this.status = status;
     }
+public String getBookName() {
+        return bookName;
+    }
 
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
     public int getOrderDetailId() {
         return orderDetailId;
     }

@@ -41,6 +41,9 @@ public class HomeController extends HttpServlet {
         List<Category> listCategory = new ArrayList<>();
         listCategory = cateDao.getAllListCategory();
         request.setAttribute("listCategory", listCategory);
+        List<SubCategory> listSubCate = new ArrayList<>();
+        listSubCate = subDao.getAllListSubCategory();
+        request.setAttribute("listSubCategory", listSubCate);
         request.getRequestDispatcher(url).forward(request, response);
     }
 

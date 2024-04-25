@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class DBContext {
 
@@ -22,11 +22,11 @@ public class DBContext {
 //    public DBContext() {
 //        try {
 //            String IP = "localhost";
-//            String instanceName = "SQLTHUAN";
+//            String instanceName = "SQLVU";
 //            String port = "1433";
 //            String uid = "sa";
 //            String pwd = "12345";
-//            String db = "BMOS1";
+//            String db = "Onlinebookstore1";
 //            String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 //            String url = "jdbc:sqlserver://" + IP + "\\" + instanceName + ":" + port
 //                    + ";databasename=" + db + ";user=" + uid + ";password=" + pwd;

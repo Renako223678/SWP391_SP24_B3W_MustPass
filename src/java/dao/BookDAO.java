@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import static util.DBContext.getConnection;
+
 /**
  *
  * @author DELL
@@ -56,14 +58,14 @@ public class BookDAO{
 //    }
     public List<Book> getAllListBook() {
         List<Book> listBook = new ArrayList<>();
-        String query = "Select * from Books";
+        String query = "Select * from Books ORDER BY BookId DESC";
         try {
                 conn = new DBContext().getConnection();
                 ps = conn.prepareStatement(query);
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     listBook.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7), rs.getDate(8), rs.getInt(9),rs.getInt(10), rs.getFloat(11), rs.getInt(12),
+                        rs.getString(6), rs.getString(7), rs.getInt(8), rs.getInt(9),rs.getInt(10), rs.getInt(11), rs.getInt(12),
                         rs.getInt(13), rs.getInt(14)));
                 }
             
@@ -83,7 +85,7 @@ public class BookDAO{
                 rs = ps.executeQuery();
                 if (rs.next()) {
                     return new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7), rs.getDate(8), rs.getInt(9),rs.getInt(10), rs.getFloat(11), rs.getInt(12),
+                        rs.getString(6), rs.getString(7), rs.getInt(8), rs.getInt(9),rs.getInt(10), rs.getInt(11), rs.getInt(12),
                         rs.getInt(13), rs.getInt(14));
                 }
         } catch (Exception e) {
@@ -103,7 +105,7 @@ public class BookDAO{
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     listBook.add(new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7), rs.getDate(8), rs.getInt(9),rs.getInt(10), rs.getFloat(11), rs.getInt(12),
+                        rs.getString(6), rs.getString(7), rs.getInt(8), rs.getInt(9),rs.getInt(10), rs.getInt(11), rs.getInt(12),
                         rs.getInt(13), rs.getInt(14)));
                 }
         } catch (Exception e) {
@@ -112,5 +114,94 @@ public class BookDAO{
         return listBook;
     }
     
+    public Book getBookID(String id){
+        String query = "Select * from Books where BookId = ?";
+        try {
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                ps.setString(1, id);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    return new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getInt(8), rs.getInt(9),rs.getInt(10), rs.getInt(11), rs.getInt(12),
+                        rs.getInt(13), rs.getInt(14));
+                }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        return null;
+    }
+    
+      public Book updateBook(Book edittedItem) {
+        try {
+            String sql = "update Books set BookName=?, Description=?, AuthorName=?, PublishingCompany=?,"
+                    +  "IssusingCompany=?, TranslatorName=?, PublishYear=?, Quantity=?, SubCategoryId=?, UnitPrice=?, CategoryID=?, Status=?, TotalFeedback=?  where BookId=? ";
+            PreparedStatement stmt = getConnection().prepareStatement(sql);
+            stmt.setString(1, edittedItem.getBookName());
+            stmt.setString(2, edittedItem.getDescription());
+            stmt.setString(3, edittedItem.getAuthorName());
+            stmt.setString(4, edittedItem.getPublishingCompany());
+            stmt.setString(5, edittedItem.getIssusingCompany());
+            stmt.setString(6, edittedItem.getTranslatorName());
+            stmt.setInt(7, edittedItem.getPublishDate());
+            stmt.setInt(8, edittedItem.getQuantity());
+            stmt.setInt(9, edittedItem.getSubCategoryId());
+            stmt.setFloat(10, edittedItem.getUnitPrice());
+            stmt.setInt(11, edittedItem.getCategoryId());
+            stmt.setInt(12, edittedItem.getStatus());
+            stmt.setInt(13, edittedItem.getTotalFeedback());
+            stmt.setInt(14, edittedItem.getBookId());
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected > 0) {
+   
+            return edittedItem;
+        }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+         
+    //Create  
+  public Book createBook(Book newItem) throws ClassNotFoundException {
+    try {
+        String sql = "INSERT INTO Books (BookName, Description, AuthorName, PublishingCompany, IssusingCompany, TranslatorName, PublishYear, Quantity, SubCategoryId, UnitPrice, CategoryID, Status, TotalFeedback) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement stmt = getConnection().prepareStatement(sql);
+        stmt.setString(1, newItem.getBookName());
+        stmt.setString(2, newItem.getDescription());
+        stmt.setString(3, newItem.getAuthorName());
+        stmt.setString(4, newItem.getPublishingCompany());
+        stmt.setString(5, newItem.getIssusingCompany());
+        stmt.setString(6, newItem.getTranslatorName());
+        stmt.setInt(7, newItem.getPublishDate());
+        stmt.setInt(8, newItem.getQuantity());
+        stmt.setInt(9, newItem.getSubCategoryId());
+        stmt.setFloat(10, newItem.getUnitPrice());
+        stmt.setInt(11, newItem.getCategoryId());
+        stmt.setInt(12, newItem.getStatus());
+        stmt.setInt(13, newItem.getTotalFeedback());
+        stmt.executeUpdate();
+    } catch (SQLException e) {
+        // Log or throw the exception for proper error handling
+        e.printStackTrace();
+    }
+    return null;
+}
+
+   
+   
+   public Book deleteBook(String id) {
+        try {
+            String sql = "delete from Books where BookId =? ";
+            PreparedStatement stmt = getConnection().prepareStatement(sql);
+            stmt.setString(1, id);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

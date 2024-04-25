@@ -37,24 +37,27 @@ public class Cart {
     //Thêm sản phẩm mới vào giỏ hàng
     public boolean add(Book book, Cart cart) {
     boolean check = false;
+
     if (cart.getCart() == null) {
         cart.setCart(new HashMap<>());
     }
 
     String bookIdStr = Integer.toString(book.getBookId());
-    
+
     if (cart.getCart().containsKey(bookIdStr)) {
-        // Nếu sách đã có trong giỏ, cộng thêm số lượng
+        // Nếu sách đã có trong giỏ, cập nhật lại số lượng
         Book existingBook = cart.getCart().get(bookIdStr);
-        int currentQuantity = existingBook.getQuantity();
-        book.setQuantity(currentQuantity + book.getQuantity());
+        int newQuantity = existingBook.getQuantity() + book.getQuantity(); // Tính toán số lượng mới
+        existingBook.setQuantity(newQuantity); // Cập nhật số lượng
+    } else {
+        // Nếu sách chưa có trong giỏ, thêm vào giỏ
+        cart.getCart().put(bookIdStr, book);
     }
 
-    // Đặt sách vào giỏ hàng
-    cart.getCart().put(bookIdStr, book);
     check = true;
     return check;
 }
+
 
     //Xóa sản phẩm khỏi giỏ hàng
     public boolean remove(int productID) {
@@ -81,8 +84,8 @@ public class Cart {
     }
 
     //Lấy tổng thành tiền của giỏ hàng
-    public float getTotalMoney() {
-        float total = 0;
+    public int getTotalMoney() {
+        int total = 0;
         for (Book book : cart.values()) {
             total += book.getQuantity() * book.getUnitPrice();
         }

@@ -9,7 +9,7 @@ import java.sql.Date;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 public class Account {
     private int userId;
@@ -18,25 +18,28 @@ public class Account {
     private String fullname;
     private int numberOfLotus;
     private int roleId;
+    private int status;
 
     public Account() {
     }
 
-    public Account(int userId, String email, String password, String fullname, int numberOfLotus, int roleId) {
+    public Account(int userId, String email, String password, String fullname, int numberOfLotus, int roleId, int status) {
         this.userId = userId;
         this.email = email;
         this.password = password;
         this.fullname = fullname;
         this.numberOfLotus = numberOfLotus;
         this.roleId = roleId;
+        this.status = status;
     }
-    public Account( String email, String password, String fullname, int numberOfLotus, int roleId) {
+    public Account( String email, String password, String fullname, int numberOfLotus, int roleId, int status) {
       
         this.email = email;
         this.password = password;
         this.fullname = fullname;
         this.numberOfLotus = numberOfLotus;
         this.roleId = roleId;
+        this.status = status;
     }
     public int getUserId() {
         return userId;
@@ -84,6 +87,14 @@ public class Account {
 
     public void setRoleId(int roleId) {
         this.roleId = roleId;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     

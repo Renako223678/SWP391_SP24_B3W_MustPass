@@ -18,15 +18,20 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author THUAN
+ * @author VU
  */
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
 
-    private final String LOGIN_PAGE = "HomeController";
+    private final String LOGIN_PAGE = "signin.jsp";
     private final String LOGIN_HOMEPAGE = "HomeController";
-    private final String MANAGER_PAGE = "adminLAC.jsp";
-    private final String ADMIN_PAGE = "adminDashboard.jsp";
+    // Admin Page
+    private final String ADMIN_PAGE = "AdminController";
+    // Manager Page
+    private final String MANAGER_PAGE = "ManagerAccountController";
+    // Staff Page
+    private final String STAFF_PAGE = "StaffController";
+  
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -37,7 +42,7 @@ public class LoginController extends HttpServlet {
             String username = request.getParameter("txtUsername");
             String pw = request.getParameter("txtPassword");
             AccountDAO dao = new AccountDAO();
-            Account user = dao.findAccount(username);
+            Account user = dao.findAccount(username,pw);
             HttpSession session = request.getSession();
             if (user != null) {
                 session.setAttribute("LOGIN_USER", user);
@@ -52,14 +57,18 @@ public class LoginController extends HttpServlet {
                     session.setAttribute("roleID", roleID);
 
                 } else if (roleID == 3) {
+                    url = STAFF_PAGE;
+                    session.setAttribute("username", username);
+                    session.setAttribute("roleID", roleID);
+                } else if (roleID == 4) {
                     url = LOGIN_HOMEPAGE;
                     session.setAttribute("username", username);
                     session.setAttribute("roleID", roleID);
-                } else {
-                    session.setAttribute("ERROR_MESSAGE", "Your role is not support");
+                }else {
+                    request.setAttribute("ERROR_MESSAGE", "Your role is not support");
                 }
             } else {
-                session.setAttribute("ERROR_MESSAGE", "Incorrect id or password");
+                request.setAttribute("ERROR_MESSAGE", "Incorrect username or password");
             }
         } catch (Exception ex) {
             log("Error at LoginServlet:" + ex.toString());

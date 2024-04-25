@@ -19,10 +19,10 @@ public class Book {
     private String publishingCompany;
     private String issusingCompany;
     private String translatorName;
-    private Date publishDate;
+    private int publishDate;
     private int quantity;
     private int subCategoryId;
-    private float unitPrice;
+    private int unitPrice;
     private int categoryId;
     private int status;
     private int totalFeedback;
@@ -30,7 +30,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(int bookId, String bookName, String description, String authorName, String publishingCompany, String issusingCompany, String translatorName, Date publishDate, int quantity, int subCategoryId, float unitPrice, int categoryId, int status, int totalFeedback) {
+    public Book(int bookId, String bookName, String description, String authorName, String publishingCompany, String issusingCompany, String translatorName, int publishDate, int quantity, int subCategoryId, int unitPrice, int categoryId, int status, int totalFeedback) {
         this.bookId = bookId;
         this.bookName = bookName;
         this.description = description;
@@ -47,7 +47,7 @@ public class Book {
         this.totalFeedback = totalFeedback;
     }
 
-    public Book(String bookName, String description, String authorName, String publishingCompany, String issusingCompany, String translatorName, Date publishDate, int quantity, int subCategoryId, float unitPrice, int categoryId, int status, int totalFeedback) {
+    public Book(String bookName, String description, String authorName, String publishingCompany, String issusingCompany, String translatorName, int publishDate, int quantity, int subCategoryId, int unitPrice, int categoryId, int status, int totalFeedback) {
         this.bookName = bookName;
         this.description = description;
         this.authorName = authorName;
@@ -119,11 +119,11 @@ public class Book {
         this.translatorName = translatorName;
     }
 
-    public Date getPublishDate() {
+    public int getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(Date publishDate) {
+    public void setPublishDate(int publishDate) {
         this.publishDate = publishDate;
     }
 
@@ -143,11 +143,11 @@ public class Book {
         this.subCategoryId = subCategoryId;
     }
 
-    public float getUnitPrice() {
+    public int getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(float unitPrice) {
+    public void setUnitPrice(int unitPrice) {
         this.unitPrice = unitPrice;
     }
 
