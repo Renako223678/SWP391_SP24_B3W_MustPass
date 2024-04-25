@@ -20,7 +20,7 @@
     <body id="page-top">
         <div id="wrapper">
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-                <a class="sidebar-brand d-flex align-items-center" href="AdminController">
+                <a class="sidebar-brand d-flex align-items-center" href="#">
                     <div class="sidebar-brand-icon">
                         <img src="img/R.png" class="img-fluid">
                     </div>
@@ -272,45 +272,49 @@
                                             <tr>
                                                 <td>Status</td>
                                                 <td>
-                                                <select name="status">
+                                                    <select name="status">
                                                     <c:choose>
                                                         <c:when test="${book.status eq 1}">
                                                             <option value="1" selected>Đang Chờ</option>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <option value="1">Đang Chờ</option>
+                                                            <option value="1" ${book.status eq 4 || book.status eq 5 ? 'disabled' : ''}>Đang Chờ</option>
                                                         </c:otherwise>
                                                     </c:choose>
+
                                                     <c:choose>
                                                         <c:when test="${book.status eq 2}">
                                                             <option value="2" selected>Đang Lấy Hàng</option>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <option value="2">Đang Lấy Hàng</option>
+                                                            <option value="2" ${book.status eq 4 || book.status eq 5 ? 'disabled' : ''}>Đang Lấy Hàng</option>
                                                         </c:otherwise>
                                                     </c:choose>
+
                                                     <c:choose>
                                                         <c:when test="${book.status eq 3}">
                                                             <option value="3" selected>Đang Giao Hàng</option>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <option value="3">Đang Giao Hàng</option>
+                                                            <option value="3" ${book.status eq 4 || book.status eq 5 ? 'disabled' : ''}>Đang Giao Hàng</option>
                                                         </c:otherwise>
                                                     </c:choose>
+
                                                     <c:choose>
                                                         <c:when test="${book.status eq 4}">
                                                             <option value="4" selected>Giao Hàng Thành Công</option>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <option value="4">Giao Hàng Thành Công</option>
+                                                            <option value="4" ${book.status eq 4 || book.status eq 5 ? 'disabled' : ''}>Giao Hàng Thành Công</option>
                                                         </c:otherwise>
                                                     </c:choose>
+
                                                     <c:choose>
                                                         <c:when test="${book.status eq 5}">
                                                             <option value="5" selected>Hủy Đơn Hàng</option>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <option value="5">Hủy Đơn Hàng</option>
+                                                            <option value="5" ${book.status eq 4 || book.status eq 5 ? 'disabled' : ''}>Hủy Đơn Hàng</option>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </select>

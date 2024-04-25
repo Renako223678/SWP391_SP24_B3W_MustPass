@@ -217,12 +217,9 @@
                                         </div>
                                     </div>
                                     <form action="MainController">
-                                            Search Keyword: <input type="text" name="txtSearchName" value="" />
-                                            <input type="submit" value="Find" name="btAction" />
-                                            </br>                                            
-                                            </br>
+                                     
                                             <div>
-                                                <input type="submit" value="Create Product" name="btAction" /> 
+                                                <input type="submit" value="Staff Create Product" name="btAction" /> 
                                             </div>
                                             </br>   
                                     </form>

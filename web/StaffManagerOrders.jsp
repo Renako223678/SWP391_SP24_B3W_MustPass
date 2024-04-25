@@ -202,7 +202,7 @@
                                     <div class="table-title">
                                         <div class="row">
                                             <div class="col-xs-5">
-                                                <h2>Feedback <b>Management</b></h2>
+                                                <h2>Orders <b>Management</b></h2>
                                             </div>
                                             <form action="MainController" method="post">
                                                 <div class="input-group-prepend ">
@@ -216,26 +216,17 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <form action="MainController">
-                                            Search Keyword: <input type="text" name="txtSearchName" value="" />
-                                            <input type="submit" value="Find" name="btAction" />
-                                            </br>                                            
-                                            </br>
-                                         
-                                            </br>   
-                                    </form>
+
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
                                                 <th>OrderId</th>
                                                 <th>Description</th>  
                                                 <th>OrderDate</th>
-                                                <th>ShipFee</th>
                                                 <th>UsedLotusBub</th>    
                                                 <th>TotalPrice</th>  
-                                                <th>FinalPrice</th>  
-                                                <th>UserId</th>  
-                                                <th>RecipientId</th> 
+                                                <th>Email</th>  
+                                                <th>Recipient</th>  
                                                 <th>Status</th>  
                                                 <th>Action</th>  
                                             </tr>
@@ -247,27 +238,41 @@
                                                     <td>${ac.orderId}</td>
                                                     <td>${ac.description}</td>
                                                     <td>${ac.orderDate}</td>
-                                                    <td>${ac.shipFee}</td>
+                                                
                                                     <td>${ac.usedLotusBub}</td>
                                                     <td>${ac.totalPrice}</td>
-                                                    <td>${ac.finalPrice}</td>
-                                                    <td>${ac.userId}</td>
-                                                    <td>${ac.recipientId}</td>
+                                              
+                                                    <td>
+                                                        <c:forEach items="${aclist}" var="name">
+                                                            <c:if test="${name.userId eq ac.userId}">
+                                                                ${name.getEmail()}
+                                                            </c:if>
+                                                        </c:forEach>
+                                                   </td>
+                                                    <td>
+                                                        <c:forEach items="${rlist}" var="rec">
+                                                            <c:if test="${rec.userID eq ac.userId}">
+                                                                ${rec.destAddress}
+                                                            </c:if>
+                                                        </c:forEach>
+                                                   </td>
+                                                   
+                                                   
                                                     <c:if test="${ac.status == 1}">
                                                         <td>Đang Chờ</td>
                                                     </c:if>
                                                     <c:if test="${ac.status == 2}">
-                                                        <td>Đang Lấy Hàng</td>
+                                                        <td style="color: #0dcaf0;">Đang Lấy Hàng</td>
                                                     </c:if> 
                                                           <c:if test="${ac.status == 3}">
-                                                        <td>Đang Giao Hàng</td>
+                                                        <td style="color: buttontext;">Đang Giao Hàng</td>
                                                     </c:if> 
                                                           <c:if test="${ac.status == 4}">
-                                                        <td>Giao Hàng Thành Công</td>
+                                                              <td style="color: #0056b3;"><strong>Giao Hàng Thành Công</strong></td>
                                                     </c:if> 
                                                           <c:if test="${ac.status == 5}">
-                                                        <td>Hủy Đơn Hàng</td>
-                                                    </c:if> 
+                                                        <td style="color: red;">Hủy Đơn Hàng</td>
+                                                    </c:if>  
                                                          <td>
                                                             <button>
                                                                 <a href="DetailsOrdersController?ID=${ac.orderId}" > DETAIL </a>
