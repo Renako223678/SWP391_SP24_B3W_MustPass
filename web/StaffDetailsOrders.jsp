@@ -202,7 +202,7 @@
                                     <div class="table-title">
                                         <div class="row">
                                             <div class="col-xs-5">
-                                                <h2>Feedback <b>Management</b></h2>
+                                                <h2>Order Details <b>Management</b></h2>
                                             </div>
                                             <form action="MainController" method="post">
                                                 <div class="input-group-prepend ">
@@ -216,12 +216,28 @@
                                             </form>
                                         </div>
                                     </div>
-                            
+                                     
+                                    
+                                     <table class="table table-striped table-hover">
+                                            <tr>
+                                                <td>Email: asdas</td>
+                                                <td>Phone:asdas</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Full Name: </td>
+                                                <td>Ship:</td>
+                                            </tr>
+                                             
+                                    </table>
+                                    
+                                    
+                                    
+                                    
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
                                                 <th>OrderDetails ID</th>
-                                                <th>Book ID</th>  
+                                                <th>Book Name</th>  
                                                 <th>Order ID</th>
                                                 <th>Quantity</th>
                                                 <th>Unit Price</th>    
@@ -237,7 +253,7 @@
                                                     <td>${ac.orderId}</td>
                                                     <td>${ac.quantity}</td>
                                                     <td>${ac.unitPrice}</td>
-                                                    <td>${ac.orderDetailId}</td>
+                                                    <td>${ac.totalPrice}</td>
                                                 </tr>
                                             </form>
                                         </c:forEach>
