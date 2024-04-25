@@ -12,7 +12,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" type="image/png" href="img/logo1.png">
-        <title>BMOS</title>
+        <title>Onlinebookstore</title>
 
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-6 d-flex justify-content-center flex-column px-0 w-100" >
                 <div class="col-lg-6 mx-auto">
-                    <h1 class="mb-2 w-100" style="margin-top: 50%; color: #120851 ">CHÀO MỪNG ĐẾN VỚI BMOS</h1>
+                    <h1 class="mb-2 w-100" style="margin-top: 50%; color: #120851 ">CHÀO MỪNG ĐẾN VỚI Onlinebookstore</h1>
                     <p class="mb-5" style="color: red">Đăng nhập vào tài khoản của bạn để tiếp tục</p>
                     <form action="LoginController" method="post">
                         <div class="d-flex align-items-center mb-4">
@@ -50,17 +50,15 @@
                             </div>
                         </div>
 
-                        <c:if test="${not empty requestScope.LOGIN_ERROR.errorMsg}">
+                        <c:if test="${not empty requestScope.ERROR_MESSAGE}">
                             <font color='red'>
-                            ${requestScope.LOGIN_ERROR.errorMsg}
+                            ${requestScope.ERROR_MESSAGE}
                             </font> 
                         </c:if> <br></br>
 
-
-                        <div class="pt-1 mb-4">
-                            <button class="btn btn-dark btn-lg btn-block" type="submit" name="btAction" value="Login">ĐĂNG NHẬP</button>
-                        </div>
-
+                            <div class="pt-1 mb-4">
+                                <button class="btn btn-dark btn-lg btn-block" type="submit" name="btAction" value="Login">ĐĂNG NHẬP</button>
+                            </div>
 
                         <p class="text-center">
                             <a href="forgot.jsp" class="text-red">QUÊN MẬT KHẨU ?</a>
@@ -69,9 +67,9 @@
                         <p class="text-center">
                             <a href="signup.jsp" class="btn btn-light btn-block mb-2">TẠO TÀI KHOẢN</a>
                         </p>
-
+                      </form>  
                 </div>
-                </form>
+                
             </div>
         </div>
     </div>

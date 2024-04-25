@@ -12,7 +12,7 @@
         <meta name="author" content="">
         <link rel="icon" type="image/png" href="img/logo1.png">
 
-        <title>BMOS Setting</title>
+        <title>Onlinebookstore Setting</title>
 
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="css/osahan.css" rel="stylesheet">
@@ -23,21 +23,21 @@
     <body id="page-top">
         <div id="wrapper">
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-                <a class="sidebar-brand d-flex align-items-center" href="index.jsp">
+                <a class="sidebar-brand d-flex align-items-center" href="HomeController">
                     <div class="sidebar-brand-icon">
                         <img src="img/logo1.png" class="img-fluid">
                     </div>
                 </a>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="index.jsp">
+                    <a class="nav-link" href="HomeController">
                         <i class="mdi mdi-home-variant-outline"></i>
                         <span>Trang Chủ</span></a>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#HistoryOrderController?username=${sessionScope.username}">
+                    <a class="nav-link" href="HistoryOrderController">
                         <i class="mdi mdi-book-open"></i>
                         <span>Lịch Sử</span></a>
                 </li>
@@ -196,7 +196,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>BMOS &copy; HCM,VIETNAME</span>
+                            <span>Onlinebookstore &copy; HCM,VIETNAME</span>
                         </div>
                     </div>
                 </footer>
@@ -230,7 +230,7 @@
                             </div>
                             <div>
                                 <p class="small font-weight-bold text-dark mb-0" style="color: brown">EMAIL</p>
-                                <P class="mb-0 small">bmos@gmail.com</P>
+                                <P class="mb-0 small">Onlinebookstore@gmail.com</P>
                             </div>
                         </div>
 

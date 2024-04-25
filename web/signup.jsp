@@ -11,7 +11,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" type="image/png" href="img/logo1.png">
-        <title>BMOS </title>
+        <title>Onlinebookstore </title>
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="css/osahan.css" rel="stylesheet">
         <link href="font/stylesheet.css" rel="stylesheet">
