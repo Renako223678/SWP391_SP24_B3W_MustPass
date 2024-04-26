@@ -20,7 +20,7 @@
     <body id="page-top">
         <div id="wrapper">
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-                <a class="sidebar-brand d-flex align-items-center" href="ManagerAccountController">
+                <a class="sidebar-brand d-flex align-items-center" href="#">
                     <div class="sidebar-brand-icon">
                         <img src="img/R.png" class="img-fluid">
                     </div>
@@ -31,17 +31,12 @@
                         <i class="mdi mdi-home-variant-outline"></i>
                         <span>TRANG CHỦ</span></a>
                 </li>
-
-
                 <hr class="sidebar-divider d-none d-md-block">
                 <div class="text-center d-none d-md-inline">
                     <button class="rounded-circle border-0" id="sidebarToggle"></button>
                 </div>
             </ul>
-
-
             <div id="content-wrapper" class="d-flex flex-column">
-
                 <div id="content">
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow-sm osahan-nav-top">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -78,7 +73,6 @@
                             </li>   
                         </c:if>
                         <ul class="navbar-nav">
-
                             <li class="nav-item dropdown no-arrow d-sm-none">
                                 <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-search fa-fw"></i>
@@ -201,7 +195,6 @@
                             color:#c60021
                         }
                     </style>
-
                     <c:if test="${sessionScope.roleID == 2}">
                         <div class="container"> <br></br>
                             <div class="table-responsive">
@@ -209,7 +202,7 @@
                                     <div class="table-title">
                                         <div class="row">
                                             <div class="col-xs-5">
-                                                <h2>Account <b>Management</b></h2>
+                                                <h2>Orders <b>Management</b></h2>
                                             </div>
                                             </br>
                                             </br>
@@ -218,17 +211,16 @@
 
                                                 <div class="input-group-prepend ">
                                                     <div class="input-group-append">
-                                                        <input class="btn btn-primary" type="submit" value="Manage Product" name="btAction" >
+                                                        <input class="btn btn-primary" type="submit" value="Manage Account" name="btAction" >
                                                     </div>
-
                                                     <div class="input-group-append">
                                                         <input class="btn btn-primary" type="submit" value="Manage Category" name="btAction" >
                                                     </div>
                                                     <div class="input-group-append">
                                                         <input class="btn btn-primary" type="submit" value="Manage SubCategory" name="btAction" >
-                                                    </div>
+                                                    </div>  
                                                     <div class="input-group-append">
-                                                        <input class="btn btn-primary" type="submit" value="Manage Orders" name="btAction" >
+                                                        <input class="btn btn-primary" type="submit" value="Manage Product" name="btAction" >
                                                     </div>
                                                     <div class="input-group-append">
                                                         <input class="btn btn-primary" type="submit" value="Manage FeedBack" name="btAction" >
@@ -246,55 +238,87 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <form action="MainController">
-                                        <div>
-                                            <input type="submit" value="Create Account Staff" name="btAction" /> 
-                                        </div>
-                                        </br>   
-                                    </form>
+
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>UsersID</th>
+                                                <th>OrderId</th>
+                                                <th>Description</th>  
+                                                <th>OrderDate</th>
+                                                <th>Pay</th> 
+                                                <th>UsedLotusBub</th>    
+                                                <th>TotalPrice</th>  
                                                 <th>Email</th>  
-                                                <th>Password</th>
-                                                <th>Fullname</th>
-                                                <th>NumberOfLotus</th>
-                                                <th>RoleID</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                                <th>Recipient</th>  
+                                                <th>Status</th>  
+                                                <th>Action</th>  
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <c:forEach items="${list}" var="ac" varStatus="counter">
                                             <form action="MainController" method="post">
                                                 <tr>
-                                                    <td>${ac.userId}</td>
-                                                    <td>${ac.email}</td>
-                                                    <td>${ac.password}</td>
-                                                    <td>${ac.fullname}</td>
-                                                    <td>${ac.numberOfLotus}</td>
-                                                    <c:if test="${ac.roleId == 1}">
-                                                        <td>Admin</td>
-                                                    </c:if>
-                                                    <c:if test="${ac.roleId == 2}">
-                                                        <td>Quản Lí</td>
-                                                    </c:if>  
-                                                    <c:if test="${ac.roleId == 3}">
-                                                        <td>Nhân Viên</td>
-                                                    </c:if>      
-                                                    <c:if test="${ac.roleId == 4}">
-                                                        <td>Khách Hàng</td>
-                                                    </c:if>      
+                                                    <td>${ac.orderId}</td>
+                                                    <td>${ac.description}</td>
+                                                    <td>${ac.orderDate}</td>
                                                     <c:if test="${ac.status == 1}">
-                                                        <td>Đang Hoạt Động</td>
+                                                        <td>Đang Chờ</td>
                                                     </c:if>
                                                     <c:if test="${ac.status == 2}">
-                                                        <td>Dừng Hoạt Động</td>
-                                                    </c:if>  
+                                                        <td>Chưa Thanh Toán</td>
+                                                    </c:if> 
+                                                    <c:if test="${ac.status == 3}">
+                                                        <td style="color: buttontext;">Chờ Thanh Toán</td>
+                                                    </c:if> 
+                                                    <c:if test="${ac.status == 4}">
+                                                        <td style="color: #0056b3;"><strong>Đã Thanh Toán</strong></td>
+                                                    </c:if> 
+                                                    <c:if test="${ac.status == 5}">
+                                                        <td style="color: red;">Thanh Thất Bại</td>
+                                                    </c:if> 
+                                                    <td>${ac.usedLotusBub}</td>
+                                                    <td>${ac.totalPrice}</td>
+
+                                                    <td>
+                                                        <c:forEach items="${aclist}" var="name">
+                                                            <c:if test="${name.userId eq ac.userId}">
+                                                                ${name.getEmail()}
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <c:forEach items="${rlist}" var="rec">
+                                                            <c:if test="${rec.userID eq ac.userId}">
+                                                                ${rec.destAddress}
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </td>
+
+
+
+                                                    <c:if test="${ac.status == 1}">
+                                                        <td>Đang Chờ</td>
+                                                    </c:if>
+                                                    <c:if test="${ac.status == 2}">
+                                                        <td style="color: #0dcaf0;">Đang Lấy Hàng</td>
+                                                    </c:if> 
+                                                    <c:if test="${ac.status == 3}">
+                                                        <td style="color: buttontext;">Đang Giao Hàng</td>
+                                                    </c:if> 
+                                                    <c:if test="${ac.status == 4}">
+                                                        <td style="color: #0056b3;"><strong>Giao Hàng Thành Công</strong></td>
+                                                    </c:if> 
+                                                    <c:if test="${ac.status == 5}">
+                                                        <td style="color: red;">Hủy Đơn Hàng</td>
+                                                    </c:if> 
                                                     <td>
                                                         <button>
-                                                            <a href="UpdateAccountController?ID=${ac.userId}" > EDIT </a>
+                                                            <a href="ManagerDetailsOrdersController?ID=${ac.orderId}" > DETAIL </a>
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button>
+                                                            <a href="ManagerUpdateOrdersController?ID=${ac.orderId}" > EDIT </a>
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -305,15 +329,10 @@
                                 </div>
                             </div>      
                         </div>   
-
-
-
                     </c:if>
                     <script data-cfasync="false" src="js/email-decode.min.js"></script><script src="vendor/jquery/jquery.min.js" type="4673c51028ea841130b80adc-text/javascript"></script>
                     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js" type="4673c51028ea841130b80adc-text/javascript"></script>
-
                     <script src="vendor/jquery-easing/jquery.easing.min.js" type="4673c51028ea841130b80adc-text/javascript"></script>
-
                     <script src="js/osahan.min.js" type="4673c51028ea841130b80adc-text/javascript"></script>
                     <script src="js/rocket-loader.min.js" data-cf-settings="4673c51028ea841130b80adc-|49" defer=""></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"75c6f9299e967d56","version":"2022.10.3","r":1,"token":"dd471ab1978346bbb991feaa79e6ce5c","si":100}' crossorigin="anonymous"></script>
                     </body>
