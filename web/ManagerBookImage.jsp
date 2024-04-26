@@ -240,7 +240,7 @@
                                                 </br>
                                                 <div class="input-group-prepend ">
                                                     <div class="input-group-append">
-                                                        <input class="btn btn-primary" type="submit" value="Manage Image" name="btAction" >
+                                                        <input class="btn btn-primary" type="submit" value="Manage Account" name="btAction" >
                                                     </div>
                                                 </div>
                                             </form>
@@ -248,19 +248,16 @@
                                     </div>
                                     <form action="MainController">
                                         <div>
-                                            <input type="submit" value="Create Account Staff" name="btAction" /> 
+                                            <input type="submit" value="Create Image" name="btAction" /> 
                                         </div>
                                         </br>   
                                     </form>
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>UsersID</th>
-                                                <th>Email</th>  
-                                                <th>Password</th>
-                                                <th>Fullname</th>
-                                                <th>NumberOfLotus</th>
-                                                <th>RoleID</th>
+                                                <th>Image ID</th>
+                                                <th>URL</th>  
+                                                <th>BookId</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -269,32 +266,31 @@
                                             <c:forEach items="${list}" var="ac" varStatus="counter">
                                             <form action="MainController" method="post">
                                                 <tr>
-                                                    <td>${ac.userId}</td>
-                                                    <td>${ac.email}</td>
-                                                    <td>${ac.password}</td>
-                                                    <td>${ac.fullname}</td>
-                                                    <td>${ac.numberOfLotus}</td>
-                                                    <c:if test="${ac.roleId == 1}">
-                                                        <td>Admin</td>
+                                                    <td>${ac.getImageId()}</td>
+                                                    <td>
+                                                        <img src="${ac.getUrl()}" width="100px" height="100px">
+                                                    </td>
+                                                    <td>${ac.getBookId()}
+                                                        <c:forEach items="${aclist}" var="rec">
+                                                            <c:if test="${rec.getBookId() eq ac.bookId}">
+                                                                ${rec.bookName}
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <c:if test="${ac.getStatus() == 1}">
+                                                        <td>Hoạt Động</td>
                                                     </c:if>
-                                                    <c:if test="${ac.roleId == 2}">
-                                                        <td>Quản Lí</td>
-                                                    </c:if>  
-                                                    <c:if test="${ac.roleId == 3}">
-                                                        <td>Nhân Viên</td>
-                                                    </c:if>      
-                                                    <c:if test="${ac.roleId == 4}">
-                                                        <td>Khách Hàng</td>
-                                                    </c:if>      
-                                                    <c:if test="${ac.status == 1}">
-                                                        <td>Đang Hoạt Động</td>
-                                                    </c:if>
-                                                    <c:if test="${ac.status == 2}">
+                                                    <c:if test="${ac.getStatus() == 2}">
                                                         <td>Dừng Hoạt Động</td>
                                                     </c:if>  
                                                     <td>
                                                         <button>
-                                                            <a href="UpdateAccountController?ID=${ac.userId}" > EDIT </a>
+                                                            <a href="ManagerUpdateImageController?ID=${ac.getImageId()}" > EDIT </a>
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button>
+                                                            <a href="ManagerDeleteImageController?ID=${ac.getImageId()}" > DELETE </a>
                                                         </button>
                                                     </td>
                                                 </tr>
