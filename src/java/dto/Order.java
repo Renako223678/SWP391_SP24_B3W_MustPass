@@ -6,6 +6,7 @@
 package dto;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -129,6 +130,10 @@ public class Order {
 
     public void setRecipientId(int recipientId) {
         this.recipientId = recipientId;
+    }
+
+    public void setOrderDate(Timestamp sqlDate) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

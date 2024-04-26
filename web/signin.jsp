@@ -1,85 +1,115 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khai Tam Book Store - Sign In</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1856&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Background image URL */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    <!-- Mirrored from askbootstrap.com/preview/osahan-eat/theme-sidebar/signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Oct 2022 05:04:58 GMT -->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="icon" type="image/png" href="img/logo1.png">
-        <title>BMOS</title>
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+        }
 
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        .logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
 
-        <link href="css/osahan.css" rel="stylesheet">
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #120851;
+        }
 
-        <link href="font/stylesheet.css" rel="stylesheet">
+        p {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #333;
+        }
 
-        <link href="vendor/mdi-icons/css/materialdesignicons.min.css" rel="stylesheet">
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 40px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
 
-        <link href="css/custom.css" rel="stylesheet">
-    </head>
-    <body id="page-top" style="background: whitesmoke">
+        .btn-primary {
+            width: calc(100% - 40px);
+            padding: 12px;
+            background-color: #120851;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
 
+        .btn-primary:hover {
+            background-color: #0a0542;
+        }
 
-        <div class="row osahan-login m-0" >
-            <div class="col-md-3  px-10">
+        .signup-link {
+            color: #120851;
+            text-decoration: none;
+        }
+
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="img/logo.jpg" alt="Bookstore Logo" class="logo" style="width: 120px;"> <!-- Adjust the width to your desired size -->
+
+        <h1>Đăng Nhập</h1>
+        <p>Đăng nhập vào tài khoản của bạn để tiếp tục</p>
+        <form action="LoginController" method="post">
+            <div class="mb-2">
+                <input type="text" name="txtUsername" placeholder="Tên Tài Khoản" required>
             </div>
-            <div class="col-md-6 d-flex justify-content-center flex-column px-0 w-100" >
-                <div class="col-lg-6 mx-auto">
-                    <h1 class="mb-2 w-100" style="margin-top: 50%; color: #120851 ">CHÀO MỪNG ĐẾN VỚI BMOS</h1>
-                    <p class="mb-5" style="color: red">Đăng nhập vào tài khoản của bạn để tiếp tục</p>
-                    <form action="LoginController" method="post">
-                        <div class="d-flex align-items-center mb-4">
-                            <div class="mr-3 bg-light rounded p-2 osahan-icon"><i class="mdi mdi-email-outline"></i></div>
-                            <div class="w-100">
-                                <p class="mb-0 small font-weight-bold text-dark">TÊN TÀI KHOẢN</p>
-                                <input type="text" class="form-control form-control-sm p-0 border-input border-0 rounded-0" placeholder="Enter Your Usename" name="txtUsername">
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center mb-4">
-                            <div class="mr-3 bg-light rounded p-2 osahan-icon"><i class="mdi mdi-form-textbox-password"></i></div>
-                            <div class="w-100">
-                                <p class="mb-0 small font-weight-bold text-dark">MẬT KHẨU</p>
-                                <input type="password" class="form-control form-control-sm p-0 border-input border-0 rounded-0" placeholder="Enter Password" name="txtPassword">
-                            </div>
-                        </div>
-
-                        <c:if test="${not empty requestScope.LOGIN_ERROR.errorMsg}">
-                            <font color='red'>
-                            ${requestScope.LOGIN_ERROR.errorMsg}
-                            </font> 
-                        </c:if> <br></br>
-
-                            <div class="pt-1 mb-4">
-                                <button class="btn btn-dark btn-lg btn-block" type="submit" name="btAction" value="Login">ĐĂNG NHẬP</button>
-                            </div>
-
-                        <p class="text-center">
-                            <a href="forgot.jsp" class="text-red">QUÊN MẬT KHẨU ?</a>
-                            <a href="index.jsp" class="text-red" >&nbsp&nbsp&nbsp&nbsp TRANG CHỦ</a>
-                        </p>
-                        <p class="text-center">
-                            <a href="signup.jsp" class="btn btn-light btn-block mb-2">TẠO TÀI KHOẢN</a>
-                        </p>
-
-                </div>
-                </form>
+            <div class="mb-2">
+<input type="password" name="txtPassword" placeholder="Mật Khẩu" required>
             </div>
-        </div>
+            <c:if test="${not empty requestScope.LOGIN_ERROR.errorMsg}">
+                <p style="color: red;">${requestScope.LOGIN_ERROR.errorMsg}</p>
+            </c:if>
+            <button class="btn-primary" type="submit" name="btAction" value="Login">Đăng Nhập</button>
+        </form>
+        <p>
+            <a href="forgot.jsp" class="signup-link">Quên Mật Khẩu?</a>
+            <a href="index.jsp" class="signup-link">Trang Chủ</a>
+        </p>
+        <p>
+            <a href="signup.jsp" class="btn btn-light mb-2">Tạo Tài Khoản</a>
+        </p>
     </div>
-
-    <script src="vendor/jquery/jquery.min.js" type="b91dad79aa96a1edb6837dad-text/javascript"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js" type="b91dad79aa96a1edb6837dad-text/javascript"></script>
-    <script src="vendor/jquery-easing/jquery.easing.min.js" type="b91dad79aa96a1edb6837dad-text/javascript"></script>
-    <script src="js/osahan.min.js" type="b91dad79aa96a1edb6837dad-text/javascript"></script>
-    <script src="js/rocket-loader.min.js" data-cf-settings="b91dad79aa96a1edb6837dad-|49" defer=""></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"75c6f94c39d87d56","version":"2022.10.3","r":1,"token":"dd471ab1978346bbb991feaa79e6ce5c","si":100}' crossorigin="anonymous"></script>
 </body>
-
-<!-- Mirrored from askbootstrap.com/preview/osahan-eat/theme-sidebar/signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Oct 2022 05:04:58 GMT -->
 </html>

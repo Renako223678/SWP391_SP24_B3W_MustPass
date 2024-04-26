@@ -63,6 +63,14 @@ public class Book {
         this.totalFeedback = totalFeedback;
     }
 
+    public Book(String BookName, String Description, String AuthorName, String PublishingCompany, String IssusingCompany, String TranslatorName, int PublishDate, int Quantity, int SubCategoryId, int UnitPrice, int CategoryID, int Status, int TotalFeedback) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Book(int BookId, String BookName, String Description, String AuthorName, String PublishingCompany, String IssusingCompany, String TranslatorName, int PublishDate, int Quantity, int SubCategoryId, int UnitPrice, int CategoryID, int Status, int TotalFeedback) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public int getBookId() {
         return bookId;
     }
